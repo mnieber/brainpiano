@@ -14,6 +14,9 @@ import { Octave } from 'src/keyboard/components/Octave';
 
 export const Keyboard = observer(() => {
   const { keyboardStore } = useStore();
+  const [keyLetterPreselection, setKeyLetterPreselection] = React.useState(
+    undefined
+  );
 
   const octaves = pipe(
     always(range(0, 3)),
@@ -30,8 +33,10 @@ export const Keyboard = observer(() => {
   return (
     <div className="Keyboard__frame">
       <ModulationProvider>
-        <KeyModulationSelector>
-          <KeySignatureSelector>
+        <KeySignatureSelector
+          setKeyLetterPreselection={setKeyLetterPreselection}
+        >
+          <KeyModulationSelector>
             <InversionSelector>
               <div tabIndex={0}>
                 <Stage width={window.innerWidth} height={600}>
@@ -39,8 +44,8 @@ export const Keyboard = observer(() => {
                 </Stage>
               </div>
             </InversionSelector>
-          </KeySignatureSelector>
-        </KeyModulationSelector>
+          </KeyModulationSelector>
+        </KeySignatureSelector>
       </ModulationProvider>
     </div>
   );

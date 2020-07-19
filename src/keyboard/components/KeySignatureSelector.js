@@ -5,20 +5,32 @@ import { useModulationContext } from 'src/keyboard/components/useModulationConte
 import { useStore } from 'src/useStore';
 import { keyLetters } from 'src/keyboard/constants';
 
-export const KeySignatureSelector = ({ children }) => {
+export const KeySignatureSelector = ({
+  children,
+  setKeyLetterPreselection
+}) => {
   const { keyboardStore } = useStore();
   const modulation = useModulationContext();
 
   return (
     <KeyboardEventHandler
       handleKeys={keyLetters}
+      handleEventType="keydown"
       onKeyEvent={(key: string, e: any) => {
-        keyboardStore.setKeyLetter(key);
-        keyboardStore.setKeySharp(modulation.isSharpening);
-        keyboardStore.setKeyFlat(modulation.isFlattening);
+        setKeyLetterPreselection(key);
       }}
     >
-      {children}
+      <KeyboardEventHandler
+        handleKeys={keyLetters}
+        handleEventType="keyup"
+        onKeyEvent={(key: string, e: any) => {
+          keyboardStore.setKeyLetter(key);
+          keyboardStore.setKeySharp(modulation.isSharpening);
+          keyboardStore.setKeyFlat(modulation.isFlattening);
+        }}
+      >
+        {children}
+      </KeyboardEventHandler>
     </KeyboardEventHandler>
   );
 };

@@ -17,13 +17,13 @@ export const Marker = ({
   return isStriped
     ? pipe(
         always(range(0, nrOfStripes)),
-        map(idx => {
+        map(stripeIdx => {
           return (
             <Rect
-              key={idx}
+              key={stripeIdx}
               x={x + 1}
-              y={y + idx * stripeHeight}
-              fill={idx % 2 ? backgroundColour : fill}
+              y={y + stripeIdx * stripeHeight}
+              fill={stripeIdx % 2 ? backgroundColour : fill}
               width={width - 2}
               height={stripeHeight}
               strokeWidth={0}

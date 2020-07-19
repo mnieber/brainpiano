@@ -10,6 +10,8 @@ import {
 } from 'rambda';
 import { action, computed, decorate, observable } from 'mobx';
 
+import { invertVoicing } from 'src/utils/invertVoicing';
+import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
 import {
   eleventh,
   fifth,
@@ -18,14 +20,12 @@ import {
   flat6,
   flat7,
   flat9,
-  invert,
-  keySignatureOffsets,
   ninth,
   seventh,
   sixth,
-  third,
-  voicingToChord
-} from 'src/keyboard/constants';
+  third
+} from 'src/keyboard/note_constants';
+import { voicingToChord } from 'src/utils/voicingToChord';
 
 export const invertObj = obj =>
   pipe(always(obj), toPairs, map(reverse), fromPairs)();
@@ -38,7 +38,7 @@ export class ChordStore {
   keySignature = undefined;
   inversion = 0;
 
-  third = -1;
+  third = 0;
   fifth = 0;
   seventh = -1;
   ninth = 0;
@@ -86,12 +86,12 @@ export class ChordStore {
     }
   };
 
-  get octaveIdx() {
+  get octaveIndex() {
     if (keySignatureOffsets[this.keySignature] >= 8) return 0;
     return 1;
   }
 
-  get octaveIdxDelta() {
+  get octaveIndexDelta() {
     const result =
       this.inversion >= this.nrOfVoices ? 1 : this.inversion < 0 ? -1 : 0;
     return result;
@@ -119,9 +119,9 @@ export class ChordStore {
 
   get chord() {
     return voicingToChord(
-      invert(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
+      invertVoicing(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
       this.keySignature,
-      this.octaveIdx + this.octaveIdxDelta
+      this.octaveIndex + this.octaveIndexDelta
     );
   }
 
@@ -154,7 +154,7 @@ export class ChordStore {
 decorate(ChordStore, {
   keySignature: observable,
   inversion: observable,
-  octaveIdx: computed,
+  octaveIndex: computed,
   third: observable,
   fifth: observable,
   seventh: observable,
@@ -163,7 +163,7 @@ decorate(ChordStore, {
   thirteenth: observable,
   setInversion: action,
   toggleNote: action,
-  octaveIdxDelta: computed,
+  octaveIndexDelta: computed,
   chord: computed,
   voicing: computed,
   chordTitle: computed,

@@ -3,10 +3,10 @@ import React from 'react';
 import { Rect } from 'react-konva';
 
 import {
-  blackKeyIdxs,
-  isWhiteKeyIdx,
-  whiteKeyIdxs
-} from 'src/keyboard/constants';
+  blackKeyIndexes,
+  isWhiteKeyIndex,
+  whiteKeyIndexes
+} from 'src/keyboard/piano_key_constants';
 import { Marker } from 'src/keyboard/components/Marker';
 
 const whiteKeyProps = {
@@ -37,21 +37,21 @@ const blackKeyX = [
   whiteKeyX[6] - fraction(0.3)
 ];
 
-const getKeyX = keyIdx => {
-  const isWhiteKey = isWhiteKeyIdx(keyIdx);
+const getKeyX = keyIndex => {
+  const isWhiteKey = isWhiteKeyIndex(keyIndex);
   const keyX = isWhiteKey ? whiteKeyX : blackKeyX;
-  const keyIdxs = isWhiteKey ? whiteKeyIdxs : blackKeyIdxs;
-  return keyX[indexOf(keyIdx, keyIdxs)];
+  const keyIndexes = isWhiteKey ? whiteKeyIndexes : blackKeyIndexes;
+  return keyX[indexOf(keyIndex, keyIndexes)];
 };
 
-export const Key = ({ idx, octaveIdx, markerColour, markerIsStriped }) => {
-  const isWhiteKey = isWhiteKeyIdx(idx);
+export const Key = ({ index, octaveIndex, markerColour, markerIsStriped }) => {
+  const isWhiteKey = isWhiteKeyIndex(index);
   const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
   const offsetY = 50;
-  const offsetX = octaveIdx * 7 * whiteKeyProps.width;
+  const offsetX = octaveIndex * 7 * whiteKeyProps.width;
 
-  const x = offsetX + getKeyX(idx);
+  const x = offsetX + getKeyX(index);
 
   return (
     <React.Fragment>

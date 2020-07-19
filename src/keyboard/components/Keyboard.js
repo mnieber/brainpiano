@@ -20,7 +20,7 @@ export const Keyboard = observer(() => {
     map(i => (
       <Octave
         key={i}
-        idx={i}
+        index={i}
         keySignature={keySignatureStore.keySignature}
         chord={chordStore.chord}
       />
@@ -34,7 +34,7 @@ export const Keyboard = observer(() => {
           <KeyModulationSelector>
             <InversionSelector>
               <div tabIndex={0}>
-                <Stage width={window.innerWidth} height={600}>
+                <Stage width={1100} height={600}>
                   {octaves}
                 </Stage>
               </div>

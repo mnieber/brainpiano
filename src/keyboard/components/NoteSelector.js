@@ -1,9 +1,10 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 import { useStore } from 'src/useStore';
 
-export const NoteSelector = ({ children }) => {
+export const NoteSelector = observer(({ children }) => {
   const { preselectionStore } = useStore();
 
   return (
@@ -25,4 +26,4 @@ export const NoteSelector = ({ children }) => {
       </KeyboardEventHandler>
     </KeyboardEventHandler>
   );
-};
+});

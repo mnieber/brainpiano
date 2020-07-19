@@ -1,25 +1,10 @@
-import {
-  always,
-  fromPairs,
-  map,
-  mathMod,
-  pipe,
-  reverse,
-  toPairs
-} from 'rambda';
+import { always, fromPairs, map, pipe, reverse, toPairs } from 'rambda';
 import { action, computed, decorate, observable } from 'mobx';
 
-import {
-  invert,
-  keyC,
-  keySignatureOffsets,
-  min7_9,
-  voicingToChord
-} from 'src/keyboard/constants';
+import { invert, keyC, min7_9, voicingToChord } from 'src/keyboard/constants';
 
-const invertObj = obj => pipe(always(obj), toPairs, map(reverse), fromPairs)();
-
-const offsetToKeySignature = invertObj(keySignatureOffsets);
+export const invertObj = obj =>
+  pipe(always(obj), toPairs, map(reverse), fromPairs)();
 
 export class KeyboardStore {
   keyLetter = keyC;
@@ -34,9 +19,14 @@ export class KeyboardStore {
     this.keyLetter = keyLetter;
   };
 
-  setKeyModulation = x => {
-    this.keySharp = x === 1;
-    this.keyFlat = x === -1;
+  setKeySharp = x => {
+    this.keySharp = x;
+    this.keyFlat = false;
+  };
+
+  setKeyFlat = x => {
+    this.keyFlat = x;
+    this.keySharp = false;
   };
 
   get chord() {
@@ -48,14 +38,11 @@ export class KeyboardStore {
   }
 
   get keySignature() {
-    const keyOffset =
-      keySignatureOffsets[this.keyLetter] +
-      (this.keySharp ? 1 : this.keyFlat ? -1 : 0);
-    return offsetToKeySignature[mathMod(keyOffset, 12)];
+    return this.keyLetter + (this.keySharp ? '#' : this.keyFlat ? 'b' : '');
   }
 
   get chordTitle() {
-    return `${this.keySignature.toUpperCase()} Min7 9`;
+    return `${this.keySignature} Min7 9`;
   }
 }
 
@@ -64,8 +51,11 @@ decorate(KeyboardStore, {
   voicing: observable,
   octaveIdx: observable,
   keyLetter: observable,
+  keySharp: observable,
+  keyFlat: observable,
   setKeyLetter: action,
-  setKeyModulation: action,
+  setKeySharp: action,
+  setKeyFlat: action,
   chord: computed,
   chordTitle: computed,
   keySignature: computed

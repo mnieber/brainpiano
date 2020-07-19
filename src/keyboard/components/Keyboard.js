@@ -4,9 +4,9 @@ import React from 'react';
 import { Stage } from 'react-konva';
 import { observer } from 'mobx-react-lite';
 import { always, map, pipe, range } from 'rambda';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 
-import { keyLetters } from 'src/keyboard/constants';
+import { KeySignatureSelector } from 'src/keyboard/components/KeySignatureSelector';
+import { KeyModulationSelector } from 'src/keyboard/components/KeyModulationSelector';
 import { useStore } from 'src/useStore';
 import { Octave } from 'src/keyboard/components/Octave';
 
@@ -27,18 +27,15 @@ export const Keyboard = observer(() => {
 
   return (
     <div className="Keyboard__frame">
-      <KeyboardEventHandler
-        handleKeys={keyLetters}
-        onKeyEvent={(key: string, e: any) => {
-          keyboardStore.setKeyLetter(key);
-        }}
-      >
-        <div tabIndex={0}>
-          <Stage width={window.innerWidth} height={window.innerHeight}>
-            {octaves}
-          </Stage>
-        </div>
-      </KeyboardEventHandler>
+      <KeySignatureSelector>
+        <KeyModulationSelector>
+          <div tabIndex={0}>
+            <Stage width={window.innerWidth} height={window.innerHeight}>
+              {octaves}
+            </Stage>
+          </div>
+        </KeyModulationSelector>
+      </KeySignatureSelector>
     </div>
   );
 });

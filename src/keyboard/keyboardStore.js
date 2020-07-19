@@ -1,4 +1,13 @@
-import { always, fromPairs, map, pipe, reverse, toPairs } from 'rambda';
+import {
+  always,
+  fromPairs,
+  length,
+  map,
+  mathMod,
+  pipe,
+  reverse,
+  toPairs
+} from 'rambda';
 import { action, computed, decorate, observable } from 'mobx';
 
 import { invert, keyC, min7_9, voicingToChord } from 'src/keyboard/constants';
@@ -22,6 +31,10 @@ export class KeyboardStore {
   setKeySharp = x => {
     this.keySharp = x;
     this.keyFlat = false;
+  };
+
+  setInversion = x => {
+    this.inversion = mathMod(x, length(this.voicing));
   };
 
   setKeyFlat = x => {
@@ -56,6 +69,7 @@ decorate(KeyboardStore, {
   setKeyLetter: action,
   setKeySharp: action,
   setKeyFlat: action,
+  setInversion: action,
   chord: computed,
   chordTitle: computed,
   keySignature: computed

@@ -9,7 +9,7 @@ export const KeySignatureSelector = ({
   children,
   setKeyLetterPreselection
 }) => {
-  const { keyboardStore } = useStore();
+  const { keySignatureStore } = useStore();
   const modulation = useModulationContext();
 
   return (
@@ -24,9 +24,9 @@ export const KeySignatureSelector = ({
         handleKeys={keyLetters}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
-          keyboardStore.setKeyLetter(key);
-          keyboardStore.setKeySharp(modulation.isSharpening);
-          keyboardStore.setKeyFlat(modulation.isFlattening);
+          keySignatureStore.setKeyLetter(key);
+          keySignatureStore.setKeySharp(modulation.isSharpening);
+          keySignatureStore.setKeyFlat(modulation.isFlattening);
         }}
       >
         {children}

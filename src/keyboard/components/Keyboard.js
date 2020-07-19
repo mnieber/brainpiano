@@ -13,7 +13,7 @@ import { useStore } from 'src/useStore';
 import { Octave } from 'src/keyboard/components/Octave';
 
 export const Keyboard = observer(() => {
-  const { keyboardStore } = useStore();
+  const { chordStore, keySignatureStore } = useStore();
   const [keyLetterPreselection, setKeyLetterPreselection] = React.useState(
     undefined
   );
@@ -24,8 +24,8 @@ export const Keyboard = observer(() => {
       <Octave
         key={i}
         idx={i}
-        keySignature={keyboardStore.keySignature}
-        chord={keyboardStore.chord}
+        keySignature={keySignatureStore.keySignature}
+        chord={chordStore.chord}
       />
     ))
   )();

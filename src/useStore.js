@@ -1,17 +1,32 @@
 import React from 'react';
+import { reaction } from 'mobx';
 
-import { KeyboardStore } from 'src/keyboard/keyboardStore';
+import { ChordStore } from 'src/keyboard/ChordStore';
+import { KeySignatureStore } from 'src/keyboard/KeySignatureStore';
 
 const storeContext = React.createContext(null);
 
+const chordStoreUsesSelectedKeySignature = () => globalStore => {
+  reaction(
+    () => globalStore.keySignatureStore.keySignature,
+    keySignature => {
+      globalStore.chordStore.keySignature = keySignature;
+    },
+    { fireImmediately: true }
+  );
+};
+
 class GlobalStore {
-  keyboardStore = new KeyboardStore();
+  chordStore = new ChordStore();
+  keySignatureStore = new KeySignatureStore();
 
   constructor() {
     this.installPolicies();
   }
 
-  installPolicies() {}
+  installPolicies() {
+    chordStoreUsesSelectedKeySignature()(this);
+  }
 }
 
 const globalStore = new GlobalStore();

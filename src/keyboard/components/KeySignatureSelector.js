@@ -6,7 +6,7 @@ import { useStore } from 'src/useStore';
 import { keyLetters } from 'src/keyboard/constants';
 
 export const KeySignatureSelector = observer(({ children }) => {
-  const { keySignatureStore, preselectionStore } = useStore();
+  const { preselectionStore } = useStore();
 
   return (
     <KeyboardEventHandler
@@ -20,11 +20,7 @@ export const KeySignatureSelector = observer(({ children }) => {
         handleKeys={keyLetters}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
-          if (preselectionStore.keyLetter) {
-            keySignatureStore.setKeyLetter(key);
-            keySignatureStore.setKeySharp(preselectionStore.isSharpening);
-            keySignatureStore.setKeyFlat(preselectionStore.isFlattening);
-          }
+          preselectionStore.reset();
         }}
       >
         {children}

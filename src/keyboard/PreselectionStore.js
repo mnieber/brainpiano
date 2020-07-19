@@ -16,7 +16,7 @@ export class PreselectionStore {
   setIsFlattening = x => (this.isFlattening = x);
 
   reset = () => {
-    if (this.keyLetter && (this.isSharpening || this.isFlattening)) {
+    if (this.keyLetter) {
       this.globalStore.sendEvent({
         type: 'PreselectionStore.selectKeySignature',
         keyLetter: this.keyLetter,
@@ -24,7 +24,7 @@ export class PreselectionStore {
         isFlattening: this.isFlattening
       });
     }
-    if (this.noteDigit && (this.isSharpening || this.isFlattening)) {
+    if (this.noteDigit) {
       this.globalStore.sendEvent({
         type: 'PreselectionStore.selectNoteDigit',
         noteDigit: this.noteDigit,

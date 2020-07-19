@@ -1,6 +1,7 @@
 import React from 'react';
 import { reaction } from 'mobx';
 
+import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { ChordStore } from 'src/keyboard/ChordStore';
 import { KeySignatureStore } from 'src/keyboard/KeySignatureStore';
 
@@ -19,6 +20,7 @@ const chordStoreUsesSelectedKeySignature = () => globalStore => {
 class GlobalStore {
   chordStore = new ChordStore();
   keySignatureStore = new KeySignatureStore();
+  preselectionStore = new PreselectionStore();
 
   constructor() {
     this.installPolicies();

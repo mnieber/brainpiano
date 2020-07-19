@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite';
 import { always, map, pipe, range } from 'rambda';
 
 import { KeyModulationSelector } from 'src/keyboard/components/KeyModulationSelector';
-import { ModulationProvider } from 'src/keyboard/components/useModulationContext';
 import { InversionSelector } from 'src/keyboard/components/InversionSelector';
 import { KeySignatureSelector } from 'src/keyboard/components/KeySignatureSelector';
 import { useStore } from 'src/useStore';
@@ -32,21 +31,17 @@ export const Keyboard = observer(() => {
 
   return (
     <div className="Keyboard__frame">
-      <ModulationProvider>
-        <KeySignatureSelector
-          setKeyLetterPreselection={setKeyLetterPreselection}
-        >
-          <KeyModulationSelector>
-            <InversionSelector>
-              <div tabIndex={0}>
-                <Stage width={window.innerWidth} height={600}>
-                  {octaves}
-                </Stage>
-              </div>
-            </InversionSelector>
-          </KeyModulationSelector>
-        </KeySignatureSelector>
-      </ModulationProvider>
+      <KeySignatureSelector setKeyLetterPreselection={setKeyLetterPreselection}>
+        <KeyModulationSelector>
+          <InversionSelector>
+            <div tabIndex={0}>
+              <Stage width={window.innerWidth} height={600}>
+                {octaves}
+              </Stage>
+            </div>
+          </InversionSelector>
+        </KeyModulationSelector>
+      </KeySignatureSelector>
     </div>
   );
 });

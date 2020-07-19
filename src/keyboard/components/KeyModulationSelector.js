@@ -1,26 +1,26 @@
 import React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 
-import { useModulationContext } from 'src/keyboard/components/useModulationContext';
+import { useStore } from 'src/useStore';
 
 export const KeyModulationSelector = ({ children }) => {
-  const modulation = useModulationContext();
+  const { preselectionStore } = useStore();
 
   return (
     <KeyboardEventHandler
       handleKeys={['up', 'down']}
       handleEventType="keydown"
       onKeyEvent={(key: string, e: any) => {
-        modulation.setIsSharpening(key === 'up');
-        modulation.setIsFlattening(key === 'down');
+        preselectionStore.setIsSharpening(key === 'up');
+        preselectionStore.setIsFlattening(key === 'down');
       }}
     >
       <KeyboardEventHandler
         handleKeys={['up', 'down']}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
-          modulation.setIsFlattening(false);
-          modulation.setIsSharpening(false);
+          preselectionStore.setIsFlattening(false);
+          preselectionStore.setIsSharpening(false);
         }}
       >
         {children}

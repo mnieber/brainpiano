@@ -1,19 +1,30 @@
 import React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 
-import { useStore } from 'src/useStore';
-
-export const KeyModulationSelector = ({ children }) => {
-  const { keyboardStore } = useStore();
+export const KeyModulationSelector = ({
+  setIsSharpening,
+  setIsFlattening,
+  children
+}) => {
   return (
     <KeyboardEventHandler
-      handleKeys={['v', 's']}
+      handleKeys={['up', 'down']}
+      handleEventType="keydown"
       onKeyEvent={(key: string, e: any) => {
-        if (key === 'v') keyboardStore.setKeyFlat(!keyboardStore.keyFlat);
-        if (key === 's') keyboardStore.setKeySharp(!keyboardStore.keySharp);
+        setIsSharpening(key === 'up');
+        setIsFlattening(key === 'down');
       }}
     >
-      {children}
+      <KeyboardEventHandler
+        handleKeys={['up', 'down']}
+        handleEventType="keyup"
+        onKeyEvent={(key: string, e: any) => {
+          setIsFlattening(false);
+          setIsSharpening(false);
+        }}
+      >
+        {children}
+      </KeyboardEventHandler>
     </KeyboardEventHandler>
   );
 };

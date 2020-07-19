@@ -13,6 +13,8 @@ import { Octave } from 'src/keyboard/components/Octave';
 
 export const Keyboard = observer(() => {
   const { keyboardStore } = useStore();
+  const [isSharpening, setIsSharpening] = React.useState(false);
+  const [isFlattening, setIsFlattening] = React.useState(false);
 
   const octaves = pipe(
     always(range(0, 3)),
@@ -28,17 +30,23 @@ export const Keyboard = observer(() => {
 
   return (
     <div className="Keyboard__frame">
-      <KeySignatureSelector>
-        <KeyModulationSelector>
+      <KeyModulationSelector
+        setIsSharpening={setIsSharpening}
+        setIsFlattening={setIsFlattening}
+      >
+        <KeySignatureSelector
+          isSharpening={isSharpening}
+          isFlattening={isFlattening}
+        >
           <InversionSelector>
             <div tabIndex={0}>
-              <Stage width={window.innerWidth} height={window.innerHeight}>
+              <Stage width={window.innerWidth} height={600}>
                 {octaves}
               </Stage>
             </div>
           </InversionSelector>
-        </KeyModulationSelector>
-      </KeySignatureSelector>
+        </KeySignatureSelector>
+      </KeyModulationSelector>
     </div>
   );
 });

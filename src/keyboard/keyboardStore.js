@@ -31,7 +31,12 @@ export class KeyboardStore {
 
   setKeySharp = x => {
     this.keySharp = x;
-    this.keyFlat = false;
+    if (x) this.keyFlat = false;
+  };
+
+  setKeyFlat = x => {
+    this.keyFlat = x;
+    if (x) this.keySharp = false;
   };
 
   setInversion = x => {
@@ -41,11 +46,6 @@ export class KeyboardStore {
       x <= minInversion ? minInversion : x >= maxInversion ? maxInversion : x;
     this.octaveIdxDelta =
       this.inversion >= this.nrOfVoices ? 1 : this.inversion < 0 ? -1 : 0;
-  };
-
-  setKeyFlat = x => {
-    this.keyFlat = x;
-    this.keySharp = false;
   };
 
   get nrOfVoices() {

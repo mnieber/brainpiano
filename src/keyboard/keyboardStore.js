@@ -22,7 +22,8 @@ export class KeyboardStore {
 
   inversion = 0;
   voicing = min7_9;
-  octaveIdx = 0;
+  octaveIdx = 1;
+  octaveIdxDelta = 0;
 
   setKeyLetter = keyLetter => {
     this.keyLetter = keyLetter;
@@ -34,7 +35,12 @@ export class KeyboardStore {
   };
 
   setInversion = x => {
-    this.inversion = mathMod(x, length(this.voicing));
+    const maxInversion = this.nrOfVoices;
+    const minInversion = -1 * this.nrOfVoices;
+    this.inversion =
+      x <= minInversion ? minInversion : x >= maxInversion ? maxInversion : x;
+    this.octaveIdxDelta =
+      this.inversion >= this.nrOfVoices ? 1 : this.inversion < 0 ? -1 : 0;
   };
 
   setKeyFlat = x => {
@@ -42,11 +48,15 @@ export class KeyboardStore {
     this.keySharp = false;
   };
 
+  get nrOfVoices() {
+    return length(this.voicing);
+  }
+
   get chord() {
     return voicingToChord(
-      invert(this.voicing, this.inversion),
+      invert(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
       this.keySignature,
-      this.octaveIdx
+      this.octaveIdx + this.octaveIdxDelta
     );
   }
 
@@ -72,5 +82,6 @@ decorate(KeyboardStore, {
   setInversion: action,
   chord: computed,
   chordTitle: computed,
-  keySignature: computed
+  keySignature: computed,
+  nrOfVoices: computed
 });

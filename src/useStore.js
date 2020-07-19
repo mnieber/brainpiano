@@ -29,7 +29,7 @@ const selectKeySignatureBasedOnPreselection = () => globalStore => {
 const toggleNoteBasedOnPreselection = () => globalStore => {
   globalStore.listen('PreselectionStore.selectNoteDigit', event => {
     globalStore.chordStore.toggleNote(
-      event.keyLetter,
+      event.noteDigit,
       event.isSharpening,
       event.isFlattening
     );

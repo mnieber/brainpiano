@@ -4,7 +4,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/useStore';
 
 export const NoteSelector = ({ children }) => {
-  const { preselectionStore, chordStore } = useStore();
+  const { preselectionStore } = useStore();
 
   return (
     <KeyboardEventHandler
@@ -18,13 +18,7 @@ export const NoteSelector = ({ children }) => {
         handleKeys={['2', '3', '4', '5', '6', '7']}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
-          if (preselectionStore.noteDigit) {
-            chordStore.toggleNote(
-              key,
-              preselectionStore.isSharpening,
-              preselectionStore.isFlattening
-            );
-          }
+          preselectionStore.reset();
         }}
       >
         {children}

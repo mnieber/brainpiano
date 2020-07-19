@@ -35,22 +35,42 @@ export const thirteenth = 9;
 export const flat7 = 10;
 export const seventh = 11;
 
-export const min7_9 = [ninth, flat3, fifth, flat7];
-export const maj7_9 = [ninth, third, fifth, seventh];
-export const dom7_13 = [ninth, third, sixth, flat7];
-export const chromatic_scale = [
-  flat9,
-  ninth,
-  flat3,
-  third,
-  fourth,
-  flat5,
-  fifth,
-  flat6,
-  sixth,
-  flat7,
-  seventh
-];
+export const three_note_voicings = {
+  Min: [flat3, fifth],
+  Maj: [third, fifth],
+  Dim: [flat3, flat5],
+  Aug: [third, sharp5]
+};
+
+export const four_note_voicings = {
+  Min7: [flat3, fifth, flat7],
+  Maj7: [third, fifth, seventh],
+  Dom7: [third, fifth, flat7],
+  MinMaj: [flat3, fifth, seventh]
+};
+
+export const five_note_voicings = {
+  'Min7+9': [ninth, flat3, fifth, flat7],
+  'Dom7+9': [ninth, third, fifth, flat7],
+  'Dom7+b9': [flat9, third, fifth, flat7],
+  'MinMaj+9': [ninth, flat3, fifth, seventh]
+};
+
+export const scales = {
+  Chromatic: [
+    flat9,
+    ninth,
+    flat3,
+    third,
+    fourth,
+    flat5,
+    fifth,
+    flat6,
+    sixth,
+    flat7,
+    seventh
+  ]
+};
 
 export const harmonicColours = {
   [root]: undefined,

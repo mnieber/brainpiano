@@ -1,4 +1,3 @@
-import { action, computed, decorate, observable } from 'mobx';
 import {
   always,
   fromPairs,
@@ -9,6 +8,7 @@ import {
   reverse,
   toPairs
 } from 'rambda';
+import { action, computed, decorate, observable } from 'mobx';
 
 import {
   eleventh,
@@ -19,6 +19,7 @@ import {
   flat7,
   flat9,
   invert,
+  keySignatureOffsets,
   ninth,
   seventh,
   sixth,
@@ -31,12 +32,11 @@ export const invertObj = obj =>
 
 const pick = (x, choice) => (x ? [choice] : []);
 
-const toggle = (x, value) => (x === value) ? undefined : value;
+const toggle = (x, value) => (x === value ? undefined : value);
 
 export class ChordStore {
   keySignature = undefined;
   inversion = 0;
-  octaveIdx = 1;
 
   third = -1;
   fifth = 0;
@@ -54,7 +54,6 @@ export class ChordStore {
 
   toggleNote = (noteDigit, isSharp, isFlat) => {
     const isNeutral = !isSharp && !isFlat;
-    (console: any).log("ND", noteDigit)
 
     if (isNeutral) {
       if (noteDigit === '2') this.ninth = toggle(this.ninth, 0);
@@ -85,6 +84,11 @@ export class ChordStore {
       if (noteDigit === '6') this.fifth = undefined;
       if (noteDigit === '7') this.seventh = toggle(this.seventh, -1);
     }
+  };
+
+  get octaveIdx() {
+    if (keySignatureOffsets[this.keySignature] >= 8) return 0;
+    return 1;
   }
 
   get octaveIdxDelta() {
@@ -126,22 +130,22 @@ export class ChordStore {
     let ext = '';
 
     if (this.third === -1) {
-      if (this.seventh === 0) base= " MinMaj";
-      if (this.seventh === -1) base= " Min7";
-      if (this.seventh === undefined) base= " Min";
+      if (this.seventh === 0) base = ' MinMaj';
+      if (this.seventh === -1) base = ' Min7';
+      if (this.seventh === undefined) base = ' Min';
     }
 
     if (this.third === 0) {
-      if (this.seventh === 0) base = " Maj7";
-      if (this.seventh === -1) base = " Dom7";
-      if (this.seventh === undefined) base= " Maj";
-      if (this.eleventh === 0) base= " Sus";
+      if (this.seventh === 0) base = ' Maj7';
+      if (this.seventh === -1) base = ' Dom7';
+      if (this.seventh === undefined) base = ' Maj';
+      if (this.eleventh === 0) base = ' Sus';
     }
 
-    if (this.eleventh === 1) ext = "#11";
-    if (this.ninth === 1) ext = "#9";
-    if (this.ninth === 0) ext = "+9";
-    if (this.thirteenth === 0) ext = "+13";
+    if (this.eleventh === 1) ext = '#11';
+    if (this.ninth === 1) ext = '#9';
+    if (this.ninth === 0) ext = '+9';
+    if (this.thirteenth === 0) ext = '+13';
 
     return `${this.keySignature}${base}${ext}`;
   }
@@ -150,7 +154,7 @@ export class ChordStore {
 decorate(ChordStore, {
   keySignature: observable,
   inversion: observable,
-  octaveIdx: observable,
+  octaveIdx: computed,
   third: observable,
   fifth: observable,
   seventh: observable,

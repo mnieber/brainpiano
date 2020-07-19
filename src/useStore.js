@@ -1,5 +1,6 @@
 import React from 'react';
 import { reaction } from 'mobx';
+import { Signal } from 'micro-signals';
 
 import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { ChordStore } from 'src/keyboard/ChordStore';
@@ -17,17 +18,47 @@ const chordStoreUsesSelectedKeySignature = () => globalStore => {
   );
 };
 
+const selectKeySignatureBasedOnPreselection = () => globalStore => {
+  globalStore.listen('PreselectionStore.selectKeySignature', event => {
+    globalStore.keySignatureStore.setKeyLetter(event.keyLetter);
+    globalStore.keySignatureStore.setKeySharp(event.isSharpening);
+    globalStore.keySignatureStore.setKeyFlat(event.isFlattening);
+  });
+};
+
 class GlobalStore {
-  chordStore = new ChordStore();
-  keySignatureStore = new KeySignatureStore();
-  preselectionStore = new PreselectionStore();
+  signal = new Signal();
+  chordStore = undefined;
+  keySignatureStore = undefined;
+  preselectionStore = undefined;
 
   constructor() {
+    this.createStores();
     this.installPolicies();
+  }
+
+  createStores() {
+    this.chordStore = new ChordStore();
+    this.keySignatureStore = new KeySignatureStore();
+    this.preselectionStore = new PreselectionStore(this);
   }
 
   installPolicies() {
     chordStoreUsesSelectedKeySignature()(this);
+    selectKeySignatureBasedOnPreselection()(this);
+  }
+
+  sendEvent(event: any) {
+    this.signal.dispatch(event);
+  }
+
+  listen(type: string = '*', callback: (event: any) => any) {
+    const cb = event => {
+      if (event.type === type || type === '*') {
+        callback(event);
+      }
+    };
+    this.signal.add(cb);
   }
 }
 

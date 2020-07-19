@@ -19,8 +19,7 @@ export const KeyModulationSelector = ({ children }) => {
         handleKeys={['up', 'down']}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
-          preselectionStore.setIsFlattening(false);
-          preselectionStore.setIsSharpening(false);
+          preselectionStore.reset();
         }}
       >
         {children}

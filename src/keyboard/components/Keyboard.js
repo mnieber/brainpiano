@@ -5,6 +5,7 @@ import { Stage } from 'react-konva';
 import { observer } from 'mobx-react-lite';
 import { always, map, pipe, range } from 'rambda';
 
+import { NoteSelector } from 'src/keyboard/components/NoteSelector';
 import { KeyModulationSelector } from 'src/keyboard/components/KeyModulationSelector';
 import { InversionSelector } from 'src/keyboard/components/InversionSelector';
 import { KeySignatureSelector } from 'src/keyboard/components/KeySignatureSelector';
@@ -29,15 +30,17 @@ export const Keyboard = observer(() => {
   return (
     <div className="Keyboard__frame">
       <KeySignatureSelector>
-        <KeyModulationSelector>
-          <InversionSelector>
-            <div tabIndex={0}>
-              <Stage width={window.innerWidth} height={600}>
-                {octaves}
-              </Stage>
-            </div>
-          </InversionSelector>
-        </KeyModulationSelector>
+        <NoteSelector>
+          <KeyModulationSelector>
+            <InversionSelector>
+              <div tabIndex={0}>
+                <Stage width={window.innerWidth} height={600}>
+                  {octaves}
+                </Stage>
+              </div>
+            </InversionSelector>
+          </KeyModulationSelector>
+        </NoteSelector>
       </KeySignatureSelector>
     </div>
   );

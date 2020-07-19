@@ -26,6 +26,16 @@ const selectKeySignatureBasedOnPreselection = () => globalStore => {
   });
 };
 
+const toggleNoteBasedOnPreselection = () => globalStore => {
+  globalStore.listen('PreselectionStore.selectNoteDigit', event => {
+    globalStore.chordStore.toggleNote(
+      event.keyLetter,
+      event.isSharpening,
+      event.isFlattening
+    );
+  });
+};
+
 class GlobalStore {
   signal = new Signal();
   chordStore = undefined;
@@ -46,6 +56,7 @@ class GlobalStore {
   installPolicies() {
     chordStoreUsesSelectedKeySignature()(this);
     selectKeySignatureBasedOnPreselection()(this);
+    toggleNoteBasedOnPreselection()(this);
   }
 
   sendEvent(event: any) {

@@ -8,5 +8,5 @@ import { useStore } from 'src/useStore';
 export const ChordTitle = observer(() => {
   const { chordStore } = useStore();
 
-  return <h1>{chordStore.chordTitle}</h1>;
+  return <p>{chordStore.chordName}</p>;
 });

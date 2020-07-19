@@ -1,3 +1,18 @@
+import {
+  fifth,
+  flat3,
+  flat5,
+  flat6,
+  flat7,
+  flat9,
+  fourth,
+  ninth,
+  seventh,
+  sharp5,
+  sixth,
+  third
+} from 'src/keyboard/note_constants';
+
 export const voicings = {
   minor: {
     Min: [flat3, fifth],

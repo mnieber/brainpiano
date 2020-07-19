@@ -1,6 +1,7 @@
 import { always, indexOf, map, pipe, range } from 'rambda';
 import React from 'react';
 import { Rect } from 'react-konva';
+import { observer } from 'mobx-react-lite';
 
 import {
   blackKeyIndexes,
@@ -44,35 +45,37 @@ const getKeyX = keyIndex => {
   return keyX[indexOf(keyIndex, keyIndexes)];
 };
 
-export const Key = ({ index, octaveIndex, markerColour, markerIsStriped }) => {
-  const isWhiteKey = isWhiteKeyIndex(index);
-  const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
+export const Key = observer(
+  ({ index, octaveIndex, markerColour, markerIsStriped }) => {
+    const isWhiteKey = isWhiteKeyIndex(index);
+    const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
-  const offsetY = 50;
-  const offsetX = octaveIndex * 7 * whiteKeyProps.width;
+    const offsetY = 50;
+    const offsetX = octaveIndex * 7 * whiteKeyProps.width;
 
-  const x = offsetX + getKeyX(index);
+    const x = offsetX + getKeyX(index);
 
-  return (
-    <React.Fragment>
-      <Rect
-        x={x}
-        y={offsetY}
-        fill={keyProps.fill}
-        stroke="#000000"
-        opacity={1}
-        width={keyProps.width}
-        height={keyProps.height}
-      />
-      <Marker
-        x={x}
-        y={offsetY + keyProps.height - keyProps.markerHeight}
-        height={keyProps.markerHeight}
-        width={keyProps.width}
-        fill={markerColour}
-        isStriped={markerIsStriped}
-        backgroundColour={keyProps.fill}
-      />
-    </React.Fragment>
-  );
-};
+    return (
+      <React.Fragment>
+        <Rect
+          x={x}
+          y={offsetY}
+          fill={keyProps.fill}
+          stroke="#000000"
+          opacity={1}
+          width={keyProps.width}
+          height={keyProps.height}
+        />
+        <Marker
+          x={x}
+          y={offsetY + keyProps.height - keyProps.markerHeight}
+          height={keyProps.markerHeight}
+          width={keyProps.width}
+          fill={markerColour}
+          isStriped={markerIsStriped}
+          backgroundColour={keyProps.fill}
+        />
+      </React.Fragment>
+    );
+  }
+);

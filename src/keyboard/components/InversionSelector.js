@@ -1,9 +1,10 @@
 import React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { observer } from 'mobx-react-lite';
 
 import { useStore } from 'src/useStore';
 
-export const InversionSelector = ({ children }) => {
+export const InversionSelector = observer(({ children }) => {
   const { chordStore } = useStore();
   return (
     <KeyboardEventHandler
@@ -20,4 +21,4 @@ export const InversionSelector = ({ children }) => {
       {children}
     </KeyboardEventHandler>
   );
-};
+});

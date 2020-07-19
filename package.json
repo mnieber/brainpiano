@@ -10,8 +10,11 @@
     "rambda": "^5.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-keyboard-event-handler": "^1.5.4",
     "react-konva": "^16.13.0-3",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "mobx": "^5.15.4",
+    "mobx-react-lite": "^2.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,4 +1,5 @@
 import {
+  add,
   always,
   concat,
   includes,
@@ -62,6 +63,34 @@ export const harmonicColours = {
   [seventh]: 'violet'
 };
 
+export const keyC = 'c';
+export const keyCSharp = 'c#';
+export const keyD = 'd';
+export const keyDSharp = 'd#';
+export const keyE = 'e';
+export const keyF = 'f';
+export const keyFSharp = 'f#';
+export const keyG = 'g';
+export const keyGSharp = 'g#';
+export const keyA = 'a';
+export const keyASharp = 'a#';
+export const keyB = 'b';
+
+export const keySignatureOffsets = {
+  [keyC]: 0,
+  [keyCSharp]: 1,
+  [keyD]: 2,
+  [keyDSharp]: 3,
+  [keyE]: 4,
+  [keyF]: 5,
+  [keyFSharp]: 6,
+  [keyG]: 7,
+  [keyGSharp]: 8,
+  [keyA]: 9,
+  [keyASharp]: 10,
+  [keyB]: 11
+};
+
 export const invert = (voicing, pos) => {
   function rotate(arr) {
     const first = take(1, arr);
@@ -76,9 +105,9 @@ export const nrOkeysInOctave = 12;
 export const octaveRootKeyPos = octaveIdx => octaveIdx * nrOkeysInOctave;
 export const keyPosToIdx = keyPos => keyPos % nrOkeysInOctave;
 
-export const keyPosToColour = (keyPos, chord) => {
+export const keyPosToColour = (keyPos, keySignature, chord) => {
   const harmonicColour = includes(keyPos, chord)
-    ? harmonicColours[keyPosToIdx(keyPos)]
+    ? harmonicColours[keyPosToIdx(keyPos - keySignatureOffsets[keySignature])]
     : undefined;
 
   const isStriped = harmonicColour && harmonicColour.endsWith('-striped');
@@ -91,17 +120,26 @@ export const keyPosToColour = (keyPos, chord) => {
 
 export const isWhiteKeyIdx = idx => includes(idx, whiteKeyIdxs);
 
-export const voicingToChord = (voicing, octaveIdx) => {
+export const voicingToChord = (voicing, keySignature, octaveIdx) => {
   let rootPos = octaveRootKeyPos(octaveIdx);
   let prev = undefined;
+
+  const addRootPos = x => {
+    if (prev !== undefined && x < prev) {
+      rootPos += 12;
+    }
+    prev = x;
+    return rootPos + x;
+  };
+
+  const keyOffset = keySignatureOffsets[keySignature];
+
   return pipe(
+    //
     always(voicing),
-    map(x => {
-      if (prev !== undefined && x < prev) {
-        rootPos += 12;
-      }
-      prev = x;
-      return rootPos + x;
-    })
+    map(addRootPos),
+    map(add(keyOffset))
   )();
 };
+
+export const keyLetters = [keyC, keyD, keyE, keyF, keyG, keyA, keyB];

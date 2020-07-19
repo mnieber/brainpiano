@@ -24,12 +24,13 @@ export const Keyboard = observer(() => {
       />
     ))
   )();
+
   return (
     <div className="Keyboard__frame">
       <KeyboardEventHandler
         handleKeys={keyLetters}
         onKeyEvent={(key: string, e: any) => {
-          keyboardStore.setKeySignature(key);
+          keyboardStore.setKeyLetter(key);
         }}
       >
         <div tabIndex={0}>

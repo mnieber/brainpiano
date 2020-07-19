@@ -1,6 +1,6 @@
 import { action, computed, decorate, observable } from 'mobx';
 
-import { keyC } from 'src/keyboard/constants';
+import { keyC } from 'src/keyboard/key_signature_constants';
 
 export class KeySignatureStore {
   keyLetter = keyC;
@@ -8,7 +8,6 @@ export class KeySignatureStore {
   keyFlat = false;
 
   setKeyLetter = keyLetter => {
-    debugger;
     this.keyLetter = keyLetter;
   };
 

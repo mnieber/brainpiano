@@ -4,27 +4,31 @@ import { always, concat, map, pipe, add } from 'rambda';
 import { Layer } from 'react-konva';
 
 import {
-  blackKeyIdxs,
-  keyPosToColour,
-  keyPosToIdx,
-  octaveRootKeyPos,
-  whiteKeyIdxs
-} from 'src/keyboard/constants';
+  blackKeyIndexes,
+  noteValueToIndex,
+  octaveRootNoteValue,
+  whiteKeyIndexes
+} from 'src/keyboard/piano_key_constants';
+import { noteValueToColour } from 'src/utils/keyPosToColour';
 import { Key } from 'src/keyboard/components/Key';
 
-export const Octave = observer(({ idx, keySignature, chord }) => {
-  const keyIdxs = concat(whiteKeyIdxs, blackKeyIdxs);
+export const Octave = observer(({ index, keySignature, chord }) => {
+  const keyIndexes = concat(whiteKeyIndexes, blackKeyIndexes);
   const keys = pipe(
-    always(keyIdxs),
-    map(add(octaveRootKeyPos(idx))),
-    map(keyPos => {
-      const keyIdx = keyPosToIdx(keyPos);
-      const [colour, isStriped] = keyPosToColour(keyPos, keySignature, chord);
+    always(keyIndexes),
+    map(add(octaveRootNoteValue(index))),
+    map(noteValue => {
+      const keyIndex = noteValueToIndex(noteValue);
+      const [colour, isStriped] = noteValueToColour(
+        noteValue,
+        keySignature,
+        chord
+      );
       return (
         <Key
-          key={keyPos}
-          idx={keyIdx}
-          octaveIdx={idx}
+          key={noteValue}
+          index={keyIndex}
+          octaveIndex={index}
           markerColour={colour}
           markerIsStriped={isStriped}
         />

@@ -1,4 +1,15 @@
-import { always, concat, last, length, pipe, take, takeLast } from 'rambda';
+import {
+  always,
+  concat,
+  includes,
+  length,
+  map,
+  pipe,
+  repeat,
+  split,
+  take,
+  takeLast
+} from 'rambda';
 
 export const whiteKeyIdxs = [0, 2, 4, 5, 7, 9, 11];
 export const blackKeyIdxs = [1, 3, 6, 8, 10];
@@ -51,12 +62,46 @@ export const harmonicColours = {
   [seventh]: 'violet'
 };
 
-export const invert = (chord, pos) => {
+export const invert = (voicing, pos) => {
   function rotate(arr) {
-    const last = takeLast(1, arr);
-    const first = take(length(arr) - 1, arr);
+    const first = take(1, arr);
+    const last = takeLast(length(arr) - 1, arr);
     return concat(last, first);
   }
 
-  return pos === 0 ? chord : pipe(always(chord), rotate, last)();
+  return pos === 0 ? voicing : pipe(always(voicing), ...repeat(rotate, pos))();
+};
+
+export const nrOkeysInOctave = 12;
+export const octaveRootKeyPos = octaveIdx => octaveIdx * nrOkeysInOctave;
+export const keyPosToIdx = keyPos => keyPos % nrOkeysInOctave;
+
+export const keyPosToColour = (keyPos, chord) => {
+  const harmonicColour = includes(keyPos, chord)
+    ? harmonicColours[keyPosToIdx(keyPos)]
+    : undefined;
+
+  const isStriped = harmonicColour && harmonicColour.endsWith('-striped');
+  const colour = isStriped
+    ? split('-striped', harmonicColour)[0]
+    : harmonicColour;
+
+  return [colour, isStriped];
+};
+
+export const isWhiteKeyIdx = idx => includes(idx, whiteKeyIdxs);
+
+export const voicingToChord = (voicing, octaveIdx) => {
+  let rootPos = octaveRootKeyPos(octaveIdx);
+  let prev = undefined;
+  return pipe(
+    always(voicing),
+    map(x => {
+      if (prev !== undefined && x < prev) {
+        rootPos += 12;
+      }
+      prev = x;
+      return rootPos + x;
+    })
+  )();
 };

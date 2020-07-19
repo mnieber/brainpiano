@@ -1,29 +1,31 @@
-import { always, concat, includes, map, pipe } from 'rambda';
+import { always, concat, map, pipe, add } from 'rambda';
 import { Layer } from 'react-konva';
 import React from 'react';
 
 import {
   blackKeyIdxs,
-  whiteKeyIdxs,
-  harmonicColours
+  keyPosToColour,
+  keyPosToIdx,
+  octaveRootKeyPos,
+  whiteKeyIdxs
 } from 'src/keyboard/constants';
 import { Key } from 'src/keyboard/components/Key';
 
 export const Octave = ({ idx, chord }) => {
-  const shift = 1; // HACK
-  const idxs = concat(whiteKeyIdxs, blackKeyIdxs);
+  const keyIdxs = concat(whiteKeyIdxs, blackKeyIdxs);
   const keys = pipe(
-    always(idxs),
-    map(keyIdx => {
-      const harmonicColour = includes(keyIdx + shift, chord)
-        ? harmonicColours[keyIdx + shift]
-        : undefined;
+    always(keyIdxs),
+    map(add(octaveRootKeyPos(idx))),
+    map(keyPos => {
+      const keyIdx = keyPosToIdx(keyPos);
+      const [colour, isStriped] = keyPosToColour(keyPos, chord);
       return (
         <Key
-          key={keyIdx}
+          key={keyPos}
           idx={keyIdx}
           octaveIdx={idx}
-          harmonicColour={harmonicColour}
+          markerColour={colour}
+          markerIsStriped={isStriped}
         />
       );
     })

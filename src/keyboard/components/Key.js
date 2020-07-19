@@ -1,101 +1,78 @@
-import { always, includes, indexOf, map, pipe, range, split } from 'rambda';
+import { always, indexOf, map, pipe, range } from 'rambda';
 import React from 'react';
 import { Rect } from 'react-konva';
 
-import { whiteKeyIdxs, blackKeyIdxs } from 'src/keyboard/constants';
+import {
+  blackKeyIdxs,
+  isWhiteKeyIdx,
+  whiteKeyIdxs
+} from 'src/keyboard/constants';
+import { Marker } from 'src/keyboard/components/Marker';
 
-export const Key = ({ idx, octaveIdx, harmonicColour }) => {
-  const whiteKey = {
-    width: 50,
-    height: 250,
-    fill: '#FFFFFF',
-    markerHeight: 56
-  };
+const whiteKeyProps = {
+  width: 50,
+  height: 250,
+  fill: '#FFFFFF',
+  markerHeight: 56
+};
 
-  const blackKey = {
-    width: 25,
-    height: 160,
-    fill: '#444444',
-    markerHeight: 100
-  };
+const blackKeyProps = {
+  width: 25,
+  height: 160,
+  fill: '#444444',
+  markerHeight: 100
+};
 
-  const whiteKeyPos = pipe(
-    always(range(0, 7)),
-    map(i => i * whiteKey.width)
-  )();
+const whiteKeyX = pipe(
+  always(range(0, 7)),
+  map(i => i * whiteKeyProps.width)
+)();
 
-  const fraction = x => x * blackKey.width;
-  const blackKeyPos = [
-    whiteKeyPos[1] - fraction(0.66),
-    whiteKeyPos[2] - fraction(0.33),
-    whiteKeyPos[4] - fraction(0.7),
-    whiteKeyPos[5] - fraction(0.5),
-    whiteKeyPos[6] - fraction(0.3)
-  ];
+const fraction = x => x * blackKeyProps.width;
+const blackKeyX = [
+  whiteKeyX[1] - fraction(0.66),
+  whiteKeyX[2] - fraction(0.33),
+  whiteKeyX[4] - fraction(0.7),
+  whiteKeyX[5] - fraction(0.5),
+  whiteKeyX[6] - fraction(0.3)
+];
 
-  const isWhiteKey = includes(idx, whiteKeyIdxs);
+const getKeyX = keyIdx => {
+  const isWhiteKey = isWhiteKeyIdx(keyIdx);
+  const keyX = isWhiteKey ? whiteKeyX : blackKeyX;
   const keyIdxs = isWhiteKey ? whiteKeyIdxs : blackKeyIdxs;
+  return keyX[indexOf(keyIdx, keyIdxs)];
+};
 
-  const key = isWhiteKey ? whiteKey : blackKey;
-  const keyPos = isWhiteKey ? whiteKeyPos : blackKeyPos;
+export const Key = ({ idx, octaveIdx, markerColour, markerIsStriped }) => {
+  const isWhiteKey = isWhiteKeyIdx(idx);
+  const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
-  const keyIdx = indexOf(idx, keyIdxs);
-
-  const offsetX = octaveIdx * 7 * whiteKey.width;
   const offsetY = 50;
+  const offsetX = octaveIdx * 7 * whiteKeyProps.width;
 
-  const stripeHeight = 8;
-
-  const isStriped = harmonicColour && harmonicColour.endsWith('-striped');
-  const colour = isStriped
-    ? split('-striped', harmonicColour)[0]
-    : harmonicColour;
-
-  const nrOfStripes = Math.ceil(key.markerHeight / stripeHeight);
-
-  const markers = isStriped
-    ? pipe(
-        always(range(0, nrOfStripes)),
-        map(idx => {
-          return (
-            <Rect
-              key={idx}
-              x={offsetX + keyPos[keyIdx] + 1}
-              y={offsetY + key.height - key.markerHeight + idx * stripeHeight}
-              fill={idx % 2 ? key.fill : colour}
-              strokeWidth={0}
-              opacity={1}
-              width={key.width - 2}
-              height={stripeHeight}
-            />
-          );
-        })
-      )()
-    : [
-        <Rect
-          key={idx}
-          x={offsetX + keyPos[keyIdx] + 1}
-          y={offsetY + key.height - key.markerHeight}
-          fill={colour}
-          strokeWidth={0}
-          opacity={1}
-          width={key.width - 2}
-          height={key.markerHeight}
-        />
-      ];
+  const x = offsetX + getKeyX(idx);
 
   return (
     <React.Fragment>
       <Rect
-        x={offsetX + keyPos[keyIdx]}
+        x={x}
         y={offsetY}
-        fill={key.fill}
+        fill={keyProps.fill}
         stroke="#000000"
         opacity={1}
-        width={key.width}
-        height={key.height}
+        width={keyProps.width}
+        height={keyProps.height}
       />
-      {markers}
+      <Marker
+        x={x}
+        y={offsetY + keyProps.height - keyProps.markerHeight}
+        height={keyProps.markerHeight}
+        width={keyProps.width}
+        fill={markerColour}
+        isStriped={markerIsStriped}
+        backgroundColour={keyProps.fill}
+      />
     </React.Fragment>
   );
 };

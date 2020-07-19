@@ -8,6 +8,7 @@ export class KeySignatureStore {
   keyFlat = false;
 
   setKeyLetter = keyLetter => {
+    debugger;
     this.keyLetter = keyLetter;
   };
 

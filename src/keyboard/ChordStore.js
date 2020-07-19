@@ -122,7 +122,28 @@ export class ChordStore {
   }
 
   get chordTitle() {
-    return `${this.keySignature} Min7 9`;
+    let base = '';
+    let ext = '';
+
+    if (this.third === -1) {
+      if (this.seventh === 0) base= " MinMaj";
+      if (this.seventh === -1) base= " Min7";
+      if (this.seventh === undefined) base= " Min";
+    }
+
+    if (this.third === 0) {
+      if (this.seventh === 0) base = " Maj7";
+      if (this.seventh === -1) base = " Dom7";
+      if (this.seventh === undefined) base= " Maj";
+      if (this.eleventh === 0) base= " Sus";
+    }
+
+    if (this.eleventh === 1) ext = "#11";
+    if (this.ninth === 1) ext = "#9";
+    if (this.ninth === 0) ext = "+9";
+    if (this.thirteenth === 0) ext = "+13";
+
+    return `${this.keySignature}${base}${ext}`;
   }
 }
 

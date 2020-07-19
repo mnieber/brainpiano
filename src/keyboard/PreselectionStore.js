@@ -2,6 +2,7 @@ import { decorate, observable, action } from 'mobx';
 
 export class PreselectionStore {
   keyLetter = undefined;
+  noteDigit = undefined;
   isSharpening = undefined;
   isFlattening = undefined;
 
@@ -10,6 +11,7 @@ export class PreselectionStore {
   }
 
   setKeyLetter = x => (this.keyLetter = x);
+  setNoteDigit = x => (this.noteDigit = x);
   setIsSharpening = x => (this.isSharpening = x);
   setIsFlattening = x => (this.isFlattening = x);
 
@@ -22,14 +24,24 @@ export class PreselectionStore {
         isFlattening: this.isFlattening
       });
     }
+    if (this.noteDigit && (this.isSharpening || this.isFlattening)) {
+      this.globalStore.sendEvent({
+        type: 'PreselectionStore.selectNoteDigit',
+        noteDigit: this.noteDigit,
+        isSharpening: this.isSharpening,
+        isFlattening: this.isFlattening
+      });
+    }
     this.setIsFlattening(false);
     this.setIsSharpening(false);
     this.setKeyLetter(undefined);
+    this.setNoteDigit(undefined);
   };
 }
 
 decorate(PreselectionStore, {
   keyLetter: observable,
+  noteDigit: observable,
   isSharpening: observable,
   isFlattening: observable,
   setKeyLetter: action,

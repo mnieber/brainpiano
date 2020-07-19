@@ -17,26 +17,30 @@ export const blackKeyIdxs = [1, 3, 6, 8, 10];
 
 export const root = 0;
 export const flat9 = 1;
-export const nine = 2;
+export const ninth = 2;
 export const sharp9 = 3;
 export const flat3 = 3;
 export const third = 4;
 export const fourth = 5;
+export const eleventh = 5;
 export const sharp4 = 6;
+export const sharp11 = 6;
 export const flat5 = 6;
 export const fifth = 7;
-export const sharpFive = 8;
+export const sharp5 = 8;
 export const flat6 = 8;
+export const flat13 = 8;
 export const sixth = 9;
+export const thirteenth = 9;
 export const flat7 = 10;
 export const seventh = 11;
 
-export const min7_9 = [nine, flat3, fifth, flat7];
-export const maj7_9 = [nine, third, fifth, seventh];
-export const dom7_13 = [nine, third, sixth, flat7];
+export const min7_9 = [ninth, flat3, fifth, flat7];
+export const maj7_9 = [ninth, third, fifth, seventh];
+export const dom7_13 = [ninth, third, sixth, flat7];
 export const chromatic_scale = [
   flat9,
-  nine,
+  ninth,
   flat3,
   third,
   fourth,
@@ -51,7 +55,7 @@ export const chromatic_scale = [
 export const harmonicColours = {
   [root]: undefined,
   [flat9]: '#DB3010-striped',
-  [nine]: '#DB3010',
+  [ninth]: '#DB3010',
   [flat3]: '#F48024-striped',
   [third]: '#F48024',
   [fourth]: '#FEE449', // yellow

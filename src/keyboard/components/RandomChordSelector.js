@@ -14,9 +14,14 @@ export const RandomChordSelector = observer(({ children }) => {
 
   return (
     <KeyboardEventHandler
-      handleKeys={['space']}
+      handleKeys={['space', 'enter']}
       onKeyEvent={(key: string, e: any) => {
-        const groupName = randomElement(['minor', 'major', 'dominant']);
+        const groupName = randomElement([
+          'minor',
+          'major',
+          'dominant',
+          'other'
+        ]);
         const [voicingName, voicing] = randomElement(
           toPairs(voicings[groupName])
         );

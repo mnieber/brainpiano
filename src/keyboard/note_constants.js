@@ -41,16 +41,16 @@ export const noteNameToIndex = {
 };
 
 export const noteColours = {
-  0: undefined,
-  1: '#DB3010-striped',
-  2: '#DB3010', // red
-  3: '#FF6E00-striped',
-  4: '#FF6E00', // orange
+  0: '#AAAAAA',
+  1: '#FF6E00-striped',
+  2: '#FF6E00', // orange
+  3: '#36AFE2-striped',
+  4: '#36AFE2', // blue
   5: '#FEE449', // yellow
-  6: '#30AD23-striped',
-  7: '#30AD23', // green
-  8: '#36AFE2-striped',
-  9: '#36AFE2', // blue
+  6: '#DB3010-striped',
+  7: '#DB3010', // red
+  8: '#30AD23-striped',
+  9: '#30AD23', // green
   10: 'violet-striped',
   11: 'violet'
 };

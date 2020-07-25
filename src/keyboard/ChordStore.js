@@ -37,8 +37,8 @@ import { voicingToChord } from 'src/utils/voicingToChord';
 export class ChordStore {
   keySignature = undefined;
   inversion = 0;
-  voicing = voicings['minor']['Min7'];
-  voicingName = 'Min7';
+  voicing = voicings['scales']['Chromatic'];
+  voicingName = 'Chromatic Scale';
 
   setInversion = x => {
     const maxInversion = this.nrOfVoices;

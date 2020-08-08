@@ -12,35 +12,44 @@ import {
   sharp5,
   sixth,
   third,
-  thirteenth
+  thirteenth,
+  flat13,
 } from 'src/keyboard/note_constants';
 
 export const voicings = {
   minor: {
-    Min: [flat3, fifth],
-    Min7: [flat3, fifth, flat7],
-    Min6: [flat3, fifth, thirteenth],
     'Min6+9': [ninth, flat3, fifth, thirteenth],
-    Min7b5: [flat3, flat5, flat7],
-    'Min7b5+9': [ninth, flat3, flat5, flat7],
-    MinMaj: [flat3, fifth, seventh],
     'Min7+9': [ninth, flat3, fifth, flat7],
-    'MinMaj+9': [ninth, flat3, fifth, seventh]
+    'Min7b5+9': [ninth, flat3, flat5, flat7],
+    'MinMaj+9': [ninth, flat3, fifth, seventh],
+    Min6: [flat3, fifth, thirteenth],
+    Min7: [flat3, fifth, flat7],
+    Min7b5: [flat3, flat5, flat7],
+    Min: [flat3, fifth],
+    MinMaj: [flat3, fifth, seventh],
   },
   major: {
-    Maj: [third, fifth],
+    'Maj6+9': [ninth, third, sixth],
+    'Maj7+9': [ninth, third, fifth, seventh],
+    Maj6: [third, sixth],
     Maj7: [third, fifth, seventh],
-    'Maj7+9': [ninth, third, fifth, seventh]
+    Maj: [third, fifth],
   },
   dominant: {
-    Dom7: [third, fifth, flat7],
-    'Dom7+9': [ninth, third, fifth, flat7],
-    'Dom7+b9': [flat9, third, fifth, flat7]
+    '7+13': [third, fifth, thirteenth, flat7],
+    '7+9': [ninth, third, fifth, flat7],
+    '7+b13': [third, fifth, flat13, flat7],
+    '7+b5': [third, flat5, flat7],
+    '7+b5+b13': [third, flat5, flat13, flat7],
+    '7+b9': [flat9, third, fifth, flat7],
+    '7+b9+13': [flat9, third, fifth, thirteenth, flat7],
+    '7+b9+b13': [flat9, third, fifth, flat13, flat7],
+    '7': [third, fifth, flat7],
   },
-  other: {
-    Dim: [flat3, flat5, thirteenth],
+  skip: {
+    SoWhat: [root, fourth, flat7, flat3, fifth],
     Aug: [root, third, sharp5],
-    SoWhat: [root, fourth, flat7, flat3, fifth]
+    Dim: [flat3, flat5, thirteenth],
   },
   scales: {
     Chromatic: [
@@ -55,7 +64,7 @@ export const voicings = {
       flat6,
       sixth,
       flat7,
-      seventh
-    ]
-  }
+      seventh,
+    ],
+  },
 };

@@ -5,7 +5,7 @@ import {
   includes,
   size,
   take,
-  takeLast,
+  takeRight,
 } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
 import {
@@ -51,6 +51,7 @@ export class ChordStore {
       nrOfVoices: computed,
       chordName: computed,
       setInversion: action,
+      setVoicing: action,
       toggleNote: action,
     });
   }
@@ -95,7 +96,7 @@ export class ChordStore {
       ? filter((x) => x !== noteName, this.voicing)
       : concat(
           take(pos, this.voicing),
-          concat([noteName], takeLast(size(this.voicing) - pos, this.voicing))
+          concat([noteName], takeRight(size(this.voicing) - pos, this.voicing))
         );
   };
 

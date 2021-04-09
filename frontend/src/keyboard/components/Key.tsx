@@ -38,44 +38,49 @@ const blackKeyX = [
   whiteKeyX[6] - fraction(0.3),
 ];
 
-const getKeyX = (keyIndex) => {
+const getKeyX = (keyIndex: number) => {
   const isWhiteKey = isWhiteKeyIndex(keyIndex);
   const keyX = isWhiteKey ? whiteKeyX : blackKeyX;
   const keyIndexes = isWhiteKey ? whiteKeyIndexes : blackKeyIndexes;
   return keyX[indexOf(keyIndex, keyIndexes)];
 };
 
-export const Key = observer(
-  ({ index, octaveIndex, markerColour, markerIsStriped }) => {
-    const isWhiteKey = isWhiteKeyIndex(index);
-    const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
+type PropsT = {
+  index: number;
+  octaveIndex: number;
+  markerColour: string;
+  markerIsStriped: boolean;
+};
 
-    const offsetY = 50;
-    const offsetX = octaveIndex * 7 * whiteKeyProps.width;
+export const Key = observer((props: PropsT) => {
+  const isWhiteKey = isWhiteKeyIndex(props.index);
+  const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
-    const x = offsetX + getKeyX(index);
+  const offsetY = 50;
+  const offsetX = props.octaveIndex * 7 * whiteKeyProps.width;
 
-    return (
-      <React.Fragment>
-        <Rect
-          x={x}
-          y={offsetY}
-          fill={keyProps.fill}
-          stroke="#000000"
-          opacity={1}
-          width={keyProps.width}
-          height={keyProps.height}
-        />
-        <Marker
-          x={x}
-          y={offsetY + keyProps.height - keyProps.markerHeight}
-          height={keyProps.markerHeight}
-          width={keyProps.width}
-          fill={markerColour}
-          isStriped={markerIsStriped}
-          backgroundColour={keyProps.fill}
-        />
-      </React.Fragment>
-    );
-  }
-);
+  const x = offsetX + getKeyX(props.index);
+
+  return (
+    <React.Fragment>
+      <Rect
+        x={x}
+        y={offsetY}
+        fill={keyProps.fill}
+        stroke="#000000"
+        opacity={1}
+        width={keyProps.width}
+        height={keyProps.height}
+      />
+      <Marker
+        x={x + 2}
+        y={offsetY + keyProps.height - keyProps.markerHeight - 2}
+        height={keyProps.markerHeight}
+        width={keyProps.width - 4}
+        fill={props.markerColour}
+        isStriped={props.markerIsStriped}
+        backgroundColour={keyProps.fill}
+      />
+    </React.Fragment>
+  );
+});

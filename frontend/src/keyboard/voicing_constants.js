@@ -45,7 +45,7 @@ export const voicings = {
     '7+b9': [flat9, third, fifth, flat7],
     '7+b9+13': [flat9, third, thirteenth, flat7],
     '7+b9+b13': [flat9, third, flat13, flat7],
-    '7': [third, fifth, flat7],
+    7: [third, fifth, flat7],
   },
   skip: {
     SoWhat: [root, fourth, flat7, flat3, fifth],
@@ -67,5 +67,8 @@ export const voicings = {
       flat7,
       seventh,
     ],
+  },
+  cluster56b79: {
+    '5_6_b7_9': [fifth, thirteenth, flat7, ninth],
   },
 };

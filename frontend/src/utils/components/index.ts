@@ -1,0 +1,1 @@
+export { EffectWithoutArgs } from './Effect';

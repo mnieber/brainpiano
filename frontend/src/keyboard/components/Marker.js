@@ -5,7 +5,7 @@ import { Rect } from 'react-konva';
 
 export const Marker = observer(
   ({ x, y, height, width, fill, backgroundColour, isStriped }) => {
-    const stripeHeight = 8;
+    const stripeHeight = 6.5;
     const nrOfStripes = Math.ceil(height / stripeHeight);
 
     return isStriped

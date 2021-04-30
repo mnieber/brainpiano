@@ -6,11 +6,9 @@ import { UrlRouter } from 'src/app/components/UrlRouter';
 export function App() {
   return (
     <div className="App w-screen">
-      <header className="App-header">
+      <header className="App__Header">
         <UrlRouter />
       </header>
     </div>
   );
 }
-
-export default App;

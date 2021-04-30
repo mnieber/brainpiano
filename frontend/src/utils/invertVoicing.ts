@@ -11,7 +11,7 @@ import {
 import { VoicingT } from 'src/voicings/types';
 
 export const invertVoicing = (voicing: VoicingT, pos: number) => {
-  function rotate(arr: VoicingT) {
+  function rotate(arr: VoicingT['noteNames']) {
     const first = take(1, arr);
     const last = takeRight(size(arr) - 1, arr);
     return concat(last, first);
@@ -20,6 +20,12 @@ export const invertVoicing = (voicing: VoicingT, pos: number) => {
   const result =
     pos === 0
       ? voicing
-      : flow(always(voicing), ...times(constant(rotate), pos))();
+      : {
+          name: voicing.name,
+          noteNames: flow(
+            always(voicing.noteNames),
+            ...times(constant(rotate), pos)
+          )(),
+        };
   return result;
 };

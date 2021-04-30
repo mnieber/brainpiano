@@ -25,18 +25,6 @@ const selectKeySignatureBasedOnPreselection = () => (appStore: AppStore) => {
   }) as any);
 };
 
-const toggleNoteBasedOnPreselection = () => (appStore: AppStore) => {
-  appStore.preselectionStore.signal.add(((event: EventT) => {
-    if (event.topic === 'PreselectionStore.selectNoteDigit') {
-      appStore.chordStore.toggleNote(
-        event.details.noteDigit,
-        event.details.isSharpening,
-        event.details.isFlattening
-      );
-    }
-  }) as any);
-};
-
 export class AppStore {
   chordStore = new ChordStore();
   keySignatureStore = new KeySignatureStore();
@@ -54,6 +42,5 @@ export class AppStore {
   applyPolicies() {
     chordStoreUsesSelectedKeySignature()(this);
     selectKeySignatureBasedOnPreselection()(this);
-    toggleNoteBasedOnPreselection()(this);
   }
 }

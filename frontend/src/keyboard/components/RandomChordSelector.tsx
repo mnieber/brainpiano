@@ -1,4 +1,4 @@
-import { size, range, toPairs } from 'lodash/fp';
+import { size, range, values } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components/StoreProvider';
@@ -16,13 +16,11 @@ export const RandomChordSelector = observer(({ children }) => {
       handleKeys={['space', 'enter']}
       onKeyEvent={(key: string, e: any) => {
         const groupName = randomElement(['minor', 'major', 'dominant']);
-        const [voicingName, voicing] = randomElement(
-          toPairs(voicings[groupName])
-        );
-        const inversion = randomElement(range(0, size(voicing)));
+        const voicing = randomElement(values(voicings[groupName]));
+        const inversion = randomElement(range(0, size(voicing.noteNames)));
         const keyLetter = randomElement(keyLetters);
         keySignatureStore.setKeyLetter(keyLetter);
-        chordStore.setVoicing(voicing, voicingName);
+        chordStore.setVoicing(voicing);
         chordStore.setInversion(inversion);
       }}
     >

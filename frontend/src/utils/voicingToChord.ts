@@ -25,7 +25,7 @@ export const voicingToChord = (
 
   const result = flow(
     //
-    always(voicing),
+    always(voicing.noteNames),
     map((x) => noteNameToIndex[x]),
     map(addRootNoteValue),
     map(add(keyOffset))

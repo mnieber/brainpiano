@@ -1,7 +1,10 @@
 export type VoicingByIdT = { [id: string]: VoicingT };
 
 export type NoteNameT = string;
-export type VoicingT = NoteNameT[];
+export type VoicingT = {
+  noteNames: NoteNameT[];
+  name: string;
+};
 
 export type NoteT = number;
 export type ChordT = NoteT[];

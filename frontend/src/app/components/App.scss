@@ -1,7 +1,7 @@
 .App {
 }
 
-.App-header {
+.App__Header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -17,4 +17,10 @@ h1 {
 
 h2 {
   @apply text-lg text-white;
+}
+
+@mixin Label() {
+  @apply border rounded-md border-solid;
+  @apply px-2;
+  @apply h-8;
 }

@@ -15,8 +15,9 @@ import {
   thirteenth,
   flat13,
 } from 'src/keyboard/note_constants';
+import { VoicingByNameT } from 'src/voicings/types';
 
-export const voicings = {
+export const voicings: { [key: string]: VoicingByNameT } = {
   minor: {
     'Min6+9': [ninth, flat3, fifth, thirteenth],
     'Min7+9': [ninth, flat3, fifth, flat7],

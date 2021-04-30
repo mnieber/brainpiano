@@ -3,7 +3,7 @@ import { observable, makeObservable } from 'mobx';
 import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { ChordStore } from 'src/keyboard/ChordStore';
 import { KeySignatureStore } from 'src/keyboard/KeySignatureStore';
-import { VoicingsStore } from 'src/voicings/VoicingsStore';
+import { EventT } from 'src/utils/types';
 
 const chordStoreUsesSelectedKeySignature = () => (appStore: AppStore) => {
   reaction(
@@ -16,36 +16,34 @@ const chordStoreUsesSelectedKeySignature = () => (appStore: AppStore) => {
 };
 
 const selectKeySignatureBasedOnPreselection = () => (appStore: AppStore) => {
-  appStore.preselectionStore.signal.add((event) => {
+  appStore.preselectionStore.signal.add(((event: EventT) => {
     if (event.topic === 'PreselectionStore.selectKeySignature') {
-      appStore.keySignatureStore.setKeyLetter(event.keyLetter);
-      appStore.keySignatureStore.setKeySharp(event.isSharpening);
-      appStore.keySignatureStore.setKeyFlat(event.isFlattening);
+      appStore.keySignatureStore.setKeyLetter(event.details.keyLetter);
+      appStore.keySignatureStore.setKeySharp(event.details.isSharpening);
+      appStore.keySignatureStore.setKeyFlat(event.details.isFlattening);
     }
-  });
+  }) as any);
 };
 
 const toggleNoteBasedOnPreselection = () => (appStore: AppStore) => {
-  appStore.preselectionStore.signal.add((event) => {
+  appStore.preselectionStore.signal.add(((event: EventT) => {
     if (event.topic === 'PreselectionStore.selectNoteDigit') {
       appStore.chordStore.toggleNote(
-        event.noteDigit,
-        event.isSharpening,
-        event.isFlattening
+        event.details.noteDigit,
+        event.details.isSharpening,
+        event.details.isFlattening
       );
     }
-  });
+  }) as any);
 };
 
 export class AppStore {
-  voicingsStore = new VoicingsStore();
   chordStore = new ChordStore();
   keySignatureStore = new KeySignatureStore();
   preselectionStore = new PreselectionStore();
 
   constructor() {
     makeObservable(this, {
-      voicingsStore: observable,
       chordStore: observable,
       keySignatureStore: observable,
       preselectionStore: observable,

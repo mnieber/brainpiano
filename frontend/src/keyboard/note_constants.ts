@@ -18,7 +18,7 @@ export const thirteenth = 'thirteenth';
 export const flat7 = 'flat7';
 export const seventh = 'seventh';
 
-export const noteNameToIndex = {
+export const noteNameToIndex: { [key: string]: number } = {
   [root]: 0,
   [flat9]: 1,
   [ninth]: 2,
@@ -40,7 +40,7 @@ export const noteNameToIndex = {
   [seventh]: 11,
 };
 
-export const noteColours = {
+export const noteColours: { [key: number]: string } = {
   0: '#aaaaaa',
   1: '#da6e1b-striped',
   2: '#ff8b33', // orange

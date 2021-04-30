@@ -2217,6 +2217,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-keyboard-event-handler@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@types/react-keyboard-event-handler/-/react-keyboard-event-handler-1.5.0.tgz#b7db2a01c2eb1101e4cde9a4822c0f9bff9dcbd3"
+  integrity sha512-0hw5ZCua/cTLzMaTcf99y3HByVovNLLwRxRbADo4XJ96X9Ef6kPYuIOQEXX257Am9i4rmgsyURWQ/6ms7zZzhQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-router-dom@^5.1.6":
   version "5.1.7"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"

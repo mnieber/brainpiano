@@ -32,12 +32,13 @@ import { voicings } from 'src/keyboard/voicing_constants';
 import { invertVoicing } from 'src/utils/invertVoicing';
 import { voicingToChord } from 'src/utils/voicingToChord';
 import { mathMod } from 'src/utils/mathMod';
+import { VoicingT, NoteNameT } from 'src/voicings/types';
 
 export class ChordStore {
-  keySignature = undefined;
-  inversion = 0;
-  voicing = voicings['scales']['Chromatic'];
-  voicingName = 'Chromatic Scale';
+  keySignature?: string = undefined;
+  inversion: number = 0;
+  voicing: VoicingT = voicings['scales']['Chromatic'];
+  voicingName: string = 'Chromatic Scale';
 
   constructor() {
     makeObservable(this, {
@@ -56,19 +57,19 @@ export class ChordStore {
     });
   }
 
-  setInversion = (x) => {
+  setInversion = (x: number) => {
     const maxInversion = this.nrOfVoices;
     const minInversion = -1 * this.nrOfVoices;
     this.inversion =
       x <= minInversion ? minInversion : x >= maxInversion ? maxInversion : x;
   };
 
-  setVoicing = (voicing, voicingName) => {
+  setVoicing = (voicing: VoicingT, voicingName: string) => {
     this.voicing = voicing;
     this.voicingName = voicingName;
   };
 
-  toggleNote = (noteDigit, isSharp, isFlat) => {
+  toggleNote = (noteDigit: string, isSharp: boolean, isFlat: boolean) => {
     let noteName = '';
     if (noteDigit === '2' && !isFlat) noteName = ninth;
     if (noteDigit === '2' && isFlat) noteName = flat9;
@@ -87,13 +88,13 @@ export class ChordStore {
     const noteValues = voicingToChord(this.voicing, keyC, 0);
     const noteValue = noteNameToIndex[noteName];
 
-    let pos = findIndex((x) => x > noteValue, noteValues);
+    let pos = findIndex((x: number) => x > noteValue, noteValues);
     if (pos === -1) {
       pos = size(this.voicing);
     }
 
     this.voicing = includes(noteName, this.voicing)
-      ? filter((x) => x !== noteName, this.voicing)
+      ? filter((x: NoteNameT) => x !== noteName, this.voicing)
       : concat(
           take(pos, this.voicing),
           concat([noteName], takeRight(size(this.voicing) - pos, this.voicing))
@@ -101,7 +102,8 @@ export class ChordStore {
   };
 
   get octaveIndex() {
-    if (keySignatureOffsets[this.keySignature] >= 8) return 0;
+    if (this.keySignature && keySignatureOffsets[this.keySignature] >= 8)
+      return 0;
     return 1;
   }
 
@@ -120,10 +122,12 @@ export class ChordStore {
   }
 
   get chord() {
-    return voicingToChord(
-      invertVoicing(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
-      this.keySignature,
-      this.octaveIndex + this.octaveIndexDelta
-    );
+    return this.keySignature
+      ? voicingToChord(
+          invertVoicing(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
+          this.keySignature,
+          this.octaveIndex + this.octaveIndexDelta
+        )
+      : undefined;
   }
 }

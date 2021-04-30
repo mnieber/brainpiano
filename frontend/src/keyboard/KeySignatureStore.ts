@@ -19,16 +19,16 @@ export class KeySignatureStore {
     });
   }
 
-  setKeyLetter = (keyLetter) => {
+  setKeyLetter = (keyLetter: string) => {
     this.keyLetter = keyLetter;
   };
 
-  setKeySharp = (x) => {
+  setKeySharp = (x: boolean) => {
     this.keySharp = x;
     if (x) this.keyFlat = false;
   };
 
-  setKeyFlat = (x) => {
+  setKeyFlat = (x: boolean) => {
     this.keyFlat = x;
     if (x) this.keySharp = false;
   };

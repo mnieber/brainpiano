@@ -20,7 +20,7 @@ export const keyB = 'B';
 export const keyBSharp = 'B#';
 export const keyBFlat = 'Bb';
 
-export const keySignatureOffsets = {
+export const keySignatureOffsets: { [key: string]: number } = {
   [keyCFlat]: 11,
   [keyC]: 0,
   [keyCSharp]: 1,
@@ -41,7 +41,7 @@ export const keySignatureOffsets = {
   [keyASharp]: 10,
   [keyBFlat]: 10,
   [keyB]: 11,
-  [keyBSharp]: 0
+  [keyBSharp]: 0,
 };
 
 export const keyLetters = [keyC, keyD, keyE, keyF, keyG, keyA, keyB];

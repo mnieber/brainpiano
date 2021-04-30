@@ -3,12 +3,17 @@ import { add, always, map, flow } from 'lodash/fp';
 import { octaveRootNoteValue } from 'src/keyboard/piano_key_constants';
 import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
 import { noteNameToIndex } from 'src/keyboard/note_constants';
+import { VoicingT } from 'src/voicings/types';
 
-export const voicingToChord = (voicing, keySignature, octaveIndex) => {
+export const voicingToChord = (
+  voicing: VoicingT,
+  keySignature: string,
+  octaveIndex: number
+) => {
   let rootNoteValue = octaveRootNoteValue(octaveIndex);
-  let prev = undefined;
+  let prev: number | undefined = undefined;
 
-  const addRootNoteValue = (x) => {
+  const addRootNoteValue = (x: number) => {
     if (prev !== undefined && x < prev) {
       rootNoteValue += 12;
     }

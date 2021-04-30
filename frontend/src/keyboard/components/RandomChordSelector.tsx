@@ -5,7 +5,8 @@ import { useStore } from 'src/app/components/StoreProvider';
 import { keyLetters } from 'src/keyboard/key_signature_constants';
 import { voicings } from 'src/keyboard/voicing_constants';
 
-const randomElement = (items) => items[Math.floor(Math.random() * size(items))];
+const randomElement = (items: Array<any>) =>
+  items[Math.floor(Math.random() * size(items))];
 
 export const RandomChordSelector = observer(({ children }) => {
   const { chordStore, keySignatureStore } = useStore();

@@ -29,7 +29,7 @@ const whiteKeyX = flow(
   map((i) => i * whiteKeyProps.width)
 )();
 
-const fraction = (x) => x * blackKeyProps.width;
+const fraction = (x: number) => x * blackKeyProps.width;
 const blackKeyX = [
   whiteKeyX[1] - fraction(0.66),
   whiteKeyX[2] - fraction(0.33),
@@ -48,7 +48,7 @@ const getKeyX = (keyIndex: number) => {
 type PropsT = {
   index: number;
   octaveIndex: number;
-  markerColour: string;
+  markerColour?: string;
   markerIsStriped: boolean;
 };
 

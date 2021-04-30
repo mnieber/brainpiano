@@ -12,23 +12,29 @@ import {
 import { noteValueToColour } from 'src/utils/keyPosToColour';
 import { Key } from 'src/keyboard/components/Key';
 
-export const Octave = observer(({ index, keySignature, chord }) => {
+type PropsT = {
+  index: number;
+  keySignature: string;
+  chord: any;
+};
+
+export const Octave = observer((props: PropsT) => {
   const keyIndexes = concat(whiteKeyIndexes, blackKeyIndexes);
   const keys = flow(
     always(keyIndexes),
-    map(add(octaveRootNoteValue(index))),
+    map(add(octaveRootNoteValue(props.index))),
     map((noteValue) => {
       const keyIndex = noteValueToIndex(noteValue);
-      const [colour, isStriped] = noteValueToColour(
+      const { colour, isStriped } = noteValueToColour(
         noteValue,
-        keySignature,
-        chord
+        props.keySignature,
+        props.chord
       );
       return (
         <Key
           key={noteValue}
           index={keyIndex}
-          octaveIndex={index}
+          octaveIndex={props.index}
           markerColour={colour}
           markerIsStriped={isStriped}
         />

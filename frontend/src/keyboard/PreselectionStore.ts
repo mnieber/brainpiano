@@ -3,10 +3,10 @@ import { Signal } from 'micro-signals';
 
 export class PreselectionStore {
   signal = new Signal();
-  keyLetter = undefined;
-  noteDigit = undefined;
-  isSharpening = undefined;
-  isFlattening = undefined;
+  keyLetter?: string = undefined;
+  noteDigit?: string = undefined;
+  isSharpening?: boolean = undefined;
+  isFlattening?: boolean = undefined;
 
   constructor() {
     makeObservable(this, {
@@ -21,10 +21,10 @@ export class PreselectionStore {
     });
   }
 
-  setKeyLetter = (x) => (this.keyLetter = x);
-  setNoteDigit = (x) => (this.noteDigit = x);
-  setIsSharpening = (x) => (this.isSharpening = x);
-  setIsFlattening = (x) => (this.isFlattening = x);
+  setKeyLetter = (x?: string) => (this.keyLetter = x);
+  setNoteDigit = (x?: string) => (this.noteDigit = x);
+  setIsSharpening = (x?: boolean) => (this.isSharpening = x);
+  setIsFlattening = (x?: boolean) => (this.isFlattening = x);
 
   reset = () => {
     if (this.keyLetter) {

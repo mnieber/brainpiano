@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components/StoreProvider';
-import { keyLetters } from 'src/keyboard/key_signature_constants';
+import { keyLetters } from 'src/keyboard/keyConstants';
 
 export const KeySignatureSelector = observer(({ children }) => {
   const { preselectionStore } = useStore();

@@ -7,7 +7,7 @@ import {
   blackKeyIndexes,
   isWhiteKeyIndex,
   whiteKeyIndexes,
-} from 'src/keyboard/piano_key_constants';
+} from 'src/keyboard/keyConstants';
 import { Marker } from 'src/keyboard/components/Marker';
 
 const whiteKeyProps = {

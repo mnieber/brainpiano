@@ -1,3 +1,5 @@
+import { includes } from 'lodash/fp';
+
 export const keyC = 'C';
 export const keyCSharp = 'C#';
 export const keyCFlat = 'Cb';
@@ -45,3 +47,15 @@ export const keySignatureOffsets: { [key: string]: number } = {
 };
 
 export const keyLetters = [keyC, keyD, keyE, keyF, keyG, keyA, keyB];
+
+export const whiteKeyIndexes = [0, 2, 4, 5, 7, 9, 11];
+export const blackKeyIndexes = [1, 3, 6, 8, 10];
+
+export const isWhiteKeyIndex = (keyIndex: number) =>
+  includes(keyIndex, whiteKeyIndexes);
+
+export const nrOfNotesInOctave = 12;
+export const octaveRootNoteValue = (octaveIndex: number) =>
+  octaveIndex * nrOfNotesInOctave;
+export const noteValueToIndex = (noteValue: number) =>
+  noteValue % nrOfNotesInOctave;

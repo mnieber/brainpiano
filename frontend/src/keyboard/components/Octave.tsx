@@ -8,8 +8,8 @@ import {
   noteValueToIndex,
   octaveRootNoteValue,
   whiteKeyIndexes,
-} from 'src/keyboard/piano_key_constants';
-import { noteValueToColour } from 'src/utils/keyPosToColour';
+} from 'src/keyboard/keyConstants';
+import { noteValueToColour } from 'src/keyboard/utils/noteValueToColour';
 import { Key } from 'src/keyboard/components/Key';
 
 type PropsT = {

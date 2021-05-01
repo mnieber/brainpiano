@@ -1,13 +1,13 @@
 import { size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
-import { voicings } from 'src/keyboard/voicing_constants';
-import { invertChord } from 'src/utils/invertChord';
-import { voicingToChord } from 'src/utils/voicingToChord';
+import { keySignatureOffsets } from 'src/keyboard/keyConstants';
+import { voicings } from 'src/voicings/voicingValues';
+import { invertChord } from 'src/voicings/utils/invertChord';
+import { voicingToChord } from 'src/voicings/utils/voicingToChord';
 import { mathMod } from 'src/utils/mathMod';
 import { VoicingT } from 'src/voicings/types';
 
-export class ChordStore {
+export class VoicingStore {
   keySignature?: string = undefined;
   inversion: number = 0;
   voicing: VoicingT = voicings['scales']['Chromatic'];
@@ -21,7 +21,7 @@ export class ChordStore {
       octaveIndexDelta: computed,
       chord: computed,
       nrOfVoices: computed,
-      chordName: computed,
+      voicingTitle: computed,
       setInversion: action,
       setVoicing: action,
     });
@@ -54,7 +54,7 @@ export class ChordStore {
     return size(this.voicing.chord);
   }
 
-  get chordName() {
+  get voicingTitle() {
     return `${this.keySignature} ${this.voicing.name}`;
   }
 

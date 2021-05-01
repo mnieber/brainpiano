@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
-import { keyC } from 'src/keyboard/key_signature_constants';
+import { keyC } from 'src/keyboard/keyConstants';
 
 export class KeySignatureStore {
   keyLetter = keyC;

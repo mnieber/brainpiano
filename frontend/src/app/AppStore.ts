@@ -1,15 +1,15 @@
 import { reaction } from 'mobx';
 import { observable, makeObservable } from 'mobx';
 import { PreselectionStore } from 'src/keyboard/PreselectionStore';
-import { ChordStore } from 'src/keyboard/ChordStore';
+import { VoicingStore } from 'src/voicings/VoicingStore';
 import { KeySignatureStore } from 'src/keyboard/KeySignatureStore';
 import { EventT } from 'src/utils/types';
 
-const chordStoreUsesSelectedKeySignature = () => (appStore: AppStore) => {
+const voicingStoreUsesSelectedKeySignature = () => (appStore: AppStore) => {
   reaction(
     () => appStore.keySignatureStore.keySignature,
     (keySignature) => {
-      appStore.chordStore.keySignature = keySignature;
+      appStore.voicingStore.keySignature = keySignature;
     },
     { fireImmediately: true }
   );
@@ -26,13 +26,13 @@ const selectKeySignatureBasedOnPreselection = () => (appStore: AppStore) => {
 };
 
 export class AppStore {
-  chordStore = new ChordStore();
+  voicingStore = new VoicingStore();
   keySignatureStore = new KeySignatureStore();
   preselectionStore = new PreselectionStore();
 
   constructor() {
     makeObservable(this, {
-      chordStore: observable,
+      voicingStore: observable,
       keySignatureStore: observable,
       preselectionStore: observable,
     });
@@ -40,7 +40,7 @@ export class AppStore {
   }
 
   applyPolicies() {
-    chordStoreUsesSelectedKeySignature()(this);
+    voicingStoreUsesSelectedKeySignature()(this);
     selectKeySignatureBasedOnPreselection()(this);
   }
 }

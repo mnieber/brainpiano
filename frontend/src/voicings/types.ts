@@ -2,7 +2,7 @@ export type VoicingByIdT = { [id: string]: VoicingT };
 
 export type NoteNameT = string;
 export type VoicingT = {
-  noteNames: NoteNameT[];
+  chord: NoteNameT[];
   name: string;
 };
 

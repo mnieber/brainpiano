@@ -17,7 +17,7 @@ export const RandomChordSelector = observer(({ children }) => {
       onKeyEvent={(key: string, e: any) => {
         const groupName = randomElement(['minor', 'major', 'dominant']);
         const voicing = randomElement(values(voicings[groupName]));
-        const inversion = randomElement(range(0, size(voicing.noteNames)));
+        const inversion = randomElement(range(0, size(voicing.chord)));
         const keyLetter = randomElement(keyLetters);
         keySignatureStore.setKeyLetter(keyLetter);
         chordStore.setVoicing(voicing);

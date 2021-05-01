@@ -51,7 +51,7 @@ export class ChordStore {
   }
 
   get nrOfVoices() {
-    return size(this.voicing.noteNames);
+    return size(this.voicing.chord);
   }
 
   get chordName() {

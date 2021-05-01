@@ -2,7 +2,6 @@ import { add, always, map, flow } from 'lodash/fp';
 
 import { octaveRootNoteValue } from 'src/keyboard/piano_key_constants';
 import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
-import { noteNameToIndex } from 'src/keyboard/note_constants';
 import { VoicingT } from 'src/voicings/types';
 
 export const voicingToChord = (
@@ -25,8 +24,7 @@ export const voicingToChord = (
 
   const result = flow(
     //
-    always(voicing.noteNames),
-    map((x) => noteNameToIndex[x]),
+    always(voicing.chord),
     map(addRootNoteValue),
     map(add(keyOffset))
   )();

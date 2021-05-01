@@ -14,7 +14,7 @@ import {
   third,
   thirteenth,
   flat13,
-} from 'src/keyboard/note_constants';
+} from 'src/voicings/noteConstants';
 import { VoicingByNameT } from 'src/voicings/types';
 import { listToItemById } from 'src/utils/ids';
 

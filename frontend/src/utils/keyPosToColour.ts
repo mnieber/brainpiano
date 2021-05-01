@@ -1,6 +1,6 @@
 import { includes, split } from 'lodash/fp';
 
-import { noteColours } from 'src/keyboard/note_constants';
+import { noteColours } from 'src/keyboard/noteColours';
 import { noteValueToIndex } from 'src/keyboard/piano_key_constants';
 import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
 import { ChordT, NoteT } from 'src/voicings/types';

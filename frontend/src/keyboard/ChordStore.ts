@@ -2,7 +2,7 @@ import { size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
 import { keySignatureOffsets } from 'src/keyboard/key_signature_constants';
 import { voicings } from 'src/keyboard/voicing_constants';
-import { invertVoicing } from 'src/utils/invertVoicing';
+import { invertChord } from 'src/utils/invertChord';
 import { voicingToChord } from 'src/utils/voicingToChord';
 import { mathMod } from 'src/utils/mathMod';
 import { VoicingT } from 'src/voicings/types';
@@ -60,10 +60,13 @@ export class ChordStore {
 
   get chord() {
     return this.keySignature
-      ? voicingToChord(
-          invertVoicing(this.voicing, mathMod(this.inversion, this.nrOfVoices)),
-          this.keySignature,
-          this.octaveIndex + this.octaveIndexDelta
+      ? invertChord(
+          voicingToChord(
+            this.voicing,
+            this.keySignature,
+            this.octaveIndex + this.octaveIndexDelta
+          ),
+          mathMod(this.inversion, this.nrOfVoices)
         )
       : undefined;
   }

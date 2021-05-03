@@ -7,5 +7,5 @@ import './VoicingTitle.scss';
 export const VoicingTitle = observer(() => {
   const { voicingStore } = useStore();
 
-  return <p className="Test">{voicingStore.voicingTitle}!</p>;
+  return <div className="VoicingTitle mb-4">{voicingStore.voicingTitle}</div>;
 });

@@ -31,7 +31,7 @@ export const Keyboard = observer(() => {
           <ClefModulationSelector>
             <InversionSelector>
               <div tabIndex={0}>
-                <Stage width={1600} height={600}>
+                <Stage width={1400} height={250}>
                   {octaves}
                 </Stage>
               </div>

@@ -56,7 +56,7 @@ export const Key = observer((props: PropsT) => {
   const isWhiteKey = isWhiteKeyIndex(props.index);
   const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
-  const offsetY = 50;
+  const offsetY = 0;
   const markerOffsetY = isWhiteKey ? 3 : 2;
   const offsetX = props.octaveIndex * 7 * whiteKeyProps.width;
 

@@ -1,15 +1,18 @@
 import { clamp, size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { voicings } from 'src/voicings/voicingValues';
+import { voicingGroupById } from 'src/voicings/voicingValues';
 import { invertChord } from 'src/voicings/utils/invertChord';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
 import { VoicingT } from 'src/voicings/types';
 import { getInversionRange } from 'src/voicings/utils/invertChord';
+import { listToItemById } from 'src/utils/ids';
 
 export class VoicingStore {
   clef: string = 'C';
   inversion: number = 0;
-  voicing: VoicingT = voicings['scales']['Chromatic'];
+  voicing: VoicingT = listToItemById(voicingGroupById['scales'].voicings)[
+    'Chromatic'
+  ];
 
   constructor() {
     makeObservable(this, {

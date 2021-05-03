@@ -7,33 +7,27 @@ import { Highlight } from 'skandha-facets/Highlight';
 import { PickerValueT, ValuePicker } from 'src/utils/components/ValuePicker';
 import { GroupT } from 'src/groups/types';
 
-type PropsT = {
-};
+type PropsT = {};
 
 type DefaultPropsT = {
-  groups: GroupT[]
-  groupsSelection: Selection
-  groupsHighlight: Highlight
+  groups: GroupT[];
+  groupsSelection: Selection;
+  groupsHighlight: Highlight;
 };
 
 export const GroupPicker: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   const props = useDefaultProps<PropsT, DefaultPropsT>(p);
 
   const onChange = (value: PickerValueT) => {
-    if (value.__isNew__) {
-      // TODO: add group
-    } else if (value.value) {
-      props.groupsSelection.selectItem({
-        itemId: value.value.id,
-      });
-    }
+    const values: Array<any> = (value as any) ?? [];
+    props.groupsSelection.ids = values.map((x) => x.value.id);
   };
 
   return (
     <div className={classnames('GroupPicker mt-2')}>
       <ValuePicker
-        isMulti={false}
-        isCreatable={true}
+        isMulti={true}
+        isCreatable={false}
         pickableValues={props.groups}
         labelFromValue={(x: any) => x.name}
         pickableValue={props.groupsHighlight.item}

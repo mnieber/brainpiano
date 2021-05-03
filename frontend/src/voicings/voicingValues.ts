@@ -15,64 +15,101 @@ import {
   thirteenth,
   flat13,
 } from 'src/voicings/noteConstants';
-import { VoicingByNameT } from 'src/voicings/types';
-import { listToItemById } from 'src/utils/ids';
+import { GroupByIdT } from 'src/groups/types';
 
-export const voicings: { [key: string]: VoicingByNameT } = {
-  minor: listToItemById(
-    [
-      { name: 'Min6+9', chord: [ninth, flat3, fifth, thirteenth] },
-      { name: 'Min7+9', chord: [ninth, flat3, fifth, flat7] },
-      { name: 'Min7b5+9', chord: [ninth, flat3, flat5, flat7] },
-      { name: 'MinMaj+9', chord: [ninth, flat3, fifth, seventh] },
-      { name: 'Min6', chord: [flat3, fifth, thirteenth] },
-      { name: 'Min7', chord: [flat3, fifth, flat7] },
-      { name: 'Min7b5', chord: [flat3, flat5, flat7] },
-      { name: 'Min', chord: [flat3, fifth] },
-      { name: 'MinMaj', chord: [flat3, fifth, seventh] },
-    ],
-    'name'
-  ),
-  fourths: listToItemById(
-    [{ name: 'SoWhat', chord: [root, fourth, flat7, 12 + flat3, 12 + fifth] }],
-    'name'
-  ),
-  major: listToItemById(
-    [
-      { name: 'Maj6+9', chord: [ninth, third, sixth] },
-      { name: 'Maj7+9', chord: [ninth, third, fifth, seventh] },
-      { name: 'Maj6', chord: [third, sixth] },
-      { name: 'Maj7', chord: [third, fifth, seventh] },
-      { name: 'Maj', chord: [third, fifth] },
-    ],
-    'name'
-  ),
-  dominant: listToItemById(
-    [
-      { name: '7+13', chord: [third, thirteenth, flat7] },
-      { name: '7+9', chord: [ninth, third, fifth, flat7] },
-      { name: '7+b13', chord: [third, flat13, flat7] },
-      { name: '7+9+b13', chord: [ninth, third, flat13, flat7] },
-      { name: '7+b5', chord: [third, flat5, flat7] },
-      { name: '7+b5+b13', chord: [third, flat5, flat13, flat7] },
-      { name: '7+b9', chord: [flat9, third, fifth, flat7] },
-      { name: '7+b9+13', chord: [flat9, third, thirteenth, flat7] },
-      { name: '7+b9+b13', chord: [flat9, third, flat13, flat7] },
-      { name: '7', chord: [third, fifth, flat7] },
-    ],
-    'name'
-  ),
-  skip: listToItemById(
-    [
-      { name: 'SoWhat', chord: [root, fourth, flat7, flat3, fifth] },
-      { name: 'Aug', chord: [root, third, sharp5] },
-      { name: 'Dim', chord: [flat3, flat5, thirteenth] },
-    ],
-    'name'
-  ),
-  scales: listToItemById(
-    [
+export const voicingGroupById: GroupByIdT = {
+  minor: {
+    id: 'minor',
+    name: 'minor',
+    voicings: [
       {
+        id: 'Min6+9',
+        name: 'Min6+9',
+        chord: [ninth, flat3, fifth, thirteenth],
+      },
+      { id: 'Min7+9', name: 'Min7+9', chord: [ninth, flat3, fifth, flat7] },
+      { id: 'Min7b5+9', name: 'Min7b5+9', chord: [ninth, flat3, flat5, flat7] },
+      {
+        id: 'MinMaj+9',
+        name: 'MinMaj+9',
+        chord: [ninth, flat3, fifth, seventh],
+      },
+      { id: 'Min6', name: 'Min6', chord: [flat3, fifth, thirteenth] },
+      { id: 'Min7', name: 'Min7', chord: [flat3, fifth, flat7] },
+      { id: 'Min7b5', name: 'Min7b5', chord: [flat3, flat5, flat7] },
+      { id: 'Min', name: 'Min', chord: [flat3, fifth] },
+      { id: 'MinMaj', name: 'MinMaj', chord: [flat3, fifth, seventh] },
+    ],
+  },
+  fourths: {
+    id: 'fourths',
+    name: 'fourths',
+    voicings: [
+      {
+        id: 'SoWhat',
+        name: 'SoWhat',
+        chord: [root, fourth, flat7, 12 + flat3, 12 + fifth],
+      },
+    ],
+  },
+  major: {
+    id: 'major',
+    name: 'major',
+    voicings: [
+      { id: 'Maj6+9', name: 'Maj6+9', chord: [ninth, third, sixth] },
+      { id: 'Maj7+9', name: 'Maj7+9', chord: [ninth, third, fifth, seventh] },
+      { id: 'Maj6', name: 'Maj6', chord: [third, sixth] },
+      { id: 'Maj7', name: 'Maj7', chord: [third, fifth, seventh] },
+      { id: 'Maj', name: 'Maj', chord: [third, fifth] },
+    ],
+  },
+  dominant: {
+    id: 'dominant',
+    name: 'dominant',
+    voicings: [
+      { id: '7+13', name: '7+13', chord: [third, thirteenth, flat7] },
+      { id: '7+9', name: '7+9', chord: [ninth, third, fifth, flat7] },
+      { id: '7+b13', name: '7+b13', chord: [third, flat13, flat7] },
+      { id: '7+9+b13', name: '7+9+b13', chord: [ninth, third, flat13, flat7] },
+      { id: '7+b5', name: '7+b5', chord: [third, flat5, flat7] },
+      {
+        id: '7+b5+b13',
+        name: '7+b5+b13',
+        chord: [third, flat5, flat13, flat7],
+      },
+      { id: '7+b9', name: '7+b9', chord: [flat9, third, fifth, flat7] },
+      {
+        id: '7+b9+13',
+        name: '7+b9+13',
+        chord: [flat9, third, thirteenth, flat7],
+      },
+      {
+        id: '7+b9+b13',
+        name: '7+b9+b13',
+        chord: [flat9, third, flat13, flat7],
+      },
+      { id: '7', name: '7', chord: [third, fifth, flat7] },
+    ],
+  },
+  skip: {
+    id: 'skip',
+    name: 'skip',
+    voicings: [
+      {
+        id: 'SoWhat',
+        name: 'SoWhat',
+        chord: [root, fourth, flat7, flat3, fifth],
+      },
+      { id: 'Aug', name: 'Aug', chord: [root, third, sharp5] },
+      { id: 'Dim', name: 'Dim', chord: [flat3, flat5, thirteenth] },
+    ],
+  },
+  scales: {
+    id: 'scales',
+    name: 'scales',
+    voicings: [
+      {
+        id: 'Chromatic',
         name: 'Chromatic',
         chord: [
           root,
@@ -90,10 +127,16 @@ export const voicings: { [key: string]: VoicingByNameT } = {
         ],
       },
     ],
-    'name'
-  ),
-  cluster56b79: listToItemById(
-    [{ name: '5_6_b7_9', chord: [fifth, thirteenth, flat7, ninth] }],
-    'name'
-  ),
+  },
+  cluster56b79: {
+    id: 'cluster56b79',
+    name: 'cluster56b79',
+    voicings: [
+      {
+        id: '5_6_b7_9',
+        name: '5_6_b7_9',
+        chord: [fifth, thirteenth, flat7, ninth],
+      },
+    ],
+  },
 };

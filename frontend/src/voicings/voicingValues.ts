@@ -33,6 +33,10 @@ export const voicings: { [key: string]: VoicingByNameT } = {
     ],
     'name'
   ),
+  fourths: listToItemById(
+    [{ name: 'SoWhat', chord: [root, fourth, flat7, 12 + flat3, 12 + fifth] }],
+    'name'
+  ),
   major: listToItemById(
     [
       { name: 'Maj6+9', chord: [ninth, third, sixth] },

@@ -1,4 +1,5 @@
 import { includes } from 'lodash/fp';
+import { mathMod } from 'src/utils/mathMod';
 
 export const clefC = 'C';
 export const clefCSharp = 'C#';
@@ -21,6 +22,21 @@ export const clefAFlat = 'Ab';
 export const clefB = 'B';
 export const clefBSharp = 'B#';
 export const clefBFlat = 'Bb';
+
+export const clefs = [
+  'C',
+  'C#',
+  'D',
+  'Eb',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'Ab',
+  'A',
+  'Bb',
+  'B',
+];
 
 export const clefOffsets: { [key: string]: number } = {
   [clefCFlat]: 11,
@@ -58,4 +74,4 @@ export const nrOfNotesInOctave = 12;
 export const octaveRootNoteValue = (octaveIndex: number) =>
   octaveIndex * nrOfNotesInOctave;
 export const noteValueToIndex = (noteValue: number) =>
-  noteValue % nrOfNotesInOctave;
+  mathMod(noteValue, nrOfNotesInOctave);

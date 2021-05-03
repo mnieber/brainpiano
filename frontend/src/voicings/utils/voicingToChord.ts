@@ -9,23 +9,12 @@ export const voicingToChord = (
   octaveIndex: number
 ) => {
   let rootNoteValue = octaveRootNoteValue(octaveIndex);
-  let prev: number | undefined = undefined;
-
-  const addRootNoteValue = (x: number) => {
-    if (prev !== undefined && x < prev) {
-      rootNoteValue += 12;
-    }
-    prev = x;
-    return rootNoteValue + x;
-  };
-
   const keyOffset = clefOffsets[clef];
 
   const result = flow(
     //
     always(voicing.chord),
-    map(addRootNoteValue),
-    map(add(keyOffset))
+    map(add(rootNoteValue + keyOffset))
   )();
   return result;
 };

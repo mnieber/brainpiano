@@ -14,14 +14,14 @@ export class PreselectionStore {
       noteDigit: observable,
       isSharpening: observable,
       isFlattening: observable,
-      setKeyLetter: action,
+      setClefLetter: action,
       setIsSharpening: action,
       setIsFlattening: action,
       reset: action,
     });
   }
 
-  setKeyLetter = (x?: string) => (this.keyLetter = x);
+  setClefLetter = (x?: string) => (this.keyLetter = x);
   setNoteDigit = (x?: string) => (this.noteDigit = x);
   setIsSharpening = (x?: boolean) => (this.isSharpening = x);
   setIsFlattening = (x?: boolean) => (this.isFlattening = x);
@@ -29,7 +29,7 @@ export class PreselectionStore {
   reset = () => {
     if (this.keyLetter) {
       this.signal.dispatch({
-        topic: 'PreselectionStore.selectKeySignature',
+        topic: 'PreselectionStore.selectClef',
         details: {
           keyLetter: this.keyLetter,
           isSharpening: this.isSharpening,
@@ -49,7 +49,7 @@ export class PreselectionStore {
     }
     this.setIsFlattening(false);
     this.setIsSharpening(false);
-    this.setKeyLetter(undefined);
+    this.setClefLetter(undefined);
     this.setNoteDigit(undefined);
   };
 }

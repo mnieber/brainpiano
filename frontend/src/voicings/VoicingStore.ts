@@ -1,6 +1,6 @@
 import { size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { keySignatureOffsets } from 'src/keyboard/keyConstants';
+import { clefOffsets } from 'src/keyboard/keyConstants';
 import { voicings } from 'src/voicings/voicingValues';
 import { invertChord } from 'src/voicings/utils/invertChord';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
@@ -8,13 +8,13 @@ import { mathMod } from 'src/utils/mathMod';
 import { VoicingT } from 'src/voicings/types';
 
 export class VoicingStore {
-  keySignature?: string = undefined;
+  clef?: string = undefined;
   inversion: number = 0;
   voicing: VoicingT = voicings['scales']['Chromatic'];
 
   constructor() {
     makeObservable(this, {
-      keySignature: observable,
+      clef: observable,
       inversion: observable,
       voicing: observable,
       octaveIndex: computed,
@@ -39,8 +39,7 @@ export class VoicingStore {
   };
 
   get octaveIndex() {
-    if (this.keySignature && keySignatureOffsets[this.keySignature] >= 8)
-      return 0;
+    if (this.clef && clefOffsets[this.clef] >= 8) return 0;
     return 1;
   }
 
@@ -55,15 +54,15 @@ export class VoicingStore {
   }
 
   get voicingTitle() {
-    return `${this.keySignature} ${this.voicing.name}`;
+    return `${this.clef} ${this.voicing.name}`;
   }
 
   get chord() {
-    return this.keySignature
+    return this.clef
       ? invertChord(
           voicingToChord(
             this.voicing,
-            this.keySignature,
+            this.clef,
             this.octaveIndex + this.octaveIndexDelta
           ),
           mathMod(this.inversion, this.nrOfVoices)

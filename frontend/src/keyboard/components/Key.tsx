@@ -57,6 +57,7 @@ export const Key = observer((props: PropsT) => {
   const keyProps = isWhiteKey ? whiteKeyProps : blackKeyProps;
 
   const offsetY = 50;
+  const markerOffsetY = isWhiteKey ? 3 : 2;
   const offsetX = props.octaveIndex * 7 * whiteKeyProps.width;
 
   const x = offsetX + getKeyX(props.index);
@@ -74,7 +75,7 @@ export const Key = observer((props: PropsT) => {
       />
       <Marker
         x={x + 2}
-        y={offsetY + keyProps.height - keyProps.markerHeight - 2}
+        y={offsetY + keyProps.height - keyProps.markerHeight - markerOffsetY}
         height={keyProps.markerHeight}
         width={keyProps.width - 4}
         fill={props.markerColour}

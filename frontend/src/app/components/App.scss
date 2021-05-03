@@ -18,9 +18,3 @@ h1 {
 h2 {
   @apply text-lg text-white;
 }
-
-@mixin Label() {
-  @apply border rounded-md border-solid;
-  @apply px-2;
-  @apply h-8;
-}

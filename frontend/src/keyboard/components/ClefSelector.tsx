@@ -1,21 +1,21 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { useStore } from 'src/app/components/StoreProvider';
-import { keyLetters } from 'src/keyboard/keyConstants';
+import { useStore } from 'src/app/components';
+import { clefLetters } from 'src/keyboard/keyConstants';
 
-export const KeySignatureSelector = observer(({ children }) => {
+export const ClefSelector = observer(({ children }) => {
   const { preselectionStore } = useStore();
 
   return (
     <KeyboardEventHandler
-      handleKeys={keyLetters}
+      handleKeys={clefLetters}
       handleEventType="keydown"
       onKeyEvent={(key: string, e: any) => {
-        preselectionStore.setKeyLetter(key);
+        preselectionStore.setClefLetter(key);
       }}
     >
       <KeyboardEventHandler
-        handleKeys={keyLetters}
+        handleKeys={clefLetters}
         handleEventType="keyup"
         onKeyEvent={(key: string, e: any) => {
           preselectionStore.reset();

@@ -1,14 +1,11 @@
 import { add, always, map, flow } from 'lodash/fp';
 
-import {
-  octaveRootNoteValue,
-  keySignatureOffsets,
-} from 'src/keyboard/keyConstants';
+import { octaveRootNoteValue, clefOffsets } from 'src/keyboard/keyConstants';
 import { VoicingT } from 'src/voicings/types';
 
 export const voicingToChord = (
   voicing: VoicingT,
-  keySignature: string,
+  clef: string,
   octaveIndex: number
 ) => {
   let rootNoteValue = octaveRootNoteValue(octaveIndex);
@@ -22,7 +19,7 @@ export const voicingToChord = (
     return rootNoteValue + x;
   };
 
-  const keyOffset = keySignatureOffsets[keySignature];
+  const keyOffset = clefOffsets[clef];
 
   const result = flow(
     //

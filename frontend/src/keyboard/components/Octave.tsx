@@ -14,7 +14,7 @@ import { Key } from 'src/keyboard/components/Key';
 
 type PropsT = {
   index: number;
-  keySignature: string;
+  clef: string;
   chord: any;
 };
 
@@ -27,7 +27,7 @@ export const Octave = observer((props: PropsT) => {
       const keyIndex = noteValueToIndex(noteValue);
       const { colour, isStriped } = noteValueToColour(
         noteValue,
-        props.keySignature,
+        props.clef,
         props.chord
       );
       return (

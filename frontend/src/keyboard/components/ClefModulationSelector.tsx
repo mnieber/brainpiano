@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { useStore } from 'src/app/components/StoreProvider';
+import { useStore } from 'src/app/components';
 
-export const KeyModulationSelector = observer(({ children }) => {
+export const ClefModulationSelector = observer(({ children }) => {
   const { preselectionStore } = useStore();
 
   return (

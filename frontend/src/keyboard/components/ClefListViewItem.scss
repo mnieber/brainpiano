@@ -1,0 +1,7 @@
+.ClefListViewItem {
+  @apply text-center;
+}
+
+.ClefListViewItem--selected {
+  @apply bg-green-400;
+}

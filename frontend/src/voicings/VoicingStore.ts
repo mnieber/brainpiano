@@ -1,18 +1,34 @@
 import { clamp, size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { voicingGroupById } from 'src/voicings/voicingValues';
 import { invertChord } from 'src/voicings/utils/invertChord';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
 import { VoicingT } from 'src/voicings/types';
 import { getInversionRange } from 'src/voicings/utils/invertChord';
-import { listToItemById } from 'src/utils/ids';
+import { parseVoicing } from 'src/voicings/voicingValues';
+
+const cScale = parseVoicing({
+  id: 'Chromatic',
+  name: 'Chromatic',
+  chord: [
+    'root',
+    'flat9',
+    'ninth',
+    'flat3',
+    'third',
+    'fourth',
+    'flat5',
+    'fifth',
+    'flat6',
+    'sixth',
+    'flat7',
+    'seventh',
+  ],
+});
 
 export class VoicingStore {
   clef: string = 'C';
   inversion: number = 0;
-  voicing: VoicingT = listToItemById(voicingGroupById['scales'].voicings)[
-    'Chromatic'
-  ];
+  voicing: VoicingT = cScale;
 
   constructor() {
     makeObservable(this, {

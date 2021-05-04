@@ -14,7 +14,7 @@ const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
   return randomElement(
     range(
       Math.max(0, minInversion),
-      Math.min(voicing.chord.length, maxInversion)
+      Math.min(voicing.chord.length, maxInversion + 1)
     )
   );
 };

@@ -30,6 +30,8 @@ import { VoicingStore } from 'src/voicings/VoicingStore';
 import { ClefStore } from 'src/keyboard/ClefStore';
 import { Inputs } from 'src/quiz/QuizState/facets/Inputs';
 import { Outputs } from 'src/quiz/QuizState/facets/Outputs';
+import { ClefT } from 'src/keyboard/types';
+import { GroupT } from 'src/groups/types';
 
 type PropsT = {
   clefStore: ClefStore;
@@ -140,6 +142,16 @@ export class QuizState {
 
     const cuf = Policies.selectClefBasedOnPreselection()(this);
     addCleanUpFunctionToCtr(this.clefs, cuf);
+  }
+
+  @action setClefs(clefs: ClefT[]) {
+    this.inputs.clefs = clefs;
+    this.clefs.selection.ids = clefs;
+  }
+
+  @action setGroups(groups: GroupT[]) {
+    this.inputs.groups = groups;
+    this.groups.selection.ids = getIds(groups);
   }
 
   @action pickRandomChord() {

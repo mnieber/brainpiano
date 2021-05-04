@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { action, reaction } from 'mobx';
-import { values } from 'lodash/fp';
 
 import { QuizState } from 'src/quiz/QuizState';
 import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
-import { voicingGroupById } from 'src/voicings/voicingValues';
-import { getIds } from 'src/utils/ids';
+import { voicingGroups } from 'src/voicings/voicingGroups';
 import { clefs } from 'src/keyboard/keyConstants';
+import { parseVoicingGroups } from 'src/voicings/voicingValues';
 
 type PropsT = React.PropsWithChildren<{}>;
 
@@ -19,7 +18,7 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
     voicingStore,
     preselectionStore,
   } = useStore();
-  const groups = values(voicingGroupById);
+  const groups = parseVoicingGroups(voicingGroups);
 
   const createState = action(() => {
     const state = new QuizState({
@@ -28,12 +27,8 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
       voicingStore,
       preselectionStore,
     });
-    state.inputs.clefs = clefs;
-    state.clefs.selection.ids = clefs;
-
-    state.inputs.groups = values(voicingGroupById);
-    state.groups.selection.ids = getIds(groups);
-
+    state.setClefs(clefs);
+    state.setGroups(groups);
     return state;
   });
 

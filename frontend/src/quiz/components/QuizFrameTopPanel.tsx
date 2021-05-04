@@ -23,7 +23,12 @@ export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
       <div className={classnames('QuizFrameTopPanel mb-4')}>
         <div className="QuizFrameTopPanel__firstRow mb4 flex flex-row justify-between">
           <VoicingTitle query={props.quizState.query} />
-          <VoicingTitle query={props.quizState.nextQuery} />
+          <VoicingTitle
+            label={
+              props.quizState.nextQuery ? 'Next: ' : 'Welcome to BrainPiano!'
+            }
+            query={props.quizState.nextQuery}
+          />
         </div>
         <GroupPicker />
         <ClefListView />

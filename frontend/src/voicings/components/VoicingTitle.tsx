@@ -7,12 +7,14 @@ import './VoicingTitle.scss';
 
 type PropsT = {
   query?: QueryT;
+  label?: string;
 };
 
 export const VoicingTitle = observer((props: PropsT) => {
   return (
     <div className="VoicingTitle">
-      {props.query ? voicingTitleFromQuery(props.query) : ''}
+      {(props.label ?? '') +
+        (props.query ? voicingTitleFromQuery(props.query) : '')}
     </div>
   );
 });

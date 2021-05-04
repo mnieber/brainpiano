@@ -18,11 +18,21 @@ type DefaultPropsT = {
 export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
   (p: PropsT) => {
     const props = useDefaultProps<PropsT, DefaultPropsT>(p);
+    const HelpButton = (
+      <button
+        onClick={() =>
+          window.open('https://github.com/mnieber/brainpiano#brainpiano')
+        }
+      >
+        Help
+      </button>
+    );
 
     return (
       <div className={classnames('QuizFrameTopPanel mb-4')}>
         <div className="QuizFrameTopPanel__firstRow mb4 flex flex-row justify-between">
           <VoicingTitle query={props.quizState.query} />
+          {HelpButton}
           <VoicingTitle
             label={
               props.quizState.nextQuery ? 'Next: ' : 'Welcome to BrainPiano!'

@@ -1,3 +1,4 @@
+import { useDefaultProps, FC } from 'react-default-props-context';
 import { always, flow, map, range } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
 import { Stage } from 'react-konva';
@@ -9,7 +10,15 @@ import { ClefSelector } from 'src/keyboard/components/ClefSelector';
 import { Octave } from 'src/keyboard/components/Octave';
 import { RandomChordSelector } from 'src/voicings/components/RandomChordSelector';
 
-export const Keyboard = observer(() => {
+type PropsT = {
+  onClick: (event: any) => void;
+};
+
+type DefaultPropsT = {};
+
+export const Keyboard: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
+  const props = useDefaultProps<PropsT, DefaultPropsT>(p);
+
   const { voicingStore, clefStore } = useStore();
 
   const octaves = flow(
@@ -25,7 +34,7 @@ export const Keyboard = observer(() => {
   )();
 
   return (
-    <div className="Keyboard__frame">
+    <div className="Keyboard__frame" onClick={props.onClick}>
       <RandomChordSelector>
         <ClefSelector>
           <ClefModulationSelector>

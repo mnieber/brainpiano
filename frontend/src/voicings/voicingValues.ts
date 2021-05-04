@@ -28,7 +28,7 @@ export const voicingGroupById: GroupByIdT = {
         chord: [ninth, flat3, fifth, thirteenth],
       },
       { id: 'Min7+9', name: 'Min7+9', chord: [ninth, flat3, fifth, flat7] },
-      { id: 'Min7b5+9', name: 'Min7b5+9', chord: [ninth, flat3, flat5, flat7] },
+      { id: 'ø+9', name: 'ø+9', chord: [ninth, flat3, flat5, flat7] },
       {
         id: 'MinMaj+9',
         name: 'MinMaj+9',
@@ -36,7 +36,7 @@ export const voicingGroupById: GroupByIdT = {
       },
       { id: 'Min6', name: 'Min6', chord: [flat3, fifth, thirteenth] },
       { id: 'Min7', name: 'Min7', chord: [flat3, fifth, flat7] },
-      { id: 'Min7b5', name: 'Min7b5', chord: [flat3, flat5, flat7] },
+      { id: 'ø', name: 'ø', chord: [flat3, flat5, flat7] },
       { id: 'Min', name: 'Min', chord: [flat3, fifth] },
       { id: 'MinMaj', name: 'MinMaj', chord: [flat3, fifth, seventh] },
     ],

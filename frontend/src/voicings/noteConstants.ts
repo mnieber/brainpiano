@@ -17,3 +17,18 @@ export const sixth = 9;
 export const thirteenth = 9;
 export const flat7 = 10;
 export const seventh = 11;
+
+export const noteNameByValue = {
+  '0': 'root',
+  '1': 'flat nine',
+  '2': 'nine',
+  '3': 'sharp nine',
+  '4': 'third',
+  '5': 'fourth/eleventh',
+  '6': 'sharp fourth/eleventh',
+  '7': 'fifth',
+  '8': 'flat thirteen',
+  '9': 'thirteenth',
+  '10': 'flat seven',
+  '11': 'seven',
+};

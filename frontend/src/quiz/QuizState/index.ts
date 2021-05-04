@@ -20,14 +20,20 @@ import {
 import { Highlight, HighlightCbs } from 'skandha-facets/Highlight';
 
 import { GroupsStore } from 'src/groups/GroupsStore';
+import { VoicingStore } from 'src/voicings/VoicingStore';
+import { ClefStore } from 'src/keyboard/ClefStore';
 import { Inputs } from 'src/quiz/QuizState/facets/Inputs';
 import { Outputs } from 'src/quiz/QuizState/facets/Outputs';
 
 type PropsT = {
+  clefStore: ClefStore;
   groupsStore: GroupsStore;
+  voicingStore: VoicingStore;
 };
 
 export class QuizState {
+  props: PropsT;
+
   @facet inputs = new Inputs();
   @facet outputs = new Outputs();
 
@@ -108,6 +114,8 @@ export class QuizState {
   }
 
   constructor(props: PropsT) {
+    this.props = props;
+
     registerFacets(this, {});
 
     registerFacets(this.clefs, { name: 'Clefs' });
@@ -119,5 +127,13 @@ export class QuizState {
     this._setGroupsCallbacks(props);
     this._applyGroupsPolicies(props);
     makeCtrObservable(this.groups);
+  }
+
+  pickRandomChord() {
+    this.props.clefStore.setRandomClef(this.clefs.selection.ids);
+    this.props.voicingStore.setRandomVoicing(
+      this.props.clefStore.clef,
+      this.groups.selection.items ?? []
+    );
   }
 }

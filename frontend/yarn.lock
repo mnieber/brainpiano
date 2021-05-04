@@ -3237,6 +3237,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+audiosynth@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/audiosynth/-/audiosynth-0.0.5.tgz#29fbac87602dfbeea064015d3cec8890f06260fe"
+  integrity sha1-Kfush2At++6gZAFdPOyIkPBiYP4=
+
 autoprefixer@^9:
   version "9.8.6"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.6.tgz#3b73594ca1bf9266320c5acf1588d74dea74210f"

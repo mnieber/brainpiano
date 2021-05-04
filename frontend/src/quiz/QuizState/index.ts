@@ -1,4 +1,5 @@
 import { setCallbacks } from 'aspiration';
+import { action, observable, makeObservable } from 'mobx';
 import {
   facet,
   getm,
@@ -18,7 +19,9 @@ import {
   handleSelectItem,
 } from 'skandha-facets/Selection';
 import { Highlight, HighlightCbs } from 'skandha-facets/Highlight';
+import { createQuery } from 'src/quiz/utils/createQuery';
 
+import { QueryT } from 'src/quiz/types';
 import { GroupsStore } from 'src/groups/GroupsStore';
 import { VoicingStore } from 'src/voicings/VoicingStore';
 import { ClefStore } from 'src/keyboard/ClefStore';
@@ -33,6 +36,8 @@ type PropsT = {
 
 export class QuizState {
   props: PropsT;
+  @observable query?: QueryT;
+  @observable nextQuery?: QueryT;
 
   @facet inputs = new Inputs();
   @facet outputs = new Outputs();
@@ -117,6 +122,7 @@ export class QuizState {
     this.props = props;
 
     registerFacets(this, {});
+    makeObservable(this);
 
     registerFacets(this.clefs, { name: 'Clefs' });
     this._setClefsCallbacks(props);
@@ -129,11 +135,20 @@ export class QuizState {
     makeCtrObservable(this.groups);
   }
 
-  pickRandomChord() {
-    this.props.clefStore.setRandomClef(this.clefs.selection.ids);
-    this.props.voicingStore.setRandomVoicing(
-      this.props.clefStore.clef,
+  @action pickRandomChord() {
+    this.query =
+      this.nextQuery ??
+      createQuery(this.clefs.selection.ids, this.groups.selection.items ?? []);
+
+    this.nextQuery = createQuery(
+      this.clefs.selection.ids,
       this.groups.selection.items ?? []
     );
+
+    if (this.query) {
+      this.props.clefStore.setClef(this.query.clef);
+      this.props.voicingStore.setVoicing(this.query.voicing);
+      this.props.voicingStore.setInversion(this.query.inversion);
+    }
   }
 }

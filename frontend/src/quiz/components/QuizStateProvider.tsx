@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { reaction } from 'mobx';
+import { action, reaction } from 'mobx';
 import { values } from 'lodash/fp';
 
 import { QuizState } from 'src/quiz/QuizState';
@@ -16,7 +16,7 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
   const { groupsStore, clefStore, voicingStore } = useStore();
   const groups = values(voicingGroupById);
 
-  const createState = () => {
+  const createState = action(() => {
     const state = new QuizState({
       groupsStore,
       clefStore,
@@ -29,7 +29,7 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
     state.groups.selection.ids = getIds(groups);
 
     return state;
-  };
+  });
 
   const updateState = (state: QuizState) => {
     reaction(

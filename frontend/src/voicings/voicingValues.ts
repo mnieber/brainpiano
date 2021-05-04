@@ -91,19 +91,6 @@ export const voicingGroupById: GroupByIdT = {
       { id: '7', name: '7', chord: [third, fifth, flat7] },
     ],
   },
-  skip: {
-    id: 'skip',
-    name: 'skip',
-    voicings: [
-      {
-        id: 'SoWhat',
-        name: 'SoWhat',
-        chord: [root, fourth, flat7, flat3, fifth],
-      },
-      { id: 'Aug', name: 'Aug', chord: [root, third, sharp5] },
-      { id: 'Dim', name: 'Dim', chord: [flat3, flat5, thirteenth] },
-    ],
-  },
   scales: {
     id: 'scales',
     name: 'scales',
@@ -133,8 +120,8 @@ export const voicingGroupById: GroupByIdT = {
     name: 'cluster56b79',
     voicings: [
       {
-        id: '5_6_b7_9',
-        name: '5_6_b7_9',
+        id: '5/6/b7/9',
+        name: '5/6/b7/9',
         chord: [fifth, thirteenth, flat7, ninth],
       },
     ],

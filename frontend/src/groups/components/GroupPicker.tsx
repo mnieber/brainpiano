@@ -1,10 +1,13 @@
 import classnames from 'classnames';
+import { action } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { useDefaultProps, FC } from 'react-default-props-context';
 import { Selection } from 'skandha-facets/Selection';
 
 import { PickerValueT, ValuePicker } from 'src/utils/components/ValuePicker';
 import { GroupT } from 'src/groups/types';
+
+import './GroupPicker.scss';
 
 type PropsT = {};
 
@@ -16,10 +19,10 @@ type DefaultPropsT = {
 export const GroupPicker: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   const props = useDefaultProps<PropsT, DefaultPropsT>(p);
 
-  const onChange = (value: PickerValueT) => {
+  const onChange = action((value: PickerValueT) => {
     const values: Array<any> = (value as any) ?? [];
     props.groupsSelection.ids = values.map((x) => x.value.id);
-  };
+  });
 
   return (
     <div className={classnames('GroupPicker mt-2')}>

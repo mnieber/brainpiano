@@ -1,7 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
 import { clefC } from 'src/keyboard/keyConstants';
-import { randomElement } from 'src/utils/random';
 import { ClefT } from 'src/keyboard/types';
 
 export class ClefStore {
@@ -39,11 +38,10 @@ export class ClefStore {
     return this.clefLetter + (this.clefSharp ? '#' : this.clefFlat ? 'b' : '');
   }
 
-  setRandomClef(clefs: ClefT[]) {
-    const clef = randomElement(clefs);
-    const clefLetter = clef[0];
+  setClef(x: ClefT) {
+    const clefLetter = x[0];
     this.setClefLetter(clefLetter);
-    const modulate = clef[1];
+    const modulate = x[1];
     this.setClefFlat(modulate == 'b');
     this.setClefSharp(modulate == '#');
   }

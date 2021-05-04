@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components';
+import { playChord } from 'src/voicings/utils/playChord';
 
 export const InversionSelector = observer(({ children }) => {
   const { voicingStore } = useStore();
@@ -16,7 +17,14 @@ export const InversionSelector = observer(({ children }) => {
         }
       }}
     >
-      {children}
+      <KeyboardEventHandler
+        handleKeys={['p']}
+        onKeyEvent={(key: string, e: any) => {
+          playChord(voicingStore.chord);
+        }}
+      >
+        {children}
+      </KeyboardEventHandler>
     </KeyboardEventHandler>
   );
 });

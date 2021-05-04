@@ -9,7 +9,9 @@ import { GroupT } from 'src/groups/types';
 
 import './GroupPicker.scss';
 
-type PropsT = {};
+type PropsT = {
+  className?: any;
+};
 
 type DefaultPropsT = {
   groups: GroupT[];
@@ -25,7 +27,7 @@ export const GroupPicker: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   });
 
   return (
-    <div className={classnames('GroupPicker mt-2')}>
+    <div className={classnames('GroupPicker', props.className)}>
       <ValuePicker
         isMulti={true}
         isCreatable={false}

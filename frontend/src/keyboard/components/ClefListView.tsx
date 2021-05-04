@@ -8,7 +8,9 @@ import { Selection } from 'skandha-facets/Selection';
 
 import './ClefListView.scss';
 
-type PropsT = {};
+type PropsT = {
+  className?: any;
+};
 
 type DefaultPropsT = {
   clefs: ClefT[];
@@ -24,9 +26,12 @@ export const ClefListView: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
       <ClefListViewItem
         key={x}
         clef={x}
-        className={classnames({
-          'ClefListViewItem--selected': props.clefsSelection.ids.includes(x),
-        })}
+        className={classnames(
+          {
+            'ClefListViewItem--selected': props.clefsSelection.ids.includes(x),
+          },
+          props.className
+        )}
         onMouseDown={(e: any) => {
           props.clefsSelection.selectItem({
             itemId: x,

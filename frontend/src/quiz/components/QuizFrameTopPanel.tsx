@@ -6,6 +6,7 @@ import { VoicingTitle } from 'src/voicings/components/VoicingTitle';
 import { GroupPicker } from 'src/groups/components';
 import { ClefListView } from 'src/keyboard/components';
 import { QuizState } from 'src/quiz/QuizState';
+import { IoMenu } from 'src/io/components';
 
 import './QuizFrameTopPanel.scss';
 
@@ -40,8 +41,11 @@ export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
             query={props.quizState.nextQuery}
           />
         </div>
-        <GroupPicker />
-        <ClefListView />
+        <GroupPicker className="flex-1" />
+        <div className="flex flex-row justify-between mt-2">
+          <ClefListView className="flex-1" />
+          <IoMenu />
+        </div>
       </div>
     );
   }

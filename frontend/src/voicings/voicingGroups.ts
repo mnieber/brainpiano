@@ -7,6 +7,7 @@ export const voicingGroups = [
         id: 'Min6+9',
         name: 'Min6+9',
         chord: ['flat3', 'fifth', 'ninth', 'thirteenth'],
+        inversions: '011',
       },
       {
         id: 'Min7+9',

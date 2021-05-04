@@ -3,15 +3,13 @@ import { Signal } from 'micro-signals';
 
 export class PreselectionStore {
   signal = new Signal();
-  keyLetter?: string = undefined;
-  noteDigit?: string = undefined;
+  clefLetter?: string = undefined;
   isSharpening?: boolean = undefined;
   isFlattening?: boolean = undefined;
 
   constructor() {
     makeObservable(this, {
-      keyLetter: observable,
-      noteDigit: observable,
+      clefLetter: observable,
       isSharpening: observable,
       isFlattening: observable,
       setClefLetter: action,
@@ -21,27 +19,16 @@ export class PreselectionStore {
     });
   }
 
-  setClefLetter = (x?: string) => (this.keyLetter = x);
-  setNoteDigit = (x?: string) => (this.noteDigit = x);
+  setClefLetter = (x?: string) => (this.clefLetter = x);
   setIsSharpening = (x?: boolean) => (this.isSharpening = x);
   setIsFlattening = (x?: boolean) => (this.isFlattening = x);
 
   reset = () => {
-    if (this.keyLetter) {
+    if (this.clefLetter) {
       this.signal.dispatch({
         topic: 'PreselectionStore.selectClef',
         details: {
-          keyLetter: this.keyLetter,
-          isSharpening: this.isSharpening,
-          isFlattening: this.isFlattening,
-        },
-      });
-    }
-    if (this.noteDigit) {
-      this.signal.dispatch({
-        topic: 'PreselectionStore.selectNoteDigit',
-        details: {
-          noteDigit: this.noteDigit,
+          clefLetter: this.clefLetter,
           isSharpening: this.isSharpening,
           isFlattening: this.isFlattening,
         },
@@ -50,6 +37,5 @@ export class PreselectionStore {
     this.setIsFlattening(false);
     this.setIsSharpening(false);
     this.setClefLetter(undefined);
-    this.setNoteDigit(undefined);
   };
 }

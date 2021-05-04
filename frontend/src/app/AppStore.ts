@@ -23,6 +23,5 @@ export class AppStore {
 
   applyPolicies() {
     Policies.voicingStoreUsesSelectedClef()(this);
-    Policies.selectClefBasedOnPreselection()(this);
   }
 }

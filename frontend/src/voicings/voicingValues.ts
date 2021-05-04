@@ -9,7 +9,6 @@ import {
   fourth,
   ninth,
   seventh,
-  sharp5,
   sixth,
   third,
   thirteenth,
@@ -122,7 +121,7 @@ export const voicingGroupById: GroupByIdT = {
       {
         id: '5/6/b7/9',
         name: '5/6/b7/9',
-        chord: [fifth, thirteenth, flat7, ninth],
+        chord: [fifth, thirteenth, flat7, 12 + ninth],
       },
     ],
   },

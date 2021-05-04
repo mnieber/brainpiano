@@ -22,7 +22,7 @@ export const noteNameByValue = {
   '0': 'root',
   '1': 'flat nine',
   '2': 'nine',
-  '3': 'sharp nine',
+  '3': 'flat third',
   '4': 'third',
   '5': 'fourth/eleventh',
   '6': 'sharp fourth/eleventh',

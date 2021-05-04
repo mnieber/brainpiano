@@ -13,7 +13,12 @@ type PropsT = React.PropsWithChildren<{}>;
 
 // Note: don't observe this with MobX
 export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
-  const { groupsStore, clefStore, voicingStore } = useStore();
+  const {
+    groupsStore,
+    clefStore,
+    voicingStore,
+    preselectionStore,
+  } = useStore();
   const groups = values(voicingGroupById);
 
   const createState = action(() => {
@@ -21,6 +26,7 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
       groupsStore,
       clefStore,
       voicingStore,
+      preselectionStore,
     });
     state.inputs.clefs = clefs;
     state.clefs.selection.ids = clefs;

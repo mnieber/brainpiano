@@ -1,6 +1,7 @@
 import { setCallbacks } from 'aspiration';
 import { action, observable, makeObservable } from 'mobx';
 import {
+  addCleanUpFunctionToCtr,
   facet,
   getm,
   cleanUpCtr,
@@ -12,6 +13,7 @@ import {
 import { makeCtrObservable } from 'skandha-mobx';
 import { getIds } from 'src/utils/ids';
 import * as Facets from 'skandha-facets';
+import * as Policies from 'src/quiz/QuizState/policies';
 import * as FacetPolicies from 'skandha-facets/policies';
 import {
   Selection,
@@ -20,6 +22,7 @@ import {
 } from 'skandha-facets/Selection';
 import { Highlight, HighlightCbs } from 'skandha-facets/Highlight';
 import { createQuery } from 'src/quiz/utils/createQuery';
+import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 
 import { QueryT } from 'src/quiz/types';
 import { GroupsStore } from 'src/groups/GroupsStore';
@@ -32,6 +35,7 @@ type PropsT = {
   clefStore: ClefStore;
   groupsStore: GroupsStore;
   voicingStore: VoicingStore;
+  preselectionStore: PreselectionStore;
 };
 
 export class QuizState {
@@ -133,6 +137,9 @@ export class QuizState {
     this._setGroupsCallbacks(props);
     this._applyGroupsPolicies(props);
     makeCtrObservable(this.groups);
+
+    const cuf = Policies.selectClefBasedOnPreselection()(this);
+    addCleanUpFunctionToCtr(this.clefs, cuf);
   }
 
   @action pickRandomChord() {

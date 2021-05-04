@@ -1,1 +1,1 @@
-export {};
+export { selectClefBasedOnPreselection } from './selectClefBasedOnPreselection';

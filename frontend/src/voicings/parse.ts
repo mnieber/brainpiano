@@ -1,14 +1,6 @@
 import { valueByNoteName } from 'src/voicings/noteConstants';
 import { map } from 'lodash/fp';
 
-const parseInversions = (inversions: string, l: number) => {
-  const result = map((x) => x === '1', inversions);
-  while (result.length < l) {
-    result.push(true);
-  }
-  return result;
-};
-
 export const parseVoicing = (data: any) => {
   const voicing = {
     ...data,
@@ -19,7 +11,6 @@ export const parseVoicing = (data: any) => {
       }
       return noteValue;
     }, data['chord']),
-    inversions: parseInversions(data['inversions'] ?? '', data['chord'].length),
   };
 
   for (let i = 1; i < voicing.chord.length; ++i) {

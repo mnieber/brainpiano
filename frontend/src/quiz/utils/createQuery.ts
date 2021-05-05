@@ -6,26 +6,35 @@ import { VoicingT } from 'src/voicings/types';
 import { getInversionRange } from 'src/voicings/utils/invertChord';
 import { QueryT } from 'src/quiz/types';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
+import { mathMod } from 'src/utils/mathMod';
 
 const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
+  const L = voicing.chord.length;
+
   const [minInversion, maxInversion] = getInversionRange(
     voicingToChord(voicing, clef, 1)
   );
-  let inversion = randomElement(range(minInversion, maxInversion + 1));
+  const inversionRange = range(minInversion, maxInversion + 1).filter((x) => {
+    return voicing.inversions[mathMod(x, L)] !== false;
+  });
+  if (inversionRange.length === 0) {
+    return 0;
+  }
+  let inversion = randomElement(inversionRange);
 
   // Try to bring inversion closer to zero using steps of voicing.chord.length inversions
   // (which means its the same inversion, just at a different place on the keyboard)
   while (
-    inversion + voicing.chord.length <= maxInversion &&
-    Math.abs(inversion) > Math.abs(inversion + voicing.chord.length)
+    inversion + L <= maxInversion &&
+    Math.abs(inversion) > Math.abs(inversion + L)
   ) {
-    inversion += voicing.chord.length;
+    inversion += L;
   }
   while (
-    inversion - voicing.chord.length >= minInversion &&
-    Math.abs(inversion) > Math.abs(inversion - voicing.chord.length)
+    inversion - L >= minInversion &&
+    Math.abs(inversion) > Math.abs(inversion - L)
   ) {
-    inversion -= voicing.chord.length;
+    inversion -= L;
   }
   return inversion;
 };

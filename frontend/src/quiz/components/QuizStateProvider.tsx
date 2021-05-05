@@ -6,7 +6,7 @@ import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
 import { voicingGroups } from 'src/voicings/voicingGroups';
 import { clefs } from 'src/keyboard/keyConstants';
-import { parseVoicingGroups } from 'src/voicings/voicingValues';
+import { parseVoicingGroups } from 'src/voicings/parse';
 
 type PropsT = React.PropsWithChildren<{}>;
 

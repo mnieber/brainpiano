@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useDefaultProps, FC } from 'react-default-props-context';
 import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
 import { QuizState } from 'src/quiz/QuizState';
-import { cache, parseVoicingGroups } from 'src/voicings/voicingValues';
+import { cache, parseVoicingGroups } from 'src/voicings/parse';
 
 import '@trendmicro/react-buttons/dist/react-buttons.css';
 import '@trendmicro/react-dropdown/dist/react-dropdown.css';

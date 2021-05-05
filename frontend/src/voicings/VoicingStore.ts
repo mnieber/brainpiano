@@ -4,7 +4,7 @@ import { invertChord } from 'src/voicings/utils/invertChord';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
 import { VoicingT } from 'src/voicings/types';
 import { getInversionRange } from 'src/voicings/utils/invertChord';
-import { parseVoicing } from 'src/voicings/voicingValues';
+import { parseVoicing } from 'src/voicings/parse';
 
 const cScale = parseVoicing({
   id: 'Chromatic',

@@ -56,7 +56,10 @@ The format should be pretty easy to understand. Notes are always placed from lef
 e.g. "flat3", "flat7", "second", "fourth" would be a minor7 chord with a nine and an eleven. Note such as "second" and "nine"
 are synonymous: they represent the same note value. The reason for supporting both "second" and "nine" is that it allows you
 to write down the voicings in any way that you find natural (e.g. you would probably write "flat3", "flat7", "nine", "eleven").
-Supported note names are "root", "flat9", "second", "flat3", "sharp9", "flat10", "third", "fourth", "eleven", "eleventh", "sharp4", "sharp11", "flat5", "five", "fifth", "sharp5", "flat6", "flat13", "six", "sixth", "flat7", "seven", and "seventh".
 
-Every voicing also has an associated inversions table, that is a series of zeroes and one. A zero at the first place means that
-the first inversion is not used, whereas a one means that it's used. E.g. 00101 means that the 3rd and 5th inversion are used.
+Every voicing also has an inversions list. If the first value in that list is true, then the root position is used. If the second
+value is true, then the first inversion is used, etc.
+
+### Note names
+
+Supported note names are "root", "flat9", "second", "flat3", "sharp9", "flat10", "third", "fourth", "eleven", "eleventh", "sharp4", "sharp11", "flat5", "five", "fifth", "sharp5", "flat6", "flat13", "six", "sixth", "flat7", "seven", and "seventh".

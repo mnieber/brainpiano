@@ -1,25 +1,24 @@
 {
   "files": {
     "main.css": "/brainpiano/static/css/main.d7cf9df7.chunk.css",
-    "main.js": "/brainpiano/static/js/main.95f4884d.chunk.js",
-    "main.js.map": "/brainpiano/static/js/main.95f4884d.chunk.js.map",
-    "runtime-main.js": "/brainpiano/static/js/runtime-main.78b033eb.js",
-    "runtime-main.js.map": "/brainpiano/static/js/runtime-main.78b033eb.js.map",
+    "main.js": "/brainpiano/static/js/main.29f6d6eb.chunk.js",
+    "main.css.map": "/brainpiano/static/css/main.d7cf9df7.chunk.css.map",
+    "main.js.map": "/brainpiano/static/js/main.29f6d6eb.chunk.js.map",
+    "runtime-main.js": "/brainpiano/static/js/runtime-main.2dfa38c6.js",
+    "runtime-main.js.map": "/brainpiano/static/js/runtime-main.2dfa38c6.js.map",
     "static/css/2.97573aad.chunk.css": "/brainpiano/static/css/2.97573aad.chunk.css",
-    "static/js/2.cb9bc37c.chunk.js": "/brainpiano/static/js/2.cb9bc37c.chunk.js",
-    "static/js/2.cb9bc37c.chunk.js.map": "/brainpiano/static/js/2.cb9bc37c.chunk.js.map",
-    "static/js/3.3ca73fe0.chunk.js": "/brainpiano/static/js/3.3ca73fe0.chunk.js",
-    "static/js/3.3ca73fe0.chunk.js.map": "/brainpiano/static/js/3.3ca73fe0.chunk.js.map",
-    "index.html": "/brainpiano/index.html",
+    "static/js/2.52d26653.chunk.js": "/brainpiano/static/js/2.52d26653.chunk.js",
     "static/css/2.97573aad.chunk.css.map": "/brainpiano/static/css/2.97573aad.chunk.css.map",
-    "static/css/main.d7cf9df7.chunk.css.map": "/brainpiano/static/css/main.d7cf9df7.chunk.css.map",
-    "static/js/2.cb9bc37c.chunk.js.LICENSE.txt": "/brainpiano/static/js/2.cb9bc37c.chunk.js.LICENSE.txt"
+    "static/js/2.52d26653.chunk.js.map": "/brainpiano/static/js/2.52d26653.chunk.js.map",
+    "static/js/3.df3b41bf.chunk.js": "/brainpiano/static/js/3.df3b41bf.chunk.js",
+    "static/js/3.df3b41bf.chunk.js.map": "/brainpiano/static/js/3.df3b41bf.chunk.js.map",
+    "index.html": "/brainpiano/index.html"
   },
   "entrypoints": [
-    "static/js/runtime-main.78b033eb.js",
+    "static/js/runtime-main.2dfa38c6.js",
     "static/css/2.97573aad.chunk.css",
-    "static/js/2.cb9bc37c.chunk.js",
+    "static/js/2.52d26653.chunk.js",
     "static/css/main.d7cf9df7.chunk.css",
-    "static/js/main.95f4884d.chunk.js"
+    "static/js/main.29f6d6eb.chunk.js"
   ]
 }

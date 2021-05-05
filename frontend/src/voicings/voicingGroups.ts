@@ -6,25 +6,25 @@ export const voicingGroups = [
       {
         id: 'Min6+9',
         name: 'Min6+9',
-        chord: ['flat3', 'fifth', 'ninth', 'thirteenth'],
+        chord: ['ninth', 'flat3', 'fifth', 'thirteenth'],
         inversions: [true, true, true, true],
       },
       {
         id: 'Min7+9',
         name: 'Min7+9',
-        chord: ['flat3', 'fifth', 'flat7', 'ninth'],
+        chord: ['ninth', 'flat3', 'fifth', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: 'ø+9',
         name: 'ø+9',
-        chord: ['flat3', 'flat5', 'flat7', 'ninth'],
+        chord: ['ninth', 'flat3', 'flat5', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: 'MinMaj+9',
         name: 'MinMaj+9',
-        chord: ['flat3', 'fifth', 'seventh', 'ninth'],
+        chord: ['ninth', 'flat3', 'fifth', 'seventh'],
         inversions: [true, true, true, true],
       },
       {
@@ -78,13 +78,13 @@ export const voicingGroups = [
       {
         id: 'Maj6+9',
         name: 'Maj6+9',
-        chord: ['third', 'sixth', 'ninth'],
+        chord: ['ninth', 'third', 'sixth'],
         inversions: [true, true, true],
       },
       {
         id: 'Maj7+9',
         name: 'Maj7+9',
-        chord: ['third', 'fifth', 'seventh', 'ninth'],
+        chord: ['ninth', 'third', 'fifth', 'seventh'],
         inversions: [true, true, true, true],
       },
       {
@@ -111,23 +111,28 @@ export const voicingGroups = [
     id: 'dominant',
     name: 'dominant',
     voicings: [
-      { id: '7+13', name: '7+13', chord: ['third', 'flat7', 'thirteenth'] },
+      {
+        id: '7+13',
+        name: '7+13',
+        chord: ['third', 'thirteenth', 'flat7'],
+        inversions: [true, true, true],
+      },
       {
         id: '7+9',
         name: '7+9',
-        chord: ['third', 'fifth', 'flat7', 'ninth'],
+        chord: ['ninth', 'third', 'fifth', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: '7+b13',
         name: '7+b13',
-        chord: ['third', 'flat7', 'flat13'],
+        chord: ['third', 'flat13', 'flat7'],
         inversions: [true, true, true],
       },
       {
         id: '7+9+b13',
         name: '7+9+b13',
-        chord: ['third', 'flat7', 'ninth', 'flat13'],
+        chord: ['ninth', 'third', 'flat13', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
@@ -139,25 +144,25 @@ export const voicingGroups = [
       {
         id: '7+b5+b13',
         name: '7+b5+b13',
-        chord: ['third', 'flat5', 'flat7', 'flat13'],
+        chord: ['third', 'flat5', 'flat13', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: '7+b9',
         name: '7+b9',
-        chord: ['third', 'fifth', 'flat7', 'flat9'],
+        chord: ['flat9', 'third', 'fifth', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: '7+b9+13',
         name: '7+b9+13',
-        chord: ['third', 'thirteenth', 'flat7', 'flat9'],
+        chord: ['flat9', 'third', 'thirteenth', 'flat7'],
         inversions: [true, true, true, true],
       },
       {
         id: '7+b9+b13',
         name: '7+b9+b13',
-        chord: ['third', 'flat13', 'flat7', 'flat9'],
+        chord: ['flat9', 'third', 'flat13', 'flat7'],
         inversions: [true, true, true, true],
       },
       {

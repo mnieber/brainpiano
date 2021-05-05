@@ -15,7 +15,7 @@ const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
     voicingToChord(voicing, clef, 1)
   );
   const inversionRange = range(minInversion, maxInversion + 1).filter((x) => {
-    return voicing.inversions[mathMod(x, L)] !== false;
+    return !voicing.inversions || voicing.inversions[mathMod(x, L)] !== false;
   });
   if (inversionRange.length === 0) {
     return 0;

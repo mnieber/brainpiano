@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/brainpiano/static/css/main.d7cf9df7.chunk.css",
-    "main.js": "/brainpiano/static/js/main.3dc0eab6.chunk.js",
+    "main.js": "/brainpiano/static/js/main.a53b83c6.chunk.js",
     "main.css.map": "/brainpiano/static/css/main.d7cf9df7.chunk.css.map",
-    "main.js.map": "/brainpiano/static/js/main.3dc0eab6.chunk.js.map",
+    "main.js.map": "/brainpiano/static/js/main.a53b83c6.chunk.js.map",
     "runtime-main.js": "/brainpiano/static/js/runtime-main.2dfa38c6.js",
     "runtime-main.js.map": "/brainpiano/static/js/runtime-main.2dfa38c6.js.map",
     "static/css/2.97573aad.chunk.css": "/brainpiano/static/css/2.97573aad.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.97573aad.chunk.css",
     "static/js/2.52d26653.chunk.js",
     "static/css/main.d7cf9df7.chunk.css",
-    "static/js/main.3dc0eab6.chunk.js"
+    "static/js/main.a53b83c6.chunk.js"
   ]
 }

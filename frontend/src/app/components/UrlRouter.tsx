@@ -13,7 +13,7 @@ export const UrlRouter: React.FC<PropsT> = observer((props: PropsT) => {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/quiz">
+        <Route path="">
           <QuizStateProvider>
             <QuizView />
           </QuizStateProvider>

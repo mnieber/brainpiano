@@ -9,7 +9,7 @@ import '@trendmicro/react-dropdown/dist/react-dropdown.css';
 
 import './IoMenu.scss';
 
-const twitterUrl = `https://twitter.com/intent/tweet?url=www.brainpiano.ai&hashtags=BrainPiano`;
+const twitterUrl = `https://twitter.com/intent/tweet?url=https://mnieber.github.io/brainpiano&hashtags=BrainPiano`;
 
 type PropsT = {};
 

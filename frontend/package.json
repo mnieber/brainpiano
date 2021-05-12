@@ -20,7 +20,7 @@
     "mobx": "^6.0.4",
     "mobx-react-lite": "^3.1.6",
     "node-sass": "^4.0.0",
-    "postcss": "^7",
+    "postcss": "^8",
     "react": "^17.0.1",
     "react-default-props-context": "^0.0.3",
     "react-dom": "^17.0.1",

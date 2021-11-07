@@ -3,7 +3,7 @@ import { GroupsStore } from 'src/groups/GroupsStore';
 import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { VoicingStore } from 'src/voicings/VoicingStore';
 import { ClefStore } from 'src/keyboard/ClefStore';
-import * as Policies from 'src/app/policies';
+import * as Policies from 'src/app/AppStore/policies';
 
 export class AppStore {
   @observable groupsStore: GroupsStore;

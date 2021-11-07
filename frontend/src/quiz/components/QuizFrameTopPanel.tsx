@@ -43,7 +43,7 @@ export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
         </div>
         <GroupPicker className="flex-1" />
         <div className="flex flex-row justify-between mt-2">
-          <ClefListView className="flex-1" />
+          <ClefListView />
           <IoMenu />
         </div>
       </div>

@@ -4,6 +4,7 @@ import { map } from 'lodash/fp';
 export const parseVoicing = (data: any) => {
   const voicing = {
     ...data,
+    id: data.name,
     chord: map((x: string) => {
       const noteValue = (valueByNoteName as any)[x as any];
       if (noteValue === undefined) {
@@ -25,6 +26,7 @@ export const parseVoicing = (data: any) => {
 const parseVoicingGroup = (data: any) => {
   return {
     ...data,
+    id: data.name,
     voicings: map(parseVoicing, data['voicings']),
   };
 };

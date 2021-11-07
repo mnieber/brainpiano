@@ -26,12 +26,9 @@ export const ClefListView: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
       <ClefListViewItem
         key={x}
         clef={x}
-        className={classnames(
-          {
-            'ClefListViewItem--selected': props.clefsSelection.ids.includes(x),
-          },
-          props.className
-        )}
+        className={classnames({
+          'ClefListViewItem--selected': props.clefsSelection.ids.includes(x),
+        })}
         onMouseDown={(e: any) => {
           props.clefsSelection.selectItem({
             itemId: x,
@@ -46,7 +43,12 @@ export const ClefListView: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   const noItems = <h2>There are no clefs</h2>;
 
   return (
-    <div className="ClefListView flex flex-row w-full">
+    <div
+      className={classnames(
+        'ClefListView flex flex-row w-full',
+        props.className
+      )}
+    >
       {clefDivs.length && clefDivs}
       {!clefDivs.length && noItems}
     </div>

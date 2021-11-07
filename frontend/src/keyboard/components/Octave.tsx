@@ -1,8 +1,8 @@
-import React from 'react';
+import { add, always, concat, flow, map } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
-import { always, concat, map, flow, add } from 'lodash/fp';
+import React from 'react';
 import { Layer } from 'react-konva';
-
+import { Key } from 'src/keyboard/components/Key';
 import {
   blackKeyIndexes,
   noteValueToIndex,
@@ -10,12 +10,12 @@ import {
   whiteKeyIndexes,
 } from 'src/keyboard/keyConstants';
 import { noteValueToColour } from 'src/keyboard/utils/noteValueToColour';
-import { Key } from 'src/keyboard/components/Key';
 
 type PropsT = {
   index: number;
   clef: string;
   chord: any;
+  scaleFactor: number;
 };
 
 export const Octave = observer((props: PropsT) => {
@@ -37,6 +37,7 @@ export const Octave = observer((props: PropsT) => {
           octaveIndex={props.index}
           markerColour={colour}
           markerIsStriped={isStriped}
+          scaleFactor={props.scaleFactor}
         />
       );
     })

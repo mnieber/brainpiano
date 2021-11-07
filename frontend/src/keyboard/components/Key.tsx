@@ -1,14 +1,13 @@
-import { always, indexOf, map, flow, range } from 'lodash/fp';
+import { always, flow, indexOf, map, range } from 'lodash/fp';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Rect } from 'react-konva';
-import { observer } from 'mobx-react-lite';
-
+import { Marker } from 'src/keyboard/components/Marker';
 import {
   blackKeyIndexes,
   isWhiteKeyIndex,
   whiteKeyIndexes,
 } from 'src/keyboard/keyConstants';
-import { Marker } from 'src/keyboard/components/Marker';
 
 const whiteKeyProps = {
   width: 50,
@@ -50,6 +49,7 @@ type PropsT = {
   octaveIndex: number;
   markerColour?: string;
   markerIsStriped: boolean;
+  scaleFactor: number;
 };
 
 export const Key = observer((props: PropsT) => {
@@ -65,19 +65,22 @@ export const Key = observer((props: PropsT) => {
   return (
     <React.Fragment>
       <Rect
-        x={x}
-        y={offsetY}
+        x={x * props.scaleFactor}
+        y={offsetY * props.scaleFactor}
         fill={keyProps.fill}
         stroke="#000000"
         opacity={1}
-        width={keyProps.width}
-        height={keyProps.height}
+        width={keyProps.width * props.scaleFactor}
+        height={keyProps.height * props.scaleFactor}
       />
       <Marker
-        x={x + 2}
-        y={offsetY + keyProps.height - keyProps.markerHeight - markerOffsetY}
-        height={keyProps.markerHeight}
-        width={keyProps.width - 4}
+        offsetX={(x + 2) * props.scaleFactor}
+        offsetY={
+          (offsetY + keyProps.height - keyProps.markerHeight - markerOffsetY) *
+          props.scaleFactor
+        }
+        height={keyProps.markerHeight * props.scaleFactor}
+        width={(keyProps.width - 4) * props.scaleFactor}
         fill={props.markerColour}
         isStriped={props.markerIsStriped}
         backgroundColour={keyProps.fill}

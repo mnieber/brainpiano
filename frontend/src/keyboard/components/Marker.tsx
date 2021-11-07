@@ -1,11 +1,11 @@
-import React from 'react';
+import { always, flow, map, range } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
-import { always, map, flow, range } from 'lodash/fp';
+import React from 'react';
 import { Rect } from 'react-konva';
 
 type PropsT = {
-  x: number;
-  y: number;
+  offsetX: number;
+  offsetY: number;
   height: number;
   width: number;
   fill: any;
@@ -16,27 +16,23 @@ type PropsT = {
 export const Marker: React.FC<PropsT> = observer((props: PropsT) => {
   const filledStripeHeight = 5;
   const bgStripeHeight = 3.5;
-  const nrOfStripes = Math.floor(
-    props.height / (0.5 * (filledStripeHeight + bgStripeHeight))
+  const nrOfStripes = Math.ceil(
+    props.height / (filledStripeHeight + bgStripeHeight)
   );
 
   return props.isStriped
     ? (flow(
         always(range(0, nrOfStripes)),
         map((stripeIdx) => {
-          const nrBg = Math.floor(stripeIdx / 2);
-          const nrFilled = stripeIdx - nrBg;
-          const isFilled = stripeIdx % 2 == 0;
-          const y =
-            props.y + nrFilled * filledStripeHeight + nrBg * bgStripeHeight;
-          const height = isFilled ? filledStripeHeight : bgStripeHeight;
+          const y = stripeIdx * (filledStripeHeight + bgStripeHeight);
+          const height = Math.min(filledStripeHeight, props.height - y);
 
           return (
             <Rect
               key={stripeIdx}
-              x={props.x + 1}
-              y={y}
-              fill={isFilled ? props.fill : props.backgroundColour}
+              x={props.offsetX + 1}
+              y={props.offsetY + y}
+              fill={props.fill}
               width={props.width - 2}
               height={height}
               strokeWidth={0}
@@ -48,8 +44,8 @@ export const Marker: React.FC<PropsT> = observer((props: PropsT) => {
     : ([
         <Rect
           key={0}
-          x={props.x + 1}
-          y={props.y}
+          x={props.offsetX + 1}
+          y={props.offsetY}
           fill={props.fill}
           width={props.width - 2}
           height={props.height}

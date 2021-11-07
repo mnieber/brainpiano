@@ -35,11 +35,16 @@ export const Keyboard: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   )();
 
   return (
-    <div className="Keyboard__frame" onClick={props.onClick}>
+    <div className="Keyboard__frame">
       <RandomChordSelector>
         <ClefSelector>
           <ClefModulationSelector>
             <InversionSelector>
+              <div
+                className="absolute w-full z-50"
+                style={{ height: 250 * scaleFactor }}
+                onClick={props.onClick}
+              />
               <div tabIndex={0}>
                 <Stage width={1400 * scaleFactor} height={250 * scaleFactor}>
                   {octaves}

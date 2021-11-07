@@ -563,6 +563,10 @@ video {
   padding-right: 0.5rem;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .resize {
   resize: both;
 }
@@ -586,6 +590,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 @-webkit-keyframes spin {
@@ -770,4 +778,4 @@ h2{
 }
 
 
-/*# sourceMappingURL=main.316d00df.chunk.css.map*/
+/*# sourceMappingURL=main.02876592.chunk.css.map*/

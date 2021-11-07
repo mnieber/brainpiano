@@ -535,6 +535,11 @@ video {
           flex-direction: column;
 }
 
+.justify-center {
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
 .justify-between {
   -webkit-justify-content: space-between;
           justify-content: space-between;
@@ -551,6 +556,15 @@ video {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.resize {
+  resize: both;
 }
 
 * {
@@ -691,33 +705,11 @@ code {
 @media (min-width: 1536px) {
 }
 
-.App__Header{
-  background-color:#282c34;
-  min-height:100vh;
-  display:-webkit-flex;
-  display:flex;
-  -webkit-flex-direction:column;
-          flex-direction:column;
-  -webkit-align-items:center;
-          align-items:center;
-  font-size:calc(10px + 2vmin);
-  color:white
+.QuizFrame{
+  width:100%;
+  max-width:1400px;
+  overflow:hidden
 }
-
-h1{
-  font-size:1.25rem;
-  line-height:1.75rem;
-  --tw-text-opacity:1;
-  color:rgba(255, 255, 255, var(--tw-text-opacity))
-}
-
-h2{
-  font-size:1.125rem;
-  line-height:1.75rem;
-  --tw-text-opacity:1;
-  color:rgba(255, 255, 255, var(--tw-text-opacity))
-}
-
 
 .Keyboard__frame {
 }
@@ -750,5 +742,32 @@ h2{
 }
 
 
+.App{
+  background-color:#282c34;
+  min-height:100vh;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-direction:column;
+          flex-direction:column;
+  -webkit-align-items:center;
+          align-items:center;
+  font-size:calc(10px + 2vmin);
+  color:white
+}
 
-/*# sourceMappingURL=main.d7cf9df7.chunk.css.map*/
+h1{
+  font-size:1.25rem;
+  line-height:1.75rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+
+h2{
+  font-size:1.125rem;
+  line-height:1.75rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+
+
+/*# sourceMappingURL=main.316d00df.chunk.css.map*/

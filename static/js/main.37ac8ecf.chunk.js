@@ -77,7 +77,7 @@
 
 /***/ }),
 
-/***/ 193:
+/***/ 196:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -102,11 +102,11 @@ var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 // EXTERNAL MODULE: ./src/index.css
 var src = __webpack_require__(112);
 
-// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js + 1 modules
-var react_router = __webpack_require__(200);
-
 // EXTERNAL MODULE: ./node_modules/mobx-react-lite/es/index.js + 17 modules
 var es = __webpack_require__(6);
+
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js + 1 modules
+var react_router = __webpack_require__(200);
 
 // EXTERNAL MODULE: ./node_modules/history/esm/history.js + 2 modules
 var esm_history = __webpack_require__(38);
@@ -122,7 +122,7 @@ var QuizFrame = __webpack_require__(113);
 var jsx_runtime = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./src/quiz/components/QuizFrame.tsx
-var QuizFrame_QuizFrame=Object(es["a" /* observer */])(function(props){var appStore=useStore_useStore();react_default.a.useEffect(function(){function handleResize(){appStore.setWindowWidth(window.innerWidth);}window.addEventListener('resize',handleResize);});return/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:classnames_default()('QuizFrame flex flex-col px-2'),children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(QuizFrameTopPanel_QuizFrameTopPanel,{}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:classnames_default()('QuizFrame__MidSection flex flex-row justify-center'),children:props.children})]});});
+var QuizFrame_QuizFrame=Object(es["a" /* observer */])(function(props){return/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:classnames_default()('QuizFrame flex flex-col px-2'),children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(QuizFrameTopPanel_QuizFrameTopPanel,{}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:classnames_default()('QuizFrame__MidSection flex flex-row justify-center'),children:props.children})]});});
 // EXTERNAL MODULE: ./node_modules/react-default-props-context/index.js + 3 modules
 var react_default_props_context = __webpack_require__(22);
 
@@ -357,11 +357,6 @@ var QuizStateProvider_QuizStateProvider=function QuizStateProvider(props){var _u
 
 // CONCATENATED MODULE: ./src/app/components/UrlRouter.tsx
 var UrlRouter_history=Object(esm_history["a" /* createBrowserHistory */])();var UrlRouter=Object(es["a" /* observer */])(function(props){return/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["b" /* Router */],{history:UrlRouter_history,children:/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["c" /* Switch */],{children:/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"",children:/*#__PURE__*/Object(jsx_runtime["jsx"])(QuizStateProvider_QuizStateProvider,{children:/*#__PURE__*/Object(jsx_runtime["jsx"])(QuizView,{})})})})});});
-// EXTERNAL MODULE: ./src/app/components/App.scss
-var App = __webpack_require__(193);
-
-// CONCATENATED MODULE: ./src/app/components/App.tsx
-function App_App(){return/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"App w-screen",children:/*#__PURE__*/Object(jsx_runtime["jsx"])(UrlRouter,{})});}
 // CONCATENATED MODULE: ./src/app/AppStore/policies/voicingStoreUsesSelectedClef.ts
 var voicingStoreUsesSelectedClef_voicingStoreUsesSelectedClef=function voicingStoreUsesSelectedClef(){return function(appStore){Object(mobx_esm["j" /* reaction */])(function(){return appStore.clefStore.clef;},function(clef){appStore.voicingStore.clef=clef;},{fireImmediately:true});};};
 // CONCATENATED MODULE: ./src/app/AppStore/policies/index.ts
@@ -383,6 +378,11 @@ var AppStore_AppStore=/*#__PURE__*/function(){function AppStore(){Object(classCa
 var StoreProvider_appStore=new AppStore_AppStore();var StoreContext=/*#__PURE__*/react_default.a.createContext(StoreProvider_appStore);var StoreProvider_StoreProvider=function StoreProvider(_ref){var children=_ref.children;return/*#__PURE__*/Object(jsx_runtime["jsx"])(StoreContext.Provider,{value:StoreProvider_appStore,children:children});};
 // CONCATENATED MODULE: ./src/app/components/useStore.ts
 var useStore_useStore=function useStore(){var store=react_default.a.useContext(StoreContext);if(!store){throw new Error('useStore must be used within a StoreProvider.');}return store;};
+// EXTERNAL MODULE: ./src/app/components/App.scss
+var App = __webpack_require__(196);
+
+// CONCATENATED MODULE: ./src/app/components/App.tsx
+var App_App=Object(es["a" /* observer */])(function(){var appStore=useStore_useStore();react_default.a.useEffect(function(){function handleResize(){appStore.setWindowWidth(window.innerWidth);}window.addEventListener('resize',handleResize);});var isPortrait=appStore.scaleFactor<0.4;var useLandscapeDiv=/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"App__useLandscape",children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"text-2xl my-auto mx-4",children:"Please rotate your device to landscape mode"})});return/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"App w-screen",children:isPortrait?useLandscapeDiv:/*#__PURE__*/Object(jsx_runtime["jsx"])(UrlRouter,{})});});
 // CONCATENATED MODULE: ./src/app/components/index.ts
 
 // CONCATENATED MODULE: ./src/reportWebVitals.ts
@@ -403,4 +403,4 @@ src_reportWebVitals();
 /***/ })
 
 },[[197,1,2]]]);
-//# sourceMappingURL=main.618bb7b2.chunk.js.map
+//# sourceMappingURL=main.37ac8ecf.chunk.js.map

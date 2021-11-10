@@ -550,6 +550,21 @@ video {
           flex: 1 1 0%;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -763,6 +778,18 @@ code {
   color:white
 }
 
+.App__useLandscape{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-direction:column;
+          flex-direction:column;
+  -webkit-align-items:center;
+          align-items:center;
+  -webkit-justify-content:center;
+          justify-content:center;
+  min-height:100vh
+}
+
 h1{
   font-size:1.25rem;
   line-height:1.75rem;
@@ -778,4 +805,4 @@ h2{
 }
 
 
-/*# sourceMappingURL=main.02876592.chunk.css.map*/
+/*# sourceMappingURL=main.135a2a77.chunk.css.map*/

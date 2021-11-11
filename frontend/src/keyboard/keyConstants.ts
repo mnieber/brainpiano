@@ -1,4 +1,4 @@
-import { includes } from 'lodash/fp';
+import { includes } from 'ramda';
 import { mathMod } from 'src/utils/mathMod';
 
 export const clefC = 'C';

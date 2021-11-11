@@ -1,12 +1,12 @@
-import { range, sumBy } from 'lodash/fp';
-import { randomElement } from 'src/utils/random';
-import { ClefT } from 'src/keyboard/types';
+import { map, range, sum } from 'ramda';
 import { GroupT } from 'src/groups/types';
+import { ClefT } from 'src/keyboard/types';
+import { QueryT } from 'src/quiz/types';
+import { mathMod } from 'src/utils/mathMod';
+import { randomElement } from 'src/utils/random';
 import { VoicingT } from 'src/voicings/types';
 import { getInversionRange } from 'src/voicings/utils/invertChord';
-import { QueryT } from 'src/quiz/types';
 import { voicingToChord } from 'src/voicings/utils/voicingToChord';
-import { mathMod } from 'src/utils/mathMod';
 
 const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
   const L = voicing.chord.length;
@@ -41,7 +41,7 @@ const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
 
 export const createQuery = (clefs: ClefT[], groups: GroupT[]): QueryT => {
   const clef = randomElement(clefs);
-  const nrVoicings = sumBy((x: GroupT) => x.voicings.length)(groups);
+  const nrVoicings = sum(map((x: GroupT) => x.voicings.length)(groups));
   const voicingIdx = Math.floor(Math.random() * nrVoicings);
 
   let groupIdx = 0;

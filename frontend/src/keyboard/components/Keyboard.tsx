@@ -1,5 +1,5 @@
-import { always, flow, map, range } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
+import { always, map, pipe, range } from 'ramda';
 import { FC, useDefaultProps } from 'react-default-props-context';
 import { Stage } from 'react-konva';
 import { useStore } from 'src/app/components';
@@ -21,7 +21,7 @@ export const Keyboard: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
 
   const { voicingStore, clefStore, scaleFactor } = useStore();
 
-  const octaves = flow(
+  const octaves = pipe(
     always(range(0, 4)),
     map((i) => (
       <Octave
@@ -44,8 +44,9 @@ export const Keyboard: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
                 className="absolute w-full z-50"
                 style={{ height: 250 * scaleFactor }}
                 onClick={props.onClick}
+                tabIndex={0}
               />
-              <div tabIndex={0}>
+              <div>
                 <Stage width={1400 * scaleFactor} height={250 * scaleFactor}>
                   {octaves}
                 </Stage>

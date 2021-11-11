@@ -1,11 +1,10 @@
 import classnames from 'classnames';
-import { always, flow, map } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
-import { useDefaultProps, FC } from 'react-default-props-context';
+import { always, map, pipe } from 'ramda';
+import { FC, useDefaultProps } from 'react-default-props-context';
+import { Selection } from 'skandha-facets/Selection';
 import { ClefListViewItem } from 'src/keyboard/components';
 import { ClefT } from 'src/keyboard/types';
-import { Selection } from 'skandha-facets/Selection';
-
 import './ClefListView.scss';
 
 type PropsT = {
@@ -20,7 +19,7 @@ type DefaultPropsT = {
 export const ClefListView: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
   const props = useDefaultProps<PropsT, DefaultPropsT>(p);
 
-  const clefDivs = flow(
+  const clefDivs = pipe(
     always(props.clefs),
     map((x) => (
       <ClefListViewItem

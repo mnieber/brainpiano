@@ -1,5 +1,5 @@
-import { always, flow, indexOf, map, range } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
+import { always, indexOf, map, pipe, range } from 'ramda';
 import React from 'react';
 import { Rect } from 'react-konva';
 import { Marker } from 'src/keyboard/components/Marker';
@@ -23,7 +23,7 @@ const blackKeyProps = {
   markerHeight: 100,
 };
 
-const whiteKeyX = flow(
+const whiteKeyX = pipe(
   always(range(0, 7)),
   map((i) => i * whiteKeyProps.width)
 )();

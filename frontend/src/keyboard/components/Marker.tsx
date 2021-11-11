@@ -1,5 +1,5 @@
-import { always, flow, map, range } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
+import { always, map, pipe, range } from 'ramda';
 import React from 'react';
 import { Rect } from 'react-konva';
 
@@ -21,7 +21,7 @@ export const Marker: React.FC<PropsT> = observer((props: PropsT) => {
   );
 
   return props.isStriped
-    ? (flow(
+    ? (pipe(
         always(range(0, nrOfStripes)),
         map((stripeIdx) => {
           const y = stripeIdx * (filledStripeHeight + bgStripeHeight);

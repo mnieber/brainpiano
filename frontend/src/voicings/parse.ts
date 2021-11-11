@@ -1,5 +1,5 @@
+import { map } from 'ramda';
 import { valueByNoteName } from 'src/voicings/noteConstants';
-import { map } from 'lodash/fp';
 
 export const parseVoicing = (data: any) => {
   const voicing = {

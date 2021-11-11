@@ -1,7 +1,6 @@
-import { includes, split } from 'lodash/fp';
-
+import { head, includes, split } from 'ramda';
+import { clefOffsets, noteValueToIndex } from 'src/keyboard/keyConstants';
 import { noteColours } from 'src/keyboard/noteColours';
-import { noteValueToIndex, clefOffsets } from 'src/keyboard/keyConstants';
 import { ChordT, NoteT } from 'src/voicings/types';
 
 export function noteValueToColour(
@@ -15,7 +14,7 @@ export function noteValueToColour(
 
   const isStriped = !!(harmonicColour && harmonicColour.endsWith('-striped'));
   const colour = isStriped
-    ? split('-striped', harmonicColour)[0]
+    ? head(split('-striped', harmonicColour ?? '')) ?? ''
     : harmonicColour;
 
   return { colour, isStriped };

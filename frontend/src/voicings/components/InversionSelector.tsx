@@ -1,9 +1,9 @@
-import { useDefaultProps, FC } from 'react-default-props-context';
 import { observer } from 'mobx-react-lite';
+import { FC, useDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components';
-import { playChord } from 'src/voicings/utils/playChord';
 import { QuizState } from 'src/quiz/QuizState';
+import { playChord } from 'src/voicings/utils/playChord';
 
 type PropsT = React.PropsWithChildren<{}>;
 
@@ -36,7 +36,9 @@ export const InversionSelector: FC<PropsT, DefaultPropsT> = observer(
         <KeyboardEventHandler
           handleKeys={['p']}
           onKeyEvent={(key: string, e: any) => {
-            playChord(voicingStore.chord, voicingStore.clef);
+            if (voicingStore.chord) {
+              playChord(voicingStore.chord, voicingStore.clef);
+            }
           }}
         >
           {props.children}

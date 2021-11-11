@@ -1,6 +1,5 @@
-import { add, always, map, flow } from 'lodash/fp';
-
-import { octaveRootNoteValue, clefOffsets } from 'src/keyboard/keyConstants';
+import { add, always, map, pipe } from 'ramda';
+import { clefOffsets, octaveRootNoteValue } from 'src/keyboard/keyConstants';
 import { VoicingT } from 'src/voicings/types';
 
 export const voicingToChord = (
@@ -11,7 +10,7 @@ export const voicingToChord = (
   let rootNoteValue = octaveRootNoteValue(octaveIndex);
   const keyOffset = clefOffsets[clef];
 
-  const result = flow(
+  const result = pipe(
     //
     always(voicing.chord),
     map(add(rootNoteValue + keyOffset))

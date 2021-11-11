@@ -1,20 +1,11 @@
-import {
-  always,
-  concat,
-  size,
-  flow,
-  times,
-  constant,
-  take,
-  takeRight,
-} from 'lodash/fp';
+import { concat, length, take, takeLast } from 'ramda';
 import { ChordT } from 'src/voicings/types';
 
 export const invertChord = (chord: ChordT, pos: number) => {
   function rotate(arr: ChordT) {
     const maxNote = arr[arr.length - 1];
     let first = take(1, arr);
-    const last = takeRight(size(arr) - 1, arr);
+    const last = takeLast(length(arr) - 1, arr);
     while (first[0] <= maxNote) {
       first[0] += 12;
     }
@@ -23,20 +14,19 @@ export const invertChord = (chord: ChordT, pos: number) => {
 
   function rotateBack(arr: ChordT) {
     const minNote = arr[0];
-    let last = takeRight(1, arr);
-    const first = take(size(arr) - 1, arr);
+    let last = takeLast(1, arr);
+    const first = take(length(arr) - 1, arr);
     while (last[0] >= minNote) {
       last[0] -= 12;
     }
     return concat(last, first);
   }
 
-  const result =
-    pos === 0
-      ? chord
-      : pos > 0
-      ? flow(always(chord), ...times(constant(rotate), pos))()
-      : flow(always(chord), ...times(constant(rotateBack), Math.abs(pos)))();
+  let result = chord;
+  for (let i = 0; i < Math.abs(pos); i++) {
+    result = pos > 0 ? rotate(result) : rotateBack(result);
+  }
+
   return result;
 };
 

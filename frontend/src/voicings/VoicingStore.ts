@@ -1,10 +1,9 @@
-import { clamp, size } from 'lodash/fp';
 import { action, computed, makeObservable, observable } from 'mobx';
-import { invertChord } from 'src/voicings/utils/invertChord';
-import { voicingToChord } from 'src/voicings/utils/voicingToChord';
-import { VoicingT } from 'src/voicings/types';
-import { getInversionRange } from 'src/voicings/utils/invertChord';
+import { clamp, length } from 'ramda';
 import { parseVoicing } from 'src/voicings/parse';
+import { VoicingT } from 'src/voicings/types';
+import { getInversionRange, invertChord } from 'src/voicings/utils/invertChord';
+import { voicingToChord } from 'src/voicings/utils/voicingToChord';
 
 const cScale = parseVoicing({
   id: 'Chromatic',
@@ -59,7 +58,7 @@ export class VoicingStore {
   }
 
   get nrOfVoices() {
-    return size(this.voicing.chord);
+    return length(this.voicing.chord);
   }
 
   get chord() {

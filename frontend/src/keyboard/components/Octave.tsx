@@ -1,5 +1,5 @@
-import { add, always, concat, flow, map } from 'lodash/fp';
 import { observer } from 'mobx-react-lite';
+import { add, always, concat, map, pipe } from 'ramda';
 import React from 'react';
 import { Layer } from 'react-konva';
 import { Key } from 'src/keyboard/components/Key';
@@ -20,7 +20,7 @@ type PropsT = {
 
 export const Octave = observer((props: PropsT) => {
   const keyIndexes = concat(whiteKeyIndexes, blackKeyIndexes);
-  const keys = flow(
+  const keys = pipe(
     always(keyIndexes),
     map(add(octaveRootNoteValue(props.index))),
     map((noteValue) => {

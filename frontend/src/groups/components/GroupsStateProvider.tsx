@@ -1,18 +1,15 @@
-import * as React from 'react';
 import { reaction } from 'mobx';
-import { values } from 'lodash/fp';
-
-import { GroupsState } from 'src/groups/GroupsState';
+import { values } from 'ramda';
+import * as React from 'react';
 import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
+import { GroupsState } from 'src/groups/GroupsState';
 
 type PropsT = React.PropsWithChildren<{}>;
 
 // Note: don't observe this with MobX
 export const GroupsStateProvider: React.FC<PropsT> = (props: PropsT) => {
-  const {
-    groupsStore,
-  } = useStore();
+  const { groupsStore } = useStore();
 
   const createState = () => {
     return new GroupsState({
@@ -41,7 +38,6 @@ export const GroupsStateProvider: React.FC<PropsT> = (props: PropsT) => {
       groupsSelection: () => state.groups.selection,
       groupsHighlight: () => state.groups.highlight,
       group: () => state.groups.highlight.item,
-
     };
   };
 

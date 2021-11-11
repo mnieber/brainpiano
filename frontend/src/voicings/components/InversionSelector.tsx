@@ -1,9 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { useSwipeable } from 'react-swipeable';
 import { useStore } from 'src/app/components';
 import { QuizState } from 'src/quiz/QuizState';
+import { QueryT } from 'src/quiz/types';
 import { playChord } from 'src/voicings/utils/playChord';
+import { VoicingStore } from 'src/voicings/VoicingStore';
 
 type PropsT = React.PropsWithChildren<{}>;
 
@@ -15,21 +18,25 @@ export const InversionSelector: FC<PropsT, DefaultPropsT> = observer(
   (p: PropsT) => {
     const props = useDefaultProps<PropsT, DefaultPropsT>(p);
     const { voicingStore } = useStore();
+
+    const swipeHandlers = useSwipeable({
+      onSwipedLeft: (eventData) =>
+        invertLeft(voicingStore, props.quizState.query),
+      onSwipedRight: (eventData) =>
+        invertRight(voicingStore, props.quizState.query),
+      preventDefaultTouchmoveEvent: true,
+      trackMouse: false,
+    });
+
     return (
       <KeyboardEventHandler
         handleKeys={['ctrl+left', 'ctrl+right']}
         onKeyEvent={(key: string, e: any) => {
           if (key === 'ctrl+right') {
-            voicingStore.setInversion(voicingStore.inversion + 1);
-            if (props.quizState.query) {
-              props.quizState.query.inversion = voicingStore.inversion;
-            }
+            invertRight(voicingStore, props.quizState.query);
           }
           if (key === 'ctrl+left') {
-            voicingStore.setInversion(voicingStore.inversion - 1);
-            if (props.quizState.query) {
-              props.quizState.query.inversion = voicingStore.inversion;
-            }
+            invertLeft(voicingStore, props.quizState.query);
           }
         }}
       >
@@ -41,9 +48,23 @@ export const InversionSelector: FC<PropsT, DefaultPropsT> = observer(
             }
           }}
         >
-          {props.children}
+          <div {...swipeHandlers}>{props.children}</div>
         </KeyboardEventHandler>
       </KeyboardEventHandler>
     );
   }
 );
+
+function invertRight(voicingStore: VoicingStore, query?: QueryT) {
+  voicingStore.setInversion(voicingStore.inversion + 1);
+  if (query) {
+    query.inversion = voicingStore.inversion;
+  }
+}
+
+function invertLeft(voicingStore: VoicingStore, query?: QueryT) {
+  voicingStore.setInversion(voicingStore.inversion - 1);
+  if (query) {
+    query.inversion = voicingStore.inversion;
+  }
+}

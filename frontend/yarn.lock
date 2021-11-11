@@ -2340,6 +2340,13 @@
     "@types/react-dom" "*"
     "@types/react-transition-group" "*"
 
+"@types/react-swipeable@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-swipeable/-/react-swipeable-5.2.0.tgz#69d6088819f0c03b13eb3fd98bfe995ef311c105"
+  integrity sha512-aQMubLpV45W8fTQufnm5j8yxYVEp/d3JJkqpPr9xcRPQ6Q6MSJUdNpsaR2uogILSIFzrAisC8AqdR1JlvjuZMA==
+  dependencies:
+    react-swipeable "*"
+
 "@types/react-transition-group@*":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.1.tgz#e1a3cb278df7f47f17b5082b1b3da17170bd44b1"
@@ -10781,6 +10788,11 @@ react-select@^3.1.0:
     prop-types "^15.6.0"
     react-input-autosize "^3.0.0"
     react-transition-group "^4.3.0"
+
+react-swipeable@*, react-swipeable@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-6.2.0.tgz#057271cb7a6fb4af9d2a3f6d80ccdf33e2f64d47"
+  integrity sha512-nWQ8dEM8e/uswZLSIkXUsAnQmnX4MTcryOHBQIQYRMJFDpgDBSiVbKsz/BZVCIScF4NtJh16oyxwaNOepR6xSw==
 
 react-transition-group@^4.3.0:
   version "4.4.1"

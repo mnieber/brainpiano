@@ -1,3 +1,79 @@
+.QuizFrame{
+  width:100%;
+  max-width:1400px;
+  overpipe:hidden
+}
+
+.Keyboard__frame {
+}
+
+.VoicingTitle{
+  text-align: center
+}
+
+
+
+.GroupPicker{
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity))
+}
+
+
+
+.ClefListViewItem{
+  text-align: center
+}
+
+.ClefListViewItem--selected{
+  --tw-bg-opacity: 1;
+  background-color: rgba(52, 211, 153, var(--tw-bg-opacity))
+}
+
+.IoMenu{
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity))
+}
+
+
+.App{
+  background-color:#282c34;
+  min-height:100vh;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-direction:column;
+          flex-direction:column;
+  -webkit-align-items:center;
+          align-items:center;
+  font-size:calc(10px + 2vmin);
+  color:white
+}
+
+.App__useLandscape{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-direction:column;
+          flex-direction:column;
+  -webkit-align-items:center;
+          align-items:center;
+  -webkit-justify-content:center;
+          justify-content:center;
+  min-height:100vh
+}
+
+h1{
+  font-size:1.25rem;
+  line-height:1.75rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+
+h2{
+  font-size:1.125rem;
+  line-height:1.75rem;
+  --tw-text-opacity:1;
+  color:rgba(255, 255, 255, var(--tw-text-opacity))
+}
+
 /*! tailwindcss v2.1.0 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -728,81 +804,5 @@ code {
 @media (min-width: 1536px) {
 }
 
-.QuizFrame{
-  width:100%;
-  max-width:1400px;
-  overflow:hidden
-}
 
-.Keyboard__frame {
-}
-
-.VoicingTitle{
-  text-align: center
-}
-
-
-
-.GroupPicker{
-  --tw-text-opacity: 1;
-  color: rgba(0, 0, 0, var(--tw-text-opacity))
-}
-
-
-
-.ClefListViewItem{
-  text-align: center
-}
-
-.ClefListViewItem--selected{
-  --tw-bg-opacity: 1;
-  background-color: rgba(52, 211, 153, var(--tw-bg-opacity))
-}
-
-.IoMenu{
-  --tw-text-opacity: 1;
-  color: rgba(0, 0, 0, var(--tw-text-opacity))
-}
-
-
-.App{
-  background-color:#282c34;
-  min-height:100vh;
-  display:-webkit-flex;
-  display:flex;
-  -webkit-flex-direction:column;
-          flex-direction:column;
-  -webkit-align-items:center;
-          align-items:center;
-  font-size:calc(10px + 2vmin);
-  color:white
-}
-
-.App__useLandscape{
-  display:-webkit-flex;
-  display:flex;
-  -webkit-flex-direction:column;
-          flex-direction:column;
-  -webkit-align-items:center;
-          align-items:center;
-  -webkit-justify-content:center;
-          justify-content:center;
-  min-height:100vh
-}
-
-h1{
-  font-size:1.25rem;
-  line-height:1.75rem;
-  --tw-text-opacity:1;
-  color:rgba(255, 255, 255, var(--tw-text-opacity))
-}
-
-h2{
-  font-size:1.125rem;
-  line-height:1.75rem;
-  --tw-text-opacity:1;
-  color:rgba(255, 255, 255, var(--tw-text-opacity))
-}
-
-
-/*# sourceMappingURL=main.135a2a77.chunk.css.map*/
+/*# sourceMappingURL=main.1e0641a2.chunk.css.map*/

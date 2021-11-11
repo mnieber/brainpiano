@@ -41,8 +41,8 @@ export const Keyboard: FC<PropsT, DefaultPropsT> = observer((p: PropsT) => {
           <ClefModulationSelector>
             <InversionSelector>
               <div
-                className="absolute w-full z-50"
-                style={{ height: 250 * scaleFactor }}
+                className="Keyboard__overlay absolute z-50"
+                style={{ height: 250 * scaleFactor, width: 1400 * scaleFactor }}
                 onClick={props.onClick}
                 tabIndex={0}
               />

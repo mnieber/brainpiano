@@ -2,7 +2,9 @@ import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components';
 
-export const ClefModulationSelector = observer(({ children }) => {
+type PropsT = React.PropsWithChildren<{}>;
+
+export const ClefModulationSelector = observer((props: PropsT) => {
   const { preselectionStore } = useStore();
 
   return (
@@ -21,7 +23,7 @@ export const ClefModulationSelector = observer(({ children }) => {
           preselectionStore.reset();
         }}
       >
-        {children}
+        {props.children}
       </KeyboardEventHandler>
     </KeyboardEventHandler>
   );

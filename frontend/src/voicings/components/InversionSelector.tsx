@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useDefaultProps } from 'react-default-props-context';
+import { withDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useSwipeable } from 'react-swipeable';
 import { useStore } from 'src/app/components';
@@ -14,9 +14,8 @@ type DefaultPropsT = {
   quizState: QuizState;
 };
 
-export const InversionSelector: FC<PropsT, DefaultPropsT> = observer(
-  (p: PropsT) => {
-    const props = useDefaultProps<PropsT, DefaultPropsT>(p);
+export const InversionSelector = observer(
+  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
     const { voicingStore } = useStore();
 
     const swipeHandlers = useSwipeable({
@@ -52,7 +51,7 @@ export const InversionSelector: FC<PropsT, DefaultPropsT> = observer(
         </KeyboardEventHandler>
       </KeyboardEventHandler>
     );
-  }
+  })
 );
 
 function invertRight(voicingStore: VoicingStore, query?: QueryT) {

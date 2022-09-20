@@ -1,10 +1,12 @@
 import { computed } from 'mobx';
-import { GroupT, GroupByIdT } from 'src/groups/types';
-import { listToItemById } from 'src/utils/ids';
 import { output } from 'skandha';
+import { GroupByIdT, GroupT } from 'src/groups/types';
 import { ClefT } from 'src/keyboard/types';
+import { listToItemById } from 'src/utils/ids';
 
 export class Outputs {
+  static className = () => 'Outputs';
+
   @output clefsDisplay: Array<ClefT> = [];
   @output groupsDisplay: Array<GroupT> = [];
 

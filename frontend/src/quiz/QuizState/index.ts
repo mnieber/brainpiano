@@ -1,37 +1,28 @@
-import { setCallbacks } from 'aspiration';
-import { action, observable, makeObservable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import {
   addCleanUpFunctionToCtr,
-  facet,
-  getm,
   cleanUpCtr,
-  mapDataToFacet,
-  installPolicies,
-  registerFacets,
-  ClassMemberT as CMT,
-} from 'skandha';
-import { makeCtrObservable } from 'skandha-mobx';
-import { getIds } from 'src/utils/ids';
-import * as Facets from 'skandha-facets';
-import * as Policies from 'src/quiz/QuizState/policies';
-import * as FacetPolicies from 'skandha-facets/policies';
-import {
-  Selection,
-  SelectionCbs,
-  handleSelectItem,
-} from 'skandha-facets/Selection';
-import { Highlight, HighlightCbs } from 'skandha-facets/Highlight';
-import { createQuery } from 'src/quiz/utils/createQuery';
-import { PreselectionStore } from 'src/keyboard/PreselectionStore';
+} from 'react-default-props-context';
+import { createConnector } from 'skandha';
 
-import { QueryT } from 'src/quiz/types';
+import { Highlight } from 'skandha-facets/Highlight';
+import { Selection } from 'skandha-facets/Selection';
+import { registerCtr } from 'skandha-mobx';
+import { PreselectionStore } from 'src/keyboard/PreselectionStore';
+import * as Policies from 'src/quiz/QuizState/policies';
+import { createQuery } from 'src/quiz/utils/createQuery';
+import { getIds } from 'src/utils/ids';
+
 import { GroupsStore } from 'src/groups/GroupsStore';
-import { VoicingStore } from 'src/voicings/VoicingStore';
+import { GroupT } from 'src/groups/types';
 import { ClefStore } from 'src/keyboard/ClefStore';
+import { ClefT } from 'src/keyboard/types';
 import { Inputs } from 'src/quiz/QuizState/facets/Inputs';
 import { Outputs } from 'src/quiz/QuizState/facets/Outputs';
-import { ClefT } from 'src/keyboard/types';
-import { GroupT } from 'src/groups/types';
+import { initClefs } from 'src/quiz/QuizState/initClefs';
+import { initGroups } from 'src/quiz/QuizState/initGroups';
+import { QueryT } from 'src/quiz/types';
+import { VoicingStore } from 'src/voicings/VoicingStore';
 
 type PropsT = {
   clefStore: ClefStore;
@@ -45,112 +36,96 @@ export class QuizState {
   @observable query?: QueryT;
   @observable nextQuery?: QueryT;
 
-  @facet inputs = new Inputs();
-  @facet outputs = new Outputs();
+  data = {
+    inputs: new Inputs(),
+    outputs: new Outputs(),
+  };
 
   clefs = {
     selection: new Selection(),
     highlight: new Highlight(),
   };
+
   groups = {
     selection: new Selection(),
     highlight: new Highlight(),
   };
 
-  _setClefsCallbacks(props: PropsT) {
-    const ctr = this.clefs;
-    setCallbacks(ctr.selection, {
-      selectItem: {
-        selectItem(this: SelectionCbs['selectItem']) {
-          handleSelectItem(ctr.selection, this.selectionParams);
-          FacetPolicies.highlightFollowsSelection(
-            ctr.selection,
-            this.selectionParams
-          );
-        },
-      },
-    } as SelectionCbs);
-    setCallbacks(ctr.highlight, {} as HighlightCbs);
+  _mapDataClefs(props: PropsT) {
+    const con = createConnector(this);
+
+    con['data.outputs'].clefsDisplay = con['data.inputs'].clefs;
+    con['clefs.selection'].selectableIds = con['data.outputs'].clefsDisplay;
+
+    con.connect();
   }
 
-  _setGroupsCallbacks(props: PropsT) {
-    const ctr = this.groups;
-    setCallbacks(ctr.selection, {
-      selectItem: {
-        selectItem(this: SelectionCbs['selectItem']) {
-          handleSelectItem(ctr.selection, this.selectionParams);
-          FacetPolicies.highlightFollowsSelection(
-            ctr.selection,
-            this.selectionParams
-          );
-        },
-      },
-    } as SelectionCbs);
-    setCallbacks(ctr.highlight, {} as HighlightCbs);
-  }
+  _mapDataGroups(props: PropsT) {
+    const con = createConnector(this);
+    const lookUpGroup = (id: string) => {
+      debugger;
+      return this.data.outputs.groupById[id];
+    };
+    const lookUpGroups = (ids: string[]) => {
+      debugger;
+      return ids.map(lookUpGroup);
+    };
 
-  _applyClefsPolicies(props: PropsT) {
-    const Inputs_items = [Inputs, 'clefs', this] as CMT;
-    const Outputs_display = [Outputs, 'clefsDisplay', this] as CMT;
+    con['data.outputs'].groupsDisplay = con['data.inputs'].groups;
+    con['groups.selection'].selectableIds =
+      con['data.outputs'].groupsDisplay.tf(getIds);
+    con['groups.selection'].items =
+      con['groups.selection'].ids.tf(lookUpGroups);
+    con['groups.highlight'].item = con['groups.highlight'].id.tf(lookUpGroup);
 
-    const policies = [
-      mapDataToFacet(Outputs_display, getm(Inputs_items)),
-      // selection
-      Facets.selectionUsesSelectableIds(getm(Outputs_display)),
-    ];
-
-    installPolicies(policies, this.clefs);
-  }
-
-  _applyGroupsPolicies(props: PropsT) {
-    const Inputs_items = [Inputs, 'groups', this] as CMT;
-    const Outputs_display = [Outputs, 'groupsDisplay', this] as CMT;
-    const Outputs_itemById = [Outputs, 'groupById', this] as CMT;
-
-    const policies = [
-      mapDataToFacet(Outputs_display, getm(Inputs_items)),
-      // selection
-      Facets.selectionUsesSelectableIds(getm(Outputs_display), getIds),
-      Facets.selectionUsesItemLookUpTable(getm(Outputs_itemById)),
-      // highlight
-      Facets.highlightUsesItemLookUpTable(getm(Outputs_itemById)),
-    ];
-
-    installPolicies(policies, this.groups);
+    con.connect();
   }
 
   destroy() {
-    cleanUpCtr(this.clefs);
-    cleanUpCtr(this.groups);
+    cleanUpCtr(this);
   }
 
   constructor(props: PropsT) {
     this.props = props;
 
-    registerFacets(this, {});
-    makeObservable(this);
+    registerCtr({
+      ctr: this.clefs,
+      options: { name: 'Clefs' },
+      initCtr: () => {
+        initClefs(this.clefs);
+        this._mapDataClefs(props);
+        addCleanUpFunctionToCtr(this, () => cleanUpCtr(this.clefs));
+      },
+    });
 
-    registerFacets(this.clefs, { name: 'Clefs' });
-    this._setClefsCallbacks(props);
-    this._applyClefsPolicies(props);
-    makeCtrObservable(this.clefs);
+    registerCtr({
+      ctr: this.groups,
+      options: { name: 'Groups' },
+      initCtr: () => {
+        initGroups(this.groups);
+        this._mapDataGroups(props);
+        addCleanUpFunctionToCtr(this, () => cleanUpCtr(this.groups));
+      },
+    });
 
-    registerFacets(this.groups, { name: 'Groups' });
-    this._setGroupsCallbacks(props);
-    this._applyGroupsPolicies(props);
-    makeCtrObservable(this.groups);
+    registerCtr({
+      ctr: this.data,
+      options: { name: 'Data' },
+    });
 
     const cuf = Policies.selectClefBasedOnPreselection()(this);
     addCleanUpFunctionToCtr(this.clefs, cuf);
+
+    makeObservable(this);
   }
 
   @action setClefs(clefs: ClefT[]) {
-    this.inputs.clefs = clefs;
+    this.data.inputs.clefs = clefs;
     this.clefs.selection.ids = clefs;
   }
 
   @action setGroups(groups: GroupT[]) {
-    this.inputs.groups = groups;
+    this.data.inputs.groups = groups;
     this.groups.selection.ids = getIds(groups);
   }
 
@@ -168,6 +143,7 @@ export class QuizState {
       this.props.clefStore.setClef(this.query.clef);
       this.props.voicingStore.setVoicing(this.query.voicing);
       this.props.voicingStore.setInversion(this.query.inversion);
+      this.props.voicingStore.setColouredNoteIdx(this.query.colouredNoteIdx);
     }
   }
 }

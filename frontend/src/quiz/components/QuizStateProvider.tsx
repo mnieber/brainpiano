@@ -1,23 +1,19 @@
-import * as React from 'react';
 import { action, reaction } from 'mobx';
+import * as React from 'react';
 
-import { QuizState } from 'src/quiz/QuizState';
 import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
-import { voicingGroups } from 'src/voicings/voicingGroups';
 import { clefs } from 'src/keyboard/keyConstants';
+import { QuizState } from 'src/quiz/QuizState';
 import { parseVoicingGroups } from 'src/voicings/parse';
+import { voicingGroups } from 'src/voicings/voicingGroups';
 
 type PropsT = React.PropsWithChildren<{}>;
 
 // Note: don't observe this with MobX
 export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
-  const {
-    groupsStore,
-    clefStore,
-    voicingStore,
-    preselectionStore,
-  } = useStore();
+  const { groupsStore, clefStore, voicingStore, preselectionStore } =
+    useStore();
   const groups = parseVoicingGroups(voicingGroups);
 
   const createState = action(() => {
@@ -45,11 +41,11 @@ export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
   const getDefaultProps = (state: QuizState) => {
     return {
       quizState: () => state,
-      clefs: () => state.outputs.clefsDisplay,
+      clefs: () => state.data.outputs.clefsDisplay,
       clefsSelection: () => state.clefs.selection,
       clefsHighlight: () => state.clefs.highlight,
       clef: () => state.clefs.highlight.item,
-      groups: () => state.outputs.groupsDisplay,
+      groups: () => state.data.outputs.groupsDisplay,
       groupsSelection: () => state.groups.selection,
       groupsHighlight: () => state.groups.highlight,
       group: () => state.groups.highlight.item,

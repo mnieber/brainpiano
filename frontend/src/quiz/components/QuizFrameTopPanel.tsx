@@ -1,12 +1,12 @@
-import React from 'react';
-import { useDefaultProps, FC } from 'react-default-props-context';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { VoicingTitle } from 'src/voicings/components/VoicingTitle';
+import React from 'react';
+import { withDefaultProps } from 'react-default-props-context';
 import { GroupPicker } from 'src/groups/components';
+import { IoMenu } from 'src/io/components';
 import { ClefListView } from 'src/keyboard/components';
 import { QuizState } from 'src/quiz/QuizState';
-import { IoMenu } from 'src/io/components';
+import { VoicingTitle } from 'src/voicings/components/VoicingTitle';
 
 import './QuizFrameTopPanel.scss';
 
@@ -16,9 +16,8 @@ type DefaultPropsT = {
   quizState: QuizState;
 };
 
-export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
-  (p: PropsT) => {
-    const props = useDefaultProps<PropsT, DefaultPropsT>(p);
+export const QuizFrameTopPanel = observer(
+  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
     const HelpButton = (
       <button
         onClick={() =>
@@ -48,5 +47,5 @@ export const QuizFrameTopPanel: FC<PropsT, DefaultPropsT> = observer(
         </div>
       </div>
     );
-  }
+  })
 );

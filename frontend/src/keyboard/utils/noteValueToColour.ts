@@ -6,11 +6,18 @@ import { ChordT, NoteT } from 'src/voicings/types';
 export function noteValueToColour(
   noteValue: NoteT,
   clef: string,
-  chord: ChordT
+  chord: ChordT,
+  colouredNote?: number
 ) {
-  const harmonicColour = includes(noteValue, chord)
-    ? noteColours[noteValueToIndex(noteValue - clefOffsets[clef])]
-    : undefined;
+  const chordHasNote = includes(noteValue, chord);
+  const useColour = !colouredNote || colouredNote === noteValue;
+
+  const harmonicColour =
+    chordHasNote && useColour
+      ? noteColours[noteValueToIndex(noteValue - clefOffsets[clef])]
+      : chordHasNote && !useColour
+      ? '#aaaaaa'
+      : undefined;
 
   const isStriped = !!(harmonicColour && harmonicColour.endsWith('-striped'));
   const colour = isStriped

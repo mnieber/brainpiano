@@ -1,24 +1,26 @@
-import React from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { createBrowserHistory } from 'history';
-import { QuizView } from 'src/quiz/components';
-import { QuizStateProvider } from 'src/quiz/components';
+import { observer } from 'mobx-react-lite';
+import { Route, Router, Switch } from 'react-router-dom';
+import { QuizStateProvider, QuizView } from 'src/quiz/components';
 
 type PropsT = {};
 
 export const history = createBrowserHistory();
 
-export const UrlRouter: React.FC<PropsT> = observer((props: PropsT) => {
+export const UrlRouter = observer((props: PropsT) => {
+  const RouterAny = Router as any;
+  const SwitchAny = Switch as any;
+  const RouteAny = Route as any;
+
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="">
+    <RouterAny history={history}>
+      <SwitchAny>
+        <RouteAny path="">
           <QuizStateProvider>
             <QuizView />
           </QuizStateProvider>
-        </Route>
-      </Switch>
-    </Router>
+        </RouteAny>
+      </SwitchAny>
+    </RouterAny>
   );
 });

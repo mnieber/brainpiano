@@ -5,10 +5,12 @@ const appStore = new AppStore();
 
 export const StoreContext = React.createContext<AppStore>(appStore);
 
-export const StoreProvider: React.FC = ({ children }) => {
+type PropsT = React.PropsWithChildren<{}>;
+
+export const StoreProvider = (props: PropsT) => {
   return (
     <StoreContext.Provider value={appStore}>
-      {children}
+      {props.children}
     </StoreContext.Provider>
   );
 };

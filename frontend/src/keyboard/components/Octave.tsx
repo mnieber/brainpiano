@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import { add, always, concat, map, pipe } from 'ramda';
-import React from 'react';
 import { Layer } from 'react-konva';
 import { Key } from 'src/keyboard/components/Key';
 import {
@@ -16,6 +15,7 @@ type PropsT = {
   clef: string;
   chord: any;
   scaleFactor: number;
+  colouredNote?: number;
 };
 
 export const Octave = observer((props: PropsT) => {
@@ -28,7 +28,8 @@ export const Octave = observer((props: PropsT) => {
       const { colour, isStriped } = noteValueToColour(
         noteValue,
         props.clef,
-        props.chord
+        props.chord,
+        props.colouredNote
       );
       return (
         <Key

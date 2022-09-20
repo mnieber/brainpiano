@@ -1,5 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { clamp, length } from 'ramda';
+import { mathMod } from 'src/utils/mathMod';
 import { parseVoicing } from 'src/voicings/parse';
 import { VoicingT } from 'src/voicings/types';
 import { getInversionRange, invertChord } from 'src/voicings/utils/invertChord';
@@ -28,6 +29,7 @@ export class VoicingStore {
   clef: string = 'C';
   inversion: number = 0;
   voicing: VoicingT = cScale;
+  colouredNoteIdx: number = -1;
 
   constructor() {
     makeObservable(this, {
@@ -53,6 +55,10 @@ export class VoicingStore {
     this.voicing = voicing;
   };
 
+  setColouredNoteIdx = (colouredNoteIdx: number) => {
+    this.colouredNoteIdx = colouredNoteIdx;
+  };
+
   get inversionRange() {
     return getInversionRange(voicingToChord(this.voicing, this.clef, 1));
   }
@@ -65,5 +71,10 @@ export class VoicingStore {
     return this.clef
       ? invertChord(voicingToChord(this.voicing, this.clef, 1), this.inversion)
       : undefined;
+  }
+
+  get colouredNote() {
+    const idx = mathMod(this.colouredNoteIdx - this.inversion, this.nrOfVoices);
+    return this.chord ? this.chord[idx] : undefined;
   }
 }

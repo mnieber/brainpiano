@@ -42,7 +42,7 @@ export class ClefStore {
     const clefLetter = x[0];
     this.setClefLetter(clefLetter);
     const modulate = x[1];
-    this.setClefFlat(modulate == 'b');
-    this.setClefSharp(modulate == '#');
+    this.setClefFlat(modulate === 'b');
+    this.setClefSharp(modulate === '#');
   }
 }

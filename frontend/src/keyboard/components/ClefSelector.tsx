@@ -3,7 +3,9 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useStore } from 'src/app/components';
 import { clefLetters } from 'src/keyboard/keyConstants';
 
-export const ClefSelector = observer(({ children }) => {
+type PropsT = React.PropsWithChildren<{}>;
+
+export const ClefSelector = observer((props: PropsT) => {
   const { preselectionStore } = useStore();
 
   return (
@@ -21,7 +23,7 @@ export const ClefSelector = observer(({ children }) => {
           preselectionStore.reset();
         }}
       >
-        {children}
+        {props.children}
       </KeyboardEventHandler>
     </KeyboardEventHandler>
   );

@@ -54,11 +54,13 @@ export const createQuery = (clefs: ClefT[], groups: GroupT[]): QueryT => {
   const group = groups[groupIdx];
   const voicing = group.voicings[voicingIdx - (count - group.voicings.length)];
   const inversion = getRandomInversion(voicing, clef);
+  const colouredNoteIdx = Math.floor(Math.random() * voicing.chord.length);
 
   return {
     clef,
     group,
     voicing,
     inversion,
+    colouredNoteIdx,
   };
 };

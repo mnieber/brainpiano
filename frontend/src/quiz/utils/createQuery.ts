@@ -39,8 +39,7 @@ const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
   return inversion;
 };
 
-export const createQuery = (clefs: ClefT[], groups: GroupT[]): QueryT => {
-  const clef = randomElement(clefs);
+export const createQuery = (clef: ClefT, groups: GroupT[]): QueryT => {
   const nrVoicings = sum(map((x: GroupT) => x.voicings.length)(groups));
   const voicingIdx = Math.floor(Math.random() * nrVoicings);
 

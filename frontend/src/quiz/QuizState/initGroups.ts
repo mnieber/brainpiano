@@ -1,5 +1,4 @@
 import { setCallbacks } from 'aspiration';
-import { HighlightCbs } from 'skandha-facets/Highlight';
 import * as FacetPolicies from 'skandha-facets/policies';
 import { handleSelectItem, SelectionCbs } from 'skandha-facets/Selection';
 
@@ -15,5 +14,4 @@ export const initGroups = (ctr: any) => {
       },
     },
   } as SelectionCbs);
-  setCallbacks(ctr.highlight, {} as HighlightCbs);
 };

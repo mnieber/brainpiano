@@ -1,65 +1,65 @@
 import { action, reaction } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { withDefaultProps } from 'react-default-props-context';
 
 import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
-import { clefs } from 'src/keyboard/keyConstants';
 import { QuizState } from 'src/quiz/QuizState';
 import { parseVoicingGroups } from 'src/voicings/parse';
 import { voicingGroups } from 'src/voicings/voicingGroups';
 
 type PropsT = React.PropsWithChildren<{}>;
 
-// Note: don't observe this with MobX
-export const QuizStateProvider: React.FC<PropsT> = (props: PropsT) => {
-  const { groupsStore, clefStore, voicingStore, preselectionStore } =
-    useStore();
-  const groups = parseVoicingGroups(voicingGroups);
+type DefaultPropsT = {};
 
-  const createState = action(() => {
-    const state = new QuizState({
-      groupsStore,
-      clefStore,
-      voicingStore,
-      preselectionStore,
+export const QuizStateProvider = observer(
+  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+    const { groupsStore, clefStore, voicingStore, preselectionStore } =
+      useStore();
+    const groups = parseVoicingGroups(voicingGroups);
+
+    const createState = action(() => {
+      const state = new QuizState({
+        groupsStore,
+        voicingStore,
+        preselectionStore,
+      });
+      state.setGroups(groups);
+      return state;
     });
-    state.setClefs(clefs);
-    state.setGroups(groups);
-    return state;
-  });
 
-  const updateState = (state: QuizState) => {
-    reaction(
-      () => ({}),
-      (inputs) => {},
-      {
-        fireImmediately: true,
-      }
-    );
-  };
-
-  const getDefaultProps = (state: QuizState) => {
-    return {
-      quizState: () => state,
-      clefs: () => state.data.outputs.clefsDisplay,
-      clefsSelection: () => state.clefs.selection,
-      clefsHighlight: () => state.clefs.highlight,
-      clef: () => state.clefs.highlight.item,
-      groups: () => state.data.outputs.groupsDisplay,
-      groupsSelection: () => state.groups.selection,
-      groupsHighlight: () => state.groups.highlight,
-      group: () => state.groups.highlight.item,
+    const updateState = (state: QuizState) => {
+      reaction(
+        () => ({
+          clef: clefStore.clef,
+        }),
+        (inputs) => {
+          state.setClef(inputs.clef);
+        },
+        {
+          fireImmediately: true,
+        }
+      );
     };
-  };
 
-  return (
-    <CtrProvider
-      createCtr={createState}
-      updateCtr={updateState}
-      destroyCtr={(state: QuizState) => state.destroy()}
-      getDefaultProps={getDefaultProps}
-    >
-      {props.children}
-    </CtrProvider>
-  );
-};
+    const getDefaultProps = (state: QuizState) => {
+      return {
+        quizState: () => state,
+        groups: () => state.data.outputs.groupsDisplay,
+        groupsSelection: () => state.groups.selection,
+      };
+    };
+
+    return (
+      <CtrProvider
+        createCtr={createState}
+        updateCtr={updateState}
+        destroyCtr={(state: QuizState) => state.destroy()}
+        getDefaultProps={getDefaultProps}
+      >
+        {props.children}
+      </CtrProvider>
+    );
+  })
+);

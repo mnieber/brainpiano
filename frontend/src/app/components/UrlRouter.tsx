@@ -1,6 +1,7 @@
 import { createBrowserHistory } from 'history';
 import { observer } from 'mobx-react-lite';
 import { Route, Router, Switch } from 'react-router-dom';
+import { StoreProvider } from 'src/app/components/StoreProvider';
 import { QuizStateProvider, QuizView } from 'src/quiz/components';
 
 type PropsT = {};
@@ -16,9 +17,11 @@ export const UrlRouter = observer((props: PropsT) => {
     <RouterAny history={history}>
       <SwitchAny>
         <RouteAny path="">
-          <QuizStateProvider>
-            <QuizView />
-          </QuizStateProvider>
+          <StoreProvider>
+            <QuizStateProvider>
+              <QuizView />
+            </QuizStateProvider>
+          </StoreProvider>
         </RouteAny>
       </SwitchAny>
     </RouterAny>

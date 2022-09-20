@@ -1,4 +1,7 @@
 import { action, computed, makeObservable, observable } from 'mobx';
+import { Selection } from 'skandha-facets/Selection';
+import { makeFacetObservable } from 'skandha-mobx';
+import { clefs } from 'src/keyboard/keyConstants';
 
 import { clefC } from 'src/keyboard/keyConstants';
 import { ClefT } from 'src/keyboard/types';
@@ -7,6 +10,7 @@ export class ClefStore {
   clefLetter = clefC;
   clefSharp = false;
   clefFlat = false;
+  selection = new Selection();
 
   constructor() {
     makeObservable(this, {
@@ -18,6 +22,10 @@ export class ClefStore {
       setClefFlat: action,
       clef: computed,
     });
+
+    makeFacetObservable(this.selection);
+    this.selection.selectableIds = clefs;
+    this.selection.ids = clefs;
   }
 
   setClefLetter = (clefLetter: string) => {

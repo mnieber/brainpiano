@@ -1,20 +1,24 @@
+import { ClefStore } from 'src/keyboard/ClefStore';
+import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { EventT } from 'src/utils/types';
-import { QuizState } from 'src/quiz/QuizState';
 
-export const selectClefBasedOnPreselection = () => (quizState: QuizState) => {
+export const selectClefBasedOnPreselection = (
+  clefStore: ClefStore,
+  preselectionStore: PreselectionStore
+) => {
   const handler = (event: EventT) => {
-    if (quizState.query && event.topic === 'PreselectionStore.selectClef') {
-      quizState.query.clef =
+    if (event.topic === 'PreselectionStore.selectClef') {
+      clefStore.setClef(
         event.details.clefLetter +
-        (event.details.isSharpening
-          ? '#'
-          : event.details.isFlattening
-          ? 'b'
-          : '');
-      quizState.props.clefStore.setClef(quizState.query.clef);
+          (event.details.isSharpening
+            ? '#'
+            : event.details.isFlattening
+            ? 'b'
+            : '')
+      );
     }
   };
 
-  quizState.props.preselectionStore.signal.add(handler as any);
-  return () => quizState.props.preselectionStore.signal.remove(handler);
+  preselectionStore.signal.add(handler as any);
+  return () => preselectionStore.signal.remove(handler);
 };

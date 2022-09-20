@@ -18,9 +18,8 @@ export const QuizStateProvider = observer(
 
     const createState = action(() => {
       const state = new QuizState({
-        groupsStore,
+        clefStore,
         voicingStore,
-        preselectionStore,
       });
       return state;
     });
@@ -28,11 +27,11 @@ export const QuizStateProvider = observer(
     const updateState = (state: QuizState) => {
       reaction(
         () => ({
-          clef: clefStore.clef,
+          clefs: clefStore.selection.ids,
           groups: groupsStore.selection.items,
         }),
         (inputs) => {
-          state.setClef(inputs.clef);
+          state.setClefs(inputs.clefs);
           state.setGroups(inputs.groups);
         },
         {

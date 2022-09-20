@@ -1,13 +1,11 @@
 import { action, makeObservable, observable } from 'mobx';
 import { cleanUpCtr } from 'react-default-props-context';
 
-import { Selection } from 'skandha-facets/Selection';
 import { registerCtr } from 'skandha-mobx';
-import { PreselectionStore } from 'src/keyboard/PreselectionStore';
 import { createQuery } from 'src/quiz/utils/createQuery';
 
-import { GroupsStore } from 'src/groups/GroupsStore';
 import { GroupT } from 'src/groups/types';
+import { ClefStore } from 'src/keyboard/ClefStore';
 import { ClefT } from 'src/keyboard/types';
 import { Inputs } from 'src/quiz/QuizState/facets/Inputs';
 import { Outputs } from 'src/quiz/QuizState/facets/Outputs';
@@ -15,9 +13,8 @@ import { QueryT } from 'src/quiz/types';
 import { VoicingStore } from 'src/voicings/VoicingStore';
 
 type PropsT = {
-  groupsStore: GroupsStore;
+  clefStore: ClefStore;
   voicingStore: VoicingStore;
-  preselectionStore: PreselectionStore;
 };
 
 export class QuizState {
@@ -28,10 +25,6 @@ export class QuizState {
   data = {
     inputs: new Inputs(),
     outputs: new Outputs(),
-  };
-
-  groups = {
-    selection: new Selection(),
   };
 
   destroy() {
@@ -49,8 +42,8 @@ export class QuizState {
     makeObservable(this);
   }
 
-  @action setClef(clef: ClefT) {
-    this.data.inputs.clef = clef;
+  @action setClefs(clefs: ClefT[]) {
+    this.data.inputs.clefs = clefs;
   }
 
   @action setGroups(groups: GroupT[]) {
@@ -60,14 +53,15 @@ export class QuizState {
   @action pickRandomChord() {
     this.query =
       this.nextQuery ??
-      createQuery(this.data.inputs.clef, this.data.inputs.groups ?? []);
+      createQuery(this.data.inputs.clefs, this.data.inputs.groups ?? []);
 
     this.nextQuery = createQuery(
-      this.data.inputs.clef,
+      this.data.inputs.clefs,
       this.data.inputs.groups ?? []
     );
 
     if (this.query) {
+      this.props.clefStore.setClef(this.query.clef);
       this.props.voicingStore.setVoicing(this.query.voicing);
       this.props.voicingStore.setInversion(this.query.inversion);
       this.props.voicingStore.setColouredNoteIdx(this.query.colouredNoteIdx);

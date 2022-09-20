@@ -3,7 +3,7 @@ import {
   addCleanUpFunctionToCtr,
   cleanUpCtr,
 } from 'react-default-props-context';
-import { createConnector } from 'skandha';
+import { mapDataToProp } from 'skandha';
 
 import { Highlight } from 'skandha-facets/Highlight';
 import { Selection } from 'skandha-facets/Selection';
@@ -23,6 +23,12 @@ import { initClefs } from 'src/quiz/QuizState/initClefs';
 import { initGroups } from 'src/quiz/QuizState/initGroups';
 import { QueryT } from 'src/quiz/types';
 import { VoicingStore } from 'src/voicings/VoicingStore';
+
+function mapDatasToProps(...mappings: any[]) {
+  for (const mapping of mappings) {
+    mapDataToProp(mapping[0][0], mapping[0][1], mapping[1]);
+  }
+}
 
 type PropsT = {
   clefStore: ClefStore;
@@ -52,33 +58,40 @@ export class QuizState {
   };
 
   _mapDataClefs(props: PropsT) {
-    const con = createConnector(this);
-
-    con['data.outputs'].clefsDisplay = con['data.inputs'].clefs;
-    con['clefs.selection'].selectableIds = con['data.outputs'].clefsDisplay;
-
-    con.connect();
+    mapDatasToProps(
+      [this.data.outputs, 'clefsDisplay', () => this.data.inputs.clefs],
+      [
+        this.clefs.selection,
+        'selectableIds',
+        () => this.data.outputs.clefsDisplay,
+      ]
+    );
   }
 
   _mapDataGroups(props: PropsT) {
-    const con = createConnector(this);
-    const lookUpGroup = (id: string) => {
-      debugger;
-      return this.data.outputs.groupById[id];
-    };
-    const lookUpGroups = (ids: string[]) => {
-      debugger;
-      return ids.map(lookUpGroup);
+    const lookUpGroup = (id?: string) => {
+      return id ? this.data.outputs.groupById[id] : undefined;
     };
 
-    con['data.outputs'].groupsDisplay = con['data.inputs'].groups;
-    con['groups.selection'].selectableIds =
-      con['data.outputs'].groupsDisplay.tf(getIds);
-    con['groups.selection'].items =
-      con['groups.selection'].ids.tf(lookUpGroups);
-    con['groups.highlight'].item = con['groups.highlight'].id.tf(lookUpGroup);
-
-    con.connect();
+    mapDatasToProps(
+      [
+        //
+        [this.data.outputs, 'groupsDisplay'],
+        () => this.data.inputs.groups,
+      ],
+      [
+        [this.groups.selection, 'selectableIds'],
+        () => getIds(this.data.outputs.groupsDisplay),
+      ],
+      [
+        [this.groups.selection, 'items'],
+        () => this.groups.selection.ids.map(lookUpGroup),
+      ],
+      [
+        [this.groups.highlight, 'item'],
+        () => lookUpGroup(this.groups.highlight.id),
+      ]
+    );
   }
 
   destroy() {

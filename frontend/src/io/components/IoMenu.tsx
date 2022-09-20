@@ -1,6 +1,7 @@
 import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
+import { useStore } from 'src/app/components/useStore';
 import { QuizState } from 'src/quiz/QuizState';
 import { cache, parseVoicingGroups } from 'src/voicings/parse';
 
@@ -19,6 +20,8 @@ type DefaultPropsT = {
 
 export const IoMenu = observer(
   withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+    const appStore = useStore();
+
     return (
       <Dropdown
         onSelect={(eventKey: any) => {
@@ -30,8 +33,7 @@ export const IoMenu = observer(
           }
           if (eventKey === 3) {
             navigator.clipboard.readText().then((clipText) => {
-              debugger;
-              props.quizState.setGroups(
+              appStore.groupsStore.setGroups(
                 parseVoicingGroups(JSON.parse(clipText))
               );
             });

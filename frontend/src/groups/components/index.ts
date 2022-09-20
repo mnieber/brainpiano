@@ -1,6 +1,5 @@
-export { GroupsFrame } from './GroupsFrame'
-export { GroupsFrameTopPanel } from './GroupsFrameTopPanel'
-export { GroupPicker } from './GroupPicker'
-export { GroupsFrameLeftPanel } from './GroupsFrameLeftPanel'
-export { LoadGroupsEffect } from './LoadGroupsEffect'
-export { SelectGroupEffect } from './SelectGroupEffect'
+export { GroupPicker } from './GroupPicker';
+export { GroupsFrame } from './GroupsFrame';
+export { GroupsFrameLeftPanel } from './GroupsFrameLeftPanel';
+export { GroupsFrameTopPanel } from './GroupsFrameTopPanel';
+export { SelectGroupEffect } from './SelectGroupEffect';

@@ -6,8 +6,6 @@ import { withDefaultProps } from 'react-default-props-context';
 import { CtrProvider } from 'react-default-props-context';
 import { useStore } from 'src/app/components';
 import { QuizState } from 'src/quiz/QuizState';
-import { parseVoicingGroups } from 'src/voicings/parse';
-import { voicingGroups } from 'src/voicings/voicingGroups';
 
 type PropsT = React.PropsWithChildren<{}>;
 
@@ -17,7 +15,6 @@ export const QuizStateProvider = observer(
   withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
     const { groupsStore, clefStore, voicingStore, preselectionStore } =
       useStore();
-    const groups = parseVoicingGroups(voicingGroups);
 
     const createState = action(() => {
       const state = new QuizState({
@@ -25,7 +22,6 @@ export const QuizStateProvider = observer(
         voicingStore,
         preselectionStore,
       });
-      state.setGroups(groups);
       return state;
     });
 
@@ -33,9 +29,11 @@ export const QuizStateProvider = observer(
       reaction(
         () => ({
           clef: clefStore.clef,
+          groups: groupsStore.selection.items,
         }),
         (inputs) => {
           state.setClef(inputs.clef);
+          state.setGroups(inputs.groups);
         },
         {
           fireImmediately: true,
@@ -46,8 +44,6 @@ export const QuizStateProvider = observer(
     const getDefaultProps = (state: QuizState) => {
       return {
         quizState: () => state,
-        groups: () => state.data.outputs.groupsDisplay,
-        groupsSelection: () => state.groups.selection,
       };
     };
 

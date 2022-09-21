@@ -6,7 +6,7 @@ import { makeFacetObservable } from 'skandha-mobx';
 import { GroupByIdT, GroupT } from 'src/groups/types';
 import { getIds, listToItemById } from 'src/utils/ids';
 
-function mapDatasToProps(...mappings: any[]) {
+function mapDataToProps(...mappings: any[]) {
   for (const mapping of mappings) {
     mapDataToProp(mapping[0][0], mapping[0][1], mapping[1]);
   }
@@ -26,7 +26,7 @@ export class GroupsStore {
       return id ? this.groupById[id] : undefined;
     };
 
-    mapDatasToProps(
+    mapDataToProps(
       [[this.selection, 'selectableIds'], () => R.values(this.groupById)],
       [[this.selection, 'items'], () => this.selection.ids.map(lookUpGroup)]
     );

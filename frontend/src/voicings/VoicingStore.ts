@@ -1,10 +1,13 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { clamp, length } from 'ramda';
-import { mathMod } from 'src/utils/mathMod';
-import { parseVoicing } from 'src/voicings/parse';
-import { VoicingT } from 'src/voicings/types';
-import { getInversionRange, invertChord } from 'src/voicings/utils/invertChord';
-import { voicingToChord } from 'src/voicings/utils/voicingToChord';
+import { mathMod } from '/src/utils/mathMod';
+import { parseVoicing } from '/src/voicings/parse';
+import { VoicingT } from '/src/voicings/types';
+import {
+  getInversionRange,
+  invertChord,
+} from '/src/voicings/utils/invertChord';
+import { voicingToChord } from '/src/voicings/utils/voicingToChord';
 
 const cScale = parseVoicing({
   id: 'Chromatic',

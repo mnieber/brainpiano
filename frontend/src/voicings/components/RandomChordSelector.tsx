@@ -1,16 +1,17 @@
+import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { QuizState } from 'src/quiz/QuizState';
+import { QuizState } from '/src/quiz/QuizState';
 
 type PropsT = React.PropsWithChildren<{}>;
 
-type DefaultPropsT = {
-  quizState: QuizState;
+const DefaultProps = {
+  quizState: stub as QuizState,
 };
 
 export const RandomChordSelector = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     return (
       <KeyboardEventHandler
         handleKeys={['space', 'enter']}
@@ -21,5 +22,5 @@ export const RandomChordSelector = observer(
         {props.children}
       </KeyboardEventHandler>
     );
-  })
+  }, DefaultProps)
 );

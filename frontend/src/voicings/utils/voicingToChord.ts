@@ -1,6 +1,6 @@
 import { add, always, map, pipe } from 'ramda';
-import { clefOffsets, octaveRootNoteValue } from 'src/keyboard/keyConstants';
-import { VoicingT } from 'src/voicings/types';
+import { clefOffsets, octaveRootNoteValue } from '/src/keyboard/keyConstants';
+import { VoicingT } from '/src/voicings/types';
 
 export const voicingToChord = (
   voicing: VoicingT,

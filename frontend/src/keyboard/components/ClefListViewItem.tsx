@@ -1,7 +1,7 @@
-import React from 'react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { ClefT } from 'src/keyboard/types';
+import React from 'react';
+import { ClefT } from '/src/keyboard/types';
 
 import './ClefListViewItem.scss';
 

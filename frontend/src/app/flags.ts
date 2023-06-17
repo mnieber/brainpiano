@@ -1,1 +1,4 @@
-export const flags = {};
+export const flags = {
+  logSkandha: false,
+  logStateProviders: false,
+};

@@ -1,21 +1,22 @@
+import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useSwipeable } from 'react-swipeable';
-import { useStore } from 'src/app/components';
-import { QuizState } from 'src/quiz/QuizState';
-import { QueryT } from 'src/quiz/types';
-import { playChord } from 'src/voicings/utils/playChord';
-import { VoicingStore } from 'src/voicings/VoicingStore';
+import { useStore } from '/src/app/components';
+import { QuizState } from '/src/quiz/QuizState';
+import { QueryT } from '/src/quiz/types';
+import { VoicingStore } from '/src/voicings/VoicingStore';
+import { playChord } from '/src/voicings/utils/playChord';
 
 type PropsT = React.PropsWithChildren<{}>;
 
-type DefaultPropsT = {
-  quizState: QuizState;
+const DefaultProps = {
+  quizState: stub as QuizState,
 };
 
 export const InversionSelector = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const { voicingStore } = useStore();
 
     const swipeHandlers = useSwipeable({
@@ -51,7 +52,7 @@ export const InversionSelector = observer(
         </KeyboardEventHandler>
       </KeyboardEventHandler>
     );
-  })
+  }, DefaultProps)
 );
 
 function invertRight(voicingStore: VoicingStore, query?: QueryT) {

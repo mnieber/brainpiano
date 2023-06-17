@@ -2,12 +2,12 @@ import { observer } from 'mobx-react-lite';
 import { always, indexOf, map, pipe, range } from 'ramda';
 import React from 'react';
 import { Rect } from 'react-konva';
-import { Marker } from 'src/keyboard/components/Marker';
+import { Marker } from '/src/keyboard/components/Marker';
 import {
   blackKeyIndexes,
   isWhiteKeyIndex,
   whiteKeyIndexes,
-} from 'src/keyboard/keyConstants';
+} from '/src/keyboard/keyConstants';
 
 const whiteKeyProps = {
   width: 50,

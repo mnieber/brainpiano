@@ -1,8 +1,8 @@
 import { createBrowserHistory } from 'history';
 import { observer } from 'mobx-react-lite';
 import { Route, Router, Switch } from 'react-router-dom';
-import { StoreProvider } from 'src/app/components/StoreProvider';
-import { QuizStateProvider, QuizView } from 'src/quiz/components';
+import { StoreProvider } from '/src/app/components/StoreProvider';
+import { QuizStateProvider, QuizView } from '/src/quiz/components';
 
 type PropsT = {};
 

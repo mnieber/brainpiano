@@ -2,22 +2,24 @@ import { observer } from 'mobx-react-lite';
 import { always, map, pipe, range } from 'ramda';
 import { withDefaultProps } from 'react-default-props-context';
 import { Stage } from 'react-konva';
-import { useStore } from 'src/app/components';
-import { ClefModulationSelector } from 'src/keyboard/components/ClefModulationSelector';
-import { ClefSelector } from 'src/keyboard/components/ClefSelector';
-import 'src/keyboard/components/Keyboard.css';
-import { Octave } from 'src/keyboard/components/Octave';
-import { InversionSelector } from 'src/voicings/components/InversionSelector';
-import { RandomChordSelector } from 'src/voicings/components/RandomChordSelector';
+import { useStore } from '/src/app/components';
+import { ClefModulationSelector } from '/src/keyboard/components/ClefModulationSelector';
+import { ClefSelector } from '/src/keyboard/components/ClefSelector';
+import { Octave } from '/src/keyboard/components/Octave';
+import { InversionSelector } from '/src/voicings/components/InversionSelector';
+import { RandomChordSelector } from '/src/voicings/components/RandomChordSelector';
+
+// Import styles
+import './Keyboard.scss';
 
 type PropsT = {
   onClick: (event: any) => void;
 };
 
-type DefaultPropsT = {};
+const DefaultProps = {};
 
 export const Keyboard = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const { voicingStore, clefStore, scaleFactor } = useStore();
 
     const octaves = pipe(
@@ -60,5 +62,5 @@ export const Keyboard = observer(
         </RandomChordSelector>
       </div>
     );
-  })
+  }, DefaultProps)
 );

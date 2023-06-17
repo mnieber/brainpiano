@@ -1,16 +1,10 @@
 import { action, makeObservable, observable } from 'mobx';
 import * as R from 'ramda';
-import { mapDataToProp } from 'skandha';
-import { Selection } from 'skandha-facets/Selection';
+import { mapDataToProps } from 'skandha';
+import { Selection } from 'skandha-facets';
 import { makeFacetObservable } from 'skandha-mobx';
-import { GroupByIdT, GroupT } from 'src/groups/types';
-import { getIds, listToItemById } from 'src/utils/ids';
-
-function mapDataToProps(...mappings: any[]) {
-  for (const mapping of mappings) {
-    mapDataToProp(mapping[0][0], mapping[0][1], mapping[1]);
-  }
-}
+import { GroupByIdT, GroupT } from '/src/groups/types';
+import { getIds, listToItemById } from '/src/utils/ids';
 
 export class GroupsStore {
   @observable groupById: GroupByIdT = {};
@@ -26,10 +20,16 @@ export class GroupsStore {
       return id ? this.groupById[id] : undefined;
     };
 
-    mapDataToProps(
-      [[this.selection, 'selectableIds'], () => R.values(this.groupById)],
-      [[this.selection, 'items'], () => this.selection.ids.map(lookUpGroup)]
-    );
+    const ctr = {
+      selection: this.selection,
+    };
+
+    mapDataToProps(ctr, {
+      selection: {
+        selectableIds: () => R.keys(this.groupById) as string[],
+        items: () => this.selection.ids.map(lookUpGroup),
+      },
+    });
 
     makeFacetObservable(this.selection);
     makeObservable(this);

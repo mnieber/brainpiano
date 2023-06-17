@@ -1,5 +1,5 @@
 import { concat, length, take, takeLast } from 'ramda';
-import { ChordT } from 'src/voicings/types';
+import { ChordT } from '/src/voicings/types';
 
 export const invertChord = (chord: ChordT, pos: number) => {
   function rotate(arr: ChordT) {

@@ -1,23 +1,24 @@
+import { stub } from 'aspiration';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { always, map, pipe } from 'ramda';
 import { withDefaultProps } from 'react-default-props-context';
-import { Selection } from 'skandha-facets/Selection';
-import { ClefListViewItem } from 'src/keyboard/components';
-import { ClefT } from 'src/keyboard/types';
+import { Selection } from 'skandha-facets';
 import './ClefListView.scss';
+import { ClefListViewItem } from '/src/keyboard/components';
+import { ClefT } from '/src/keyboard/types';
 
 type PropsT = {
   className?: any;
 };
 
-type DefaultPropsT = {
-  clefs: ClefT[];
-  clefsSelection: Selection;
+const DefaultProps = {
+  clefs: stub as ClefT[],
+  clefsSelection: stub as Selection,
 };
 
 export const ClefListView = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const clefDivs = pipe(
       always(props.clefs),
       map((x) => (
@@ -51,5 +52,5 @@ export const ClefListView = observer(
         {!clefDivs.length && noItems}
       </div>
     );
-  })
+  }, DefaultProps)
 );

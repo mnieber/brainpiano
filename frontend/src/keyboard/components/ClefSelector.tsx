@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { useStore } from 'src/app/components';
-import { clefLetters } from 'src/keyboard/keyConstants';
+import { useStore } from '/src/app/components';
+import { clefLetters } from '/src/keyboard/keyConstants';
 
 type PropsT = React.PropsWithChildren<{}>;
 

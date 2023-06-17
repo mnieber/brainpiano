@@ -1,12 +1,12 @@
 import { map, range, sum } from 'ramda';
-import { GroupT } from 'src/groups/types';
-import { ClefT } from 'src/keyboard/types';
-import { QueryT } from 'src/quiz/types';
-import { mathMod } from 'src/utils/mathMod';
-import { randomElement } from 'src/utils/random';
-import { VoicingT } from 'src/voicings/types';
-import { getInversionRange } from 'src/voicings/utils/invertChord';
-import { voicingToChord } from 'src/voicings/utils/voicingToChord';
+import { GroupT } from '/src/groups/types';
+import { ClefT } from '/src/keyboard/types';
+import { QueryT } from '/src/quiz/types';
+import { mathMod } from '/src/utils/mathMod';
+import { randomElement } from '/src/utils/random';
+import { VoicingT } from '/src/voicings/types';
+import { getInversionRange } from '/src/voicings/utils/invertChord';
+import { voicingToChord } from '/src/voicings/utils/voicingToChord';
 
 const getRandomInversion = (voicing: VoicingT, clef: ClefT) => {
   const L = voicing.chord.length;

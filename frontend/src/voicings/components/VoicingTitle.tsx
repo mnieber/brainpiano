@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
-import 'src/keyboard/components/Keyboard.css';
-import { voicingTitleFromQuery } from 'src/quiz/utils/voicingTitleFromQuery';
-import { QueryT } from 'src/quiz/types';
+import { QueryT } from '/src/quiz/types';
+import { voicingTitleFromQuery } from '/src/quiz/utils/voicingTitleFromQuery';
 
 import './VoicingTitle.scss';
 

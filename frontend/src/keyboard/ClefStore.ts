@@ -1,10 +1,10 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { Selection } from 'skandha-facets/Selection';
+import { Selection } from 'skandha-facets';
 import { makeFacetObservable } from 'skandha-mobx';
-import { clefs } from 'src/keyboard/keyConstants';
+import { clefs } from '/src/keyboard/keyConstants';
 
-import { clefC } from 'src/keyboard/keyConstants';
-import { ClefT } from 'src/keyboard/types';
+import { clefC } from '/src/keyboard/keyConstants';
+import { ClefT } from '/src/keyboard/types';
 
 export class ClefStore {
   clefLetter = clefC;

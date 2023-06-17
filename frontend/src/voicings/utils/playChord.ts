@@ -1,7 +1,7 @@
 import AudioSynth from 'audiosynth';
-import { clefOffsets } from 'src/keyboard/keyConstants';
-import { ClefT } from 'src/keyboard/types';
-import { ChordT } from 'src/voicings/types';
+import { clefOffsets } from '/src/keyboard/keyConstants';
+import { ClefT } from '/src/keyboard/types';
+import { ChordT } from '/src/voicings/types';
 
 var AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 

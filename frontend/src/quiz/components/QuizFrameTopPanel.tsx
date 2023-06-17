@@ -1,23 +1,24 @@
+import { stub } from 'aspiration';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { withDefaultProps } from 'react-default-props-context';
-import { GroupPicker } from 'src/groups/components';
-import { IoMenu } from 'src/io/components';
-import { ClefListView } from 'src/keyboard/components';
-import { QuizState } from 'src/quiz/QuizState';
-import { VoicingTitle } from 'src/voicings/components/VoicingTitle';
+import { GroupPicker } from '/src/groups/components';
+import { IoMenu } from '/src/io/components';
+import { ClefListView } from '/src/keyboard/components';
+import { QuizState } from '/src/quiz/QuizState';
+import { VoicingTitle } from '/src/voicings/components/VoicingTitle';
 
 import './QuizFrameTopPanel.scss';
 
 type PropsT = React.PropsWithChildren<{}>;
 
-type DefaultPropsT = {
-  quizState: QuizState;
+const DefaultProps = {
+  quizState: stub as QuizState,
 };
 
 export const QuizFrameTopPanel = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const HelpButton = (
       <button
         onClick={() =>
@@ -47,5 +48,5 @@ export const QuizFrameTopPanel = observer(
         </div>
       </div>
     );
-  })
+  }, DefaultProps)
 );

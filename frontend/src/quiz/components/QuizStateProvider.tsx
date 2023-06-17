@@ -1,60 +1,53 @@
-import { action, reaction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { withDefaultProps } from 'react-default-props-context';
+import { useUpdateStateReaction } from '/src/frames/hooks/useUpdateStateReaction';
+import { useBuilder } from '/src/utils/hooks/useBuilder';
 
-import { CtrProvider } from 'react-default-props-context';
-import { useStore } from 'src/app/components';
-import { QuizState } from 'src/quiz/QuizState';
+import { DefaultPropsProvider } from 'react-default-props-context';
+import { useStore } from '/src/app/components';
+import { QuizState } from '/src/quiz/QuizState';
 
 type PropsT = React.PropsWithChildren<{}>;
 
-type DefaultPropsT = {};
+const DefaultProps = {};
 
 export const QuizStateProvider = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
-    const { groupsStore, clefStore, voicingStore, preselectionStore } =
-      useStore();
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
+    const { groupsStore, clefStore, voicingStore } = useStore();
 
-    const createState = action(() => {
-      const state = new QuizState({
+    const quizState = useBuilder(() => {
+      return new QuizState({
         clefStore,
         voicingStore,
       });
-      return state;
     });
 
-    const updateState = (state: QuizState) => {
-      reaction(
-        () => ({
+    useUpdateStateReaction({
+      getInputs: () => {
+        return {
           clefs: clefStore.selection.ids,
           groups: groupsStore.selection.items,
-        }),
-        (inputs) => {
-          state.setClefs(inputs.clefs);
-          state.setGroups(inputs.groups);
-        },
-        {
-          fireImmediately: true,
-        }
-      );
-    };
+        };
+      },
+      updateState: (inputs: any) => {
+        quizState.setClefs(inputs.clefs);
+        quizState.setGroups(inputs.groups);
+      },
+    });
 
-    const getDefaultProps = (state: QuizState) => {
+    const getDefaultPropsContext = () => {
       return {
-        quizState: () => state,
+        defaultProps: {
+          quizState: () => quizState,
+        },
       };
     };
 
     return (
-      <CtrProvider
-        createCtr={createState}
-        updateCtr={updateState}
-        destroyCtr={(state: QuizState) => state.destroy()}
-        getDefaultProps={getDefaultProps}
-      >
+      <DefaultPropsProvider extend value={getDefaultPropsContext()}>
         {props.children}
-      </CtrProvider>
+      </DefaultPropsProvider>
     );
-  })
+  }, DefaultProps)
 );

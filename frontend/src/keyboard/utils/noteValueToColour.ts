@@ -1,7 +1,7 @@
 import { head, includes, split } from 'ramda';
-import { clefOffsets, noteValueToIndex } from 'src/keyboard/keyConstants';
-import { noteColours } from 'src/keyboard/noteColours';
-import { ChordT, NoteT } from 'src/voicings/types';
+import { clefOffsets, noteValueToIndex } from '/src/keyboard/keyConstants';
+import { noteColours } from '/src/keyboard/noteColours';
+import { ChordT, NoteT } from '/src/voicings/types';
 
 export function noteValueToColour(
   noteValue: NoteT,

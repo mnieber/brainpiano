@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import { add, always, concat, map, pipe } from 'ramda';
 import { Layer } from 'react-konva';
-import { Key } from 'src/keyboard/components/Key';
+import { Key } from '/src/keyboard/components/Key';
 import {
   blackKeyIndexes,
   noteValueToIndex,
   octaveRootNoteValue,
   whiteKeyIndexes,
-} from 'src/keyboard/keyConstants';
-import { noteValueToColour } from 'src/keyboard/utils/noteValueToColour';
+} from '/src/keyboard/keyConstants';
+import { noteValueToColour } from '/src/keyboard/utils/noteValueToColour';
 
 type PropsT = {
   index: number;

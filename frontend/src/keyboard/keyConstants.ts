@@ -1,5 +1,5 @@
 import { includes } from 'ramda';
-import { mathMod } from 'src/utils/mathMod';
+import { mathMod } from '/src/utils/mathMod';
 
 export const clefC = 'C';
 export const clefCSharp = 'C#';

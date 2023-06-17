@@ -1,6 +1,6 @@
-import { ClefStore } from 'src/keyboard/ClefStore';
-import { PreselectionStore } from 'src/keyboard/PreselectionStore';
-import { EventT } from 'src/utils/types';
+import { ClefStore } from '/src/keyboard/ClefStore';
+import { PreselectionStore } from '/src/keyboard/PreselectionStore';
+import { EventT } from '/src/utils/types';
 
 export const selectClefBasedOnPreselection = (
   clefStore: ClefStore,

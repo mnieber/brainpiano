@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { UrlRouter } from 'src/app/components/UrlRouter';
-import { useStore } from 'src/app/components/useStore';
 import './App.scss';
+import { UrlRouter } from '/src/app/components/UrlRouter';
+import { useStore } from '/src/app/components/useStore';
 
 export const App = observer(() => {
   const appStore = useStore();

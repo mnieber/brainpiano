@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import { useStore } from 'src/app/components';
+import { useStore } from '/src/app/components';
 
 type PropsT = React.PropsWithChildren<{}>;
 

@@ -1,11 +1,11 @@
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import './GroupsFrame.scss';
 import {
   GroupsFrameLeftPanel,
   GroupsFrameTopPanel,
-} from 'src/groups/components';
-import './GroupsFrame.scss';
+} from '/src/groups/components';
 
 type PropsT = React.PropsWithChildren<{}>;
 

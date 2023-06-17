@@ -1,11 +1,12 @@
-import { map } from 'ramda';
-import { valueByNoteName } from 'src/voicings/noteConstants';
+import * as R from 'ramda';
+import { GroupT } from '/src/groups/types';
+import { valueByNoteName } from '/src/voicings/noteConstants';
 
 export const parseVoicing = (data: any) => {
   const voicing = {
     ...data,
     id: data.name,
-    chord: map((x: string) => {
+    chord: R.map((x: string) => {
       const noteValue = (valueByNoteName as any)[x as any];
       if (noteValue === undefined) {
         console.log(`Error: unknown note ${x}`);
@@ -27,7 +28,7 @@ const parseVoicingGroup = (data: any) => {
   return {
     ...data,
     id: data.name,
-    voicings: map(parseVoicing, data['voicings']),
+    voicings: R.map(parseVoicing, data['voicings']),
   };
 };
 
@@ -37,5 +38,5 @@ export const cache = {
 
 export const parseVoicingGroups = (data: any) => {
   cache.data = data;
-  return map(parseVoicingGroup, data);
+  return R.map(parseVoicingGroup, data) as GroupT[];
 };

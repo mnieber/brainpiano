@@ -1,4 +1,4 @@
-import { VoicingT } from 'src/voicings/types';
+import { VoicingT } from '/src/voicings/types';
 
 export type GroupT = {
   id: string;

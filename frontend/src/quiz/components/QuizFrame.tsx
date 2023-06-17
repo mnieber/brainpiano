@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { QuizFrameTopPanel } from 'src/quiz/components';
 import './QuizFrame.scss';
+import { QuizFrameTopPanel } from '/src/quiz/components';
 
 type PropsT = React.PropsWithChildren<{}>;
 

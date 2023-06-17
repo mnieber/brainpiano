@@ -1,13 +1,13 @@
 import { action, makeObservable, observable } from 'mobx';
 import { cleanUpCtr } from 'react-default-props-context';
 
-import { createQuery } from 'src/quiz/utils/createQuery';
+import { createQuery } from '/src/quiz/utils/createQuery';
 
-import { GroupT } from 'src/groups/types';
-import { ClefStore } from 'src/keyboard/ClefStore';
-import { ClefT } from 'src/keyboard/types';
-import { QueryT } from 'src/quiz/types';
-import { VoicingStore } from 'src/voicings/VoicingStore';
+import { GroupT } from '/src/groups/types';
+import { ClefStore } from '/src/keyboard/ClefStore';
+import { ClefT } from '/src/keyboard/types';
+import { QueryT } from '/src/quiz/types';
+import { VoicingStore } from '/src/voicings/VoicingStore';
 
 type PropsT = {
   clefStore: ClefStore;

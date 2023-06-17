@@ -1,5 +1,5 @@
 import { reaction } from 'mobx';
-import { AppStore } from 'src/app/AppStore';
+import { AppStore } from '/src/app/AppStore';
 
 export const voicingStoreUsesSelectedClef = () => (appStore: AppStore) => {
   reaction(

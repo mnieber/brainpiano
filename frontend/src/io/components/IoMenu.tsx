@@ -1,9 +1,10 @@
 import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
+import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
-import { useStore } from 'src/app/components/useStore';
-import { QuizState } from 'src/quiz/QuizState';
-import { cache, parseVoicingGroups } from 'src/voicings/parse';
+import { useStore } from '/src/app/components/useStore';
+import { QuizState } from '/src/quiz/QuizState';
+import { cache, parseVoicingGroups } from '/src/voicings/parse';
 
 import '@trendmicro/react-buttons/dist/react-buttons.css';
 import '@trendmicro/react-dropdown/dist/react-dropdown.css';
@@ -14,12 +15,12 @@ const twitterUrl = `https://twitter.com/intent/tweet?url=https://mnieber.github.
 
 type PropsT = {};
 
-type DefaultPropsT = {
-  quizState: QuizState;
+const DefaultProps = {
+  quizState: stub as QuizState,
 };
 
 export const IoMenu = observer(
-  withDefaultProps<PropsT, DefaultPropsT>((props: PropsT & DefaultPropsT) => {
+  withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const appStore = useStore();
 
     return (
@@ -54,5 +55,5 @@ export const IoMenu = observer(
         </Dropdown.Menu>
       </Dropdown>
     );
-  })
+  }, DefaultProps)
 );

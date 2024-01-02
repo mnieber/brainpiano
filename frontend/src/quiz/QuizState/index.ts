@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
-import { cleanUpCtr } from 'react-default-props-context';
+import { cleanUpCtr } from 'skandha';
 
 import { createQuery } from '/src/quiz/utils/createQuery';
 

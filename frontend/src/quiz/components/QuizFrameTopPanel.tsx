@@ -1,8 +1,8 @@
-import { stub } from 'aspiration';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { withDefaultProps } from 'react-default-props-context';
+import { stub } from 'skandha';
 import { GroupPicker } from '/src/groups/components';
 import { IoMenu } from '/src/io/components';
 import { ClefListView } from '/src/keyboard/components';

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
 import { Selection } from 'skandha-facets';
 
-import { stub } from 'aspiration';
+import { stub } from 'skandha';
 import { GroupT } from '/src/groups/types';
 import { PickerValueT, ValuePicker } from '/src/utils/components/ValuePicker';
 
@@ -23,7 +23,7 @@ export const GroupPicker = observer(
   withDefaultProps((props: PropsT & typeof DefaultProps) => {
     const onChange = action((value: PickerValueT) => {
       const values: Array<any> = (value as any) ?? [];
-      props.groupsSelection.ids = values.map((x) => x.value.id);
+      props.groupsSelection.itemIds = values.map((x) => x.value.id);
     });
 
     return (

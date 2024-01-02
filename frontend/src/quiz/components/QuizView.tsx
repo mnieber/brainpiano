@@ -1,7 +1,7 @@
-import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { withDefaultProps } from 'react-default-props-context';
+import { stub } from 'skandha';
 import { Keyboard } from '/src/keyboard/components/Keyboard';
 import { QuizState } from '/src/quiz/QuizState';
 import { QuizFrame } from '/src/quiz/components';

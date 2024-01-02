@@ -1,7 +1,7 @@
-import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { stub } from 'skandha';
 import { QuizState } from '/src/quiz/QuizState';
 
 type PropsT = React.PropsWithChildren<{}>;

@@ -12,7 +12,7 @@ export class GroupsStore {
 
   @action setGroups(groups: GroupT[]) {
     this.groupById = listToItemById(groups);
-    this.selection.ids = getIds(groups);
+    this.selection.itemIds = getIds(groups);
   }
 
   constructor() {
@@ -27,7 +27,7 @@ export class GroupsStore {
     mapDataToProps(ctr, {
       selection: {
         selectableIds: () => R.keys(this.groupById) as string[],
-        items: () => this.selection.ids.map(lookUpGroup),
+        items: () => this.selection.itemIds.map(lookUpGroup),
       },
     });
 

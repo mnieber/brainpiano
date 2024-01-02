@@ -26,7 +26,7 @@ export const QuizStateProvider = observer(
     useUpdateStateReaction({
       getInputs: () => {
         return {
-          clefs: clefStore.selection.ids,
+          clefs: clefStore.selection.itemIds,
           groups: groupsStore.selection.items,
         };
       },

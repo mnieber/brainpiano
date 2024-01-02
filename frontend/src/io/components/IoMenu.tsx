@@ -1,7 +1,7 @@
 import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
-import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
+import { stub } from 'skandha';
 import { useStore } from '/src/app/components/useStore';
 import { QuizState } from '/src/quiz/QuizState';
 import { cache, parseVoicingGroups } from '/src/voicings/parse';

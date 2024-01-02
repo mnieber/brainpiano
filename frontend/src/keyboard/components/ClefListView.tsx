@@ -1,8 +1,8 @@
-import { stub } from 'aspiration';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { always, map, pipe } from 'ramda';
 import { withDefaultProps } from 'react-default-props-context';
+import { stub } from 'skandha';
 import { Selection } from 'skandha-facets';
 import './ClefListView.scss';
 import { ClefListViewItem } from '/src/keyboard/components';
@@ -26,7 +26,7 @@ export const ClefListView = observer(
           key={x}
           clef={x}
           className={classnames({
-            'ClefListViewItem--selected': props.clefsSelection.ids.includes(x),
+            'ClefListViewItem--selected': props.clefsSelection.itemIds.includes(x),
           })}
           onMouseDown={(e: any) => {
             props.clefsSelection.selectItem({

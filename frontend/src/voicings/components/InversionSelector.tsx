@@ -1,8 +1,8 @@
-import { stub } from 'aspiration';
 import { observer } from 'mobx-react-lite';
 import { withDefaultProps } from 'react-default-props-context';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { useSwipeable } from 'react-swipeable';
+import { stub } from 'skandha';
 import { useStore } from '/src/app/components';
 import { QuizState } from '/src/quiz/QuizState';
 import { QueryT } from '/src/quiz/types';

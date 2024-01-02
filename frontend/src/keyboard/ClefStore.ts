@@ -25,7 +25,7 @@ export class ClefStore {
 
     makeFacetObservable(this.selection);
     this.selection.selectableIds = clefs;
-    this.selection.ids = clefs;
+    this.selection.itemIds = clefs;
   }
 
   setClefLetter = (clefLetter: string) => {
